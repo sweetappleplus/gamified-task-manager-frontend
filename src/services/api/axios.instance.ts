@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const apiUrl = process.env["REACT_APP_API_URL"];
+export const API_URL = process.env["REACT_APP_API_URL"];
 
-if (!apiUrl) {
+if (!API_URL) {
   throw new Error("REACT_APP_API_URL environment variable is not defined");
 }
 
 export const api = axios.create({
-  baseURL: apiUrl,
+  baseURL: API_URL,
   withCredentials: true,
 });
