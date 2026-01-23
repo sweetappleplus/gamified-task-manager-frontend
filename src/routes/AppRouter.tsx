@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "@/pages/Login";
-import DashboardPage from "@/pages/Dashboard";
+import LoginPage from "pages/Login";
+import DashboardPage from "pages/Dashboard";
 
 const AppRouter = () => (
   <BrowserRouter>
