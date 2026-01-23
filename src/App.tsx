@@ -1,5 +1,5 @@
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import { theme } from "./theme/mui.theme";
+import { theme } from "./libs/theme/mui.theme";
 import AppRouter from "./routes/AppRouter";
 
 const App = () => (
