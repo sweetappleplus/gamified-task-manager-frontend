@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LoginPage from '../pages/Login'
-import DashboardPage from '../pages/Dashboard'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "../pages/Login";
+import DashboardPage from "../pages/Dashboard";
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -9,6 +9,6 @@ const AppRouter = () => (
       <Route path="/" element={<DashboardPage />} />
     </Routes>
   </BrowserRouter>
-)
+);
 
-export default AppRouter
+export default AppRouter;
