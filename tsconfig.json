@@ -22,8 +22,11 @@
     "alwaysStrict": true,
     "jsx": "preserve",
     "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "incremental": true
   },
-  "include": ["custom.d.ts", "src"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
