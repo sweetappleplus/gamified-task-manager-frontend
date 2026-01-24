@@ -1,12 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "pages/Login";
-import DashboardPage from "pages/Dashboard";
+import { ROUTES } from "constants/routes";
 
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<DashboardPage />} />
+      {Object.values(ROUTES).map((route) => {
+        const Component = route.component;
+        return (
+          <Route key={route.path} path={route.path} element={<Component />} />
+        );
+      })}
     </Routes>
   </BrowserRouter>
 );
