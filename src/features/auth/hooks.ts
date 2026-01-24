@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { setUser, logout } from "./slice";
-import { RootState } from "@/app/store";
-import { User } from "@/types";
+import { RootState } from "app/store";
+import { User } from "types";
 
 export const useAuth = () => {
   const dispatch = useAppDispatch();
