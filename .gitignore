@@ -23,5 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Cursor rules
+# AI IDE rules
 .cursorrules
+CLAUDE.md
