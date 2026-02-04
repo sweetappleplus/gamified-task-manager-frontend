@@ -7,6 +7,7 @@ import {
   Icon,
   Input,
   SocialOauthButton,
+  Tag,
 } from "../../components/atoms";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
 import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
@@ -404,6 +405,64 @@ const UIKit = () => {
             >
               <Badge variant="secondary" text="12" />
               <Typography sx={uikitStyles.caseLabel}>secondary wide</Typography>
+            </Box>
+          </Box>
+          {/* Tag */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Tag
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Tag text="Default" />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Tag text="Custom" bgColor="primary.50" textColor="primary.600" />
+              <Typography sx={uikitStyles.caseLabel}>custom colors</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Tag
+                text="Success"
+                bgColor="additional.green.200"
+                textColor="additional.green.main"
+              />
+              <Typography sx={uikitStyles.caseLabel}>green</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Tag
+                text="Error"
+                bgColor="additional.red.200"
+                textColor="additional.red.main"
+              />
+              <Typography sx={uikitStyles.caseLabel}>red</Typography>
             </Box>
           </Box>
         </Box>
