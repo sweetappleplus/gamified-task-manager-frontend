@@ -7,6 +7,34 @@ declare module "@mui/material/styles" {
     end: string;
   }
 
+  interface PaletteColor {
+    0: string;
+    50: string;
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    600: string;
+    700: string;
+    800: string;
+    900: string;
+    950: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    0?: string;
+    50?: string;
+    100?: string;
+    200?: string;
+    300?: string;
+    400?: string;
+    600?: string;
+    700?: string;
+    800?: string;
+    900?: string;
+    950?: string;
+  }
+
   interface Theme {
     radius: {
       xs: number;
@@ -22,44 +50,44 @@ declare module "@mui/material/styles" {
     radius?: Theme["radius"];
   }
 
+  interface AdditionalColor {
+    main: string;
+    100?: string;
+    200: string;
+  }
+
   interface Palette {
     grayscale: {
       0: string;
       50: string;
+      100: string;
       200: string;
       300: string;
       400: string;
       500: string;
       600: string;
       700: string;
+      800: string;
+      900: string;
       950: string;
     };
     additional: {
-      red: string;
-      redLight: string;
-      green: string;
-      greenMiddle: string;
-      greenLight: string;
-      blue: string;
-      blueLight: string;
-      yellow: string;
-      yellowLight: string;
-      pink: string;
-      pinkLight: string;
-      orange: string;
-      orangeLight: string;
+      green: AdditionalColor;
+      red: AdditionalColor;
+      orange: AdditionalColor;
+      pink: AdditionalColor;
+      blue: AdditionalColor;
+      yellow: AdditionalColor;
     };
     gradient: {
-      yellow: GradientColors;
-      gray: GradientColors;
-      brown: GradientColors;
+      gold: GradientColors;
+      bronze: GradientColors;
+      silver: GradientColors;
+      diamond: GradientColors;
       blue: GradientColors;
       red: GradientColors;
       orange: GradientColors;
-    };
-    social: {
-      telegram: string;
-      whatsapp: string;
+      second: GradientColors;
     };
   }
 
@@ -67,54 +95,56 @@ declare module "@mui/material/styles" {
     grayscale?: Palette["grayscale"];
     additional?: Palette["additional"];
     gradient?: Palette["gradient"];
-    social?: Palette["social"];
   }
 }
 
 export const theme = createTheme({
   palette: {
     primary: {
+      "0": "#FFFFFF",
+      main: "#0091FF",
       "50": "#E5F4FF",
-      main: "#33A7FF",
-      "500": "#0091FF",
+      "100": "#CCE9FF",
+      "200": "#99D3FF",
+      "300": "#66BDFF",
+      "400": "#33A7FF",
+      "600": "#0074CC",
+      "700": "#005799",
+      "800": "#003A66",
+      "900": "#001D33",
+      "950": "#000E1A",
     },
     grayscale: {
       0: "#FFFFFF",
       50: "#F2F2F2",
+      100: "#E6E6E6",
       200: "#CCCCCC",
       300: "#B3B3B3",
       400: "#999999",
       500: "#838383",
       600: "#666666",
       700: "#4D4D4D",
+      800: "#333333",
+      900: "#1A1A1A",
       950: "#000000",
     },
     additional: {
-      red: "#E5484D",
-      redLight: "#FDF4F4",
-      green: "#11A772",
-      greenMiddle: "#E8F5F1",
-      greenLight: "#E7F6F0",
-      blue: "#0FB3FA",
-      blueLight: "#D8E3F3",
-      yellow: "#FFC53D",
-      yellowLight: "#FDEACE",
-      pink: "#E5467B",
-      pinkLight: "#FCECF0",
-      orange: "#FF801F",
-      orangeLight: "#FFF2E9",
+      green: { main: "#11A772", 200: "#E7F6F0", 100: "#E8F5F1" },
+      red: { main: "#E5484D", 200: "#FDF4F4" },
+      orange: { main: "#FF801F", 200: "#FFF2E9" },
+      pink: { main: "#E5467B", 200: "#FCECF0" },
+      blue: { main: "#0FB3FA", 200: "#D8E3F3" },
+      yellow: { main: "#FFC53D", 200: "#FDEACE" },
     },
     gradient: {
-      yellow: { start: "#FECE85", end: "#FEA713" },
-      gray: { start: "#D3E1FF", end: "#888E9A" },
-      brown: { start: "#FFE0BF", end: "#B49C83" },
+      gold: { start: "#FECE85", end: "#FEA713" },
+      bronze: { start: "#D2AC84", end: "#B49C83" },
+      silver: { start: "#ABABAB", end: "#888E9A" },
+      diamond: { start: "#99D3FF", end: "#0091FF" },
       blue: { start: "#70B8FF", end: "#0090FF" },
       red: { start: "#EC5D5E", end: "#E5484D" },
       orange: { start: "#FFA057", end: "#FF801F" },
-    },
-    social: {
-      telegram: "#0088CC",
-      whatsapp: "#25D366",
+      second: { start: "#D3E1FF", end: "#888E9A" },
     },
   },
   typography: {
