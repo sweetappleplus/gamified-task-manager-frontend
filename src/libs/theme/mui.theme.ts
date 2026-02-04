@@ -84,6 +84,15 @@ declare module "@mui/material/styles" {
 }
 
 export const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 468,
+      lg: 1441,
+      xl: 1536,
+    },
+  },
   palette: {
     primary: {
       "0": "#FFFFFF",
