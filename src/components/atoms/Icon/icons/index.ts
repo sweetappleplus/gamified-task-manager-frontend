@@ -4,7 +4,7 @@ import { ReactComponent as ArrowUp } from "./arrow-up.svg";
 import { ReactComponent as ArrowDown } from "./arrow-down.svg";
 
 import { ReactComponent as ArrowRightDoubleSharp } from "./arrow-right-double-sharp.svg";
-import { ReactComponent as ArrowLeftDoubleSharp } from "./arrow-left-double-sharp.svg";
+import { ReactComponent as ArrowUpDoubleSharp } from "./arrow-up-double-sharp.svg";
 
 import { ReactComponent as ChevronRight } from "./chevron-right.svg";
 import { ReactComponent as ChevronLeft } from "./chevron-left.svg";
@@ -88,7 +88,7 @@ export const icons = {
   "arrow-down": ArrowDown,
 
   "arrow-right-double-sharp": ArrowRightDoubleSharp,
-  "arrow-left-double-sharp": ArrowLeftDoubleSharp,
+  "arrow-up-double-sharp": ArrowUpDoubleSharp,
 
   "chevron-right": ChevronRight,
   "chevron-left": ChevronLeft,
