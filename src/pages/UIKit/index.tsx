@@ -1,9 +1,19 @@
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
-import { Icon } from "../../components/atoms";
+import { Icon, SocialOauthButton } from "../../components/atoms";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
+import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
 
 const iconNames = Object.keys(icons) as IconName[];
+const socialProviders: SocialProvider[] = [
+  "google",
+  "microsoft",
+  "facebook",
+  "linkedin",
+  "whatsapp",
+  "telegram",
+  "discord",
+];
 
 const UIKit = () => {
   return (
@@ -39,6 +49,18 @@ const UIKit = () => {
               >
                 <Icon name={name} size={24} />
                 <Typography sx={uikitStyles.caseLabel}>{name}</Typography>
+              </Box>
+            ))}
+          </Box>
+
+          {/* SocialOauthButton */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            SocialOauthButton
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {socialProviders.map((provider) => (
+              <Box key={provider} sx={{ width: 60 }}>
+                <SocialOauthButton social={provider} />
               </Box>
             ))}
           </Box>
