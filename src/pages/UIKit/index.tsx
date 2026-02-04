@@ -1,8 +1,9 @@
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
-import { Icon, SocialOauthButton } from "../../components/atoms";
+import { Avatar, Icon, SocialOauthButton } from "../../components/atoms";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
 import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
+import { AvatarSize } from "../../components/atoms/Avatar/Avatar.types";
 
 const iconNames = Object.keys(icons) as IconName[];
 const socialProviders: SocialProvider[] = [
@@ -14,6 +15,7 @@ const socialProviders: SocialProvider[] = [
   "telegram",
   "discord",
 ];
+const avatarSizes: AvatarSize[] = [24, 32, 48, 64, 128];
 
 const UIKit = () => {
   return (
@@ -61,6 +63,27 @@ const UIKit = () => {
             {socialProviders.map((provider) => (
               <Box key={provider} sx={{ width: 60 }}>
                 <SocialOauthButton social={provider} />
+              </Box>
+            ))}
+          </Box>
+
+          {/* Avatar */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Avatar
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {avatarSizes.map((size) => (
+              <Box
+                key={size}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Avatar size={size} email="user@example.com" name="John Doe" />
+                <Typography sx={uikitStyles.caseLabel}>{size}px</Typography>
               </Box>
             ))}
           </Box>
