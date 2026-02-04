@@ -1,5 +1,9 @@
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
+import { Icon } from "../../components/atoms";
+import { icons, IconName } from "../../components/atoms/Icon/icons";
+
+const iconNames = Object.keys(icons) as IconName[];
 
 const UIKit = () => {
   return (
@@ -14,7 +18,30 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Atoms
           </Typography>
-          {/* Add atom components here */}
+
+          {/* Icons */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Icons
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {iconNames.map((name) => (
+              <Box
+                key={name}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 1,
+                  p: 1.5,
+                  borderRadius: 2,
+                  "&:hover": { bgcolor: "grayscale.50" },
+                }}
+              >
+                <Icon name={name} size={24} />
+                <Typography sx={uikitStyles.caseLabel}>{name}</Typography>
+              </Box>
+            ))}
+          </Box>
         </Box>
 
         {/* Molecules Section */}

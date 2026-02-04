@@ -25,6 +25,13 @@ export const uikitStyles: Record<string, SxProps<Theme>> = {
     borderColor: "grayscale.200",
     pb: 1,
   },
+  componentLabel: {
+    fontWeight: 500,
+    fontSize: 14,
+    color: "grayscale.500",
+    minWidth: 120,
+    mb: 2,
+  },
   componentRow: {
     display: "flex",
     flexWrap: "wrap",
@@ -32,10 +39,10 @@ export const uikitStyles: Record<string, SxProps<Theme>> = {
     alignItems: "center",
     mb: 2,
   },
-  componentLabel: {
-    fontWeight: 500,
-    fontSize: 14,
+  caseLabel: {
+    fontSize: 10,
     color: "grayscale.500",
-    minWidth: 120,
+    maxWidth: 80,
+    textAlign: "center",
   },
 };
