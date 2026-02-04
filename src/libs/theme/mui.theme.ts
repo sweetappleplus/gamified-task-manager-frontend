@@ -35,21 +35,6 @@ declare module "@mui/material/styles" {
     950?: string;
   }
 
-  interface Theme {
-    radius: {
-      xs: number;
-      sm: number;
-      md: number;
-      lg: number;
-      xl: number;
-      xxl: number;
-    };
-  }
-
-  interface ThemeOptions {
-    radius?: Theme["radius"];
-  }
-
   interface AdditionalColor {
     main: string;
     100?: string;
@@ -149,13 +134,5 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: FontFamily.primary,
-  },
-  radius: {
-    xs: 1,
-    sm: 2,
-    md: 3,
-    lg: 3.5,
-    xl: 4,
-    xxl: 6,
   },
 });
