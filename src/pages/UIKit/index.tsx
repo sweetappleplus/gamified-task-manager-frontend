@@ -2,6 +2,7 @@ import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
 import {
   Avatar,
+  Badge,
   Button,
   Icon,
   Input,
@@ -352,6 +353,57 @@ const UIKit = () => {
               <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
                 left icon (filled)
               </Typography>
+            </Box>
+          </Box>
+
+          {/* Badge */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Badge
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Badge text="1" />
+              <Typography sx={uikitStyles.caseLabel}>primary</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Badge variant="secondary" text="5" />
+              <Typography sx={uikitStyles.caseLabel}>secondary</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Badge text="99+" />
+              <Typography sx={uikitStyles.caseLabel}>wide</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Badge variant="secondary" text="12" />
+              <Typography sx={uikitStyles.caseLabel}>secondary wide</Typography>
             </Box>
           </Box>
         </Box>
