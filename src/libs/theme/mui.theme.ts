@@ -38,6 +38,7 @@ declare module "@mui/material/styles" {
   interface AdditionalColor {
     main: string;
     100?: string;
+    500?: string;
     200: string;
   }
 
@@ -124,7 +125,7 @@ export const theme = createTheme({
     },
     additional: {
       green: { main: "#11A772", 200: "#E7F6F0", 100: "#E8F5F1" },
-      red: { main: "#E5484D", 200: "#FDF4F4" },
+      red: { main: "#E5484D", 500: "#ED4A45", 200: "#FDF4F4" },
       orange: { main: "#FF801F", 200: "#FFF2E9" },
       pink: { main: "#E5467B", 200: "#FCECF0" },
       blue: { main: "#0FB3FA", 200: "#D8E3F3" },
