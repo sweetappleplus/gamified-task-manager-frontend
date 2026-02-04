@@ -195,7 +195,7 @@ export const icons: Record<IconName, IconComponent> = {
       />
     </svg>
   ),
-  google: (props) => (
+  "google-colored": (props) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         fillRule="evenodd"
@@ -383,7 +383,7 @@ export const icons: Record<IconName, IconComponent> = {
       />
     </svg>
   ),
-  diamond: (props) => (
+  "diamond-colored": (props) => (
     <svg viewBox="0 0 20 20" fill="none" {...props}>
       <path
         d="M5.81152 5.67289L4.54539 2.75484C4.49533 2.63946 4.57991 2.5106 4.70567 2.5106H5.45767C5.48748 2.5106 5.51681 2.51821 5.54283 2.53276L7.9325 3.86701C7.94725 3.87524 7.96579 3.87213 7.97699 3.85946L9.87124 1.72459C9.88739 1.7064 9.90721 1.69184 9.92939 1.68187C9.95157 1.6719 9.97562 1.66675 9.99994 1.66675C10.0243 1.66675 10.0483 1.6719 10.0705 1.68187C10.0927 1.69184 10.1125 1.7064 10.1286 1.72459L12.0229 3.85946C12.0341 3.8721 12.0526 3.87524 12.0674 3.86701L14.457 2.53276C14.4831 2.51822 14.5124 2.51059 14.5422 2.5106H15.2942C15.42 2.5106 15.5045 2.63946 15.4545 2.75484L14.1884 5.67289V6.10409H5.86598L5.81152 5.67289Z"
@@ -455,7 +455,7 @@ export const icons: Record<IconName, IconComponent> = {
       />
     </svg>
   ),
-  "master-card": (props) => (
+  "master-card-colored": (props) => (
     <svg viewBox="0 0 18 12" fill="none" {...props}>
       <g clipPath="url(#clip_mastercard)">
         <path
@@ -478,7 +478,7 @@ export const icons: Record<IconName, IconComponent> = {
       </defs>
     </svg>
   ),
-  "crypto-usdt": (props) => (
+  "crypto-usdt-colored": (props) => (
     <svg viewBox="0 0 16 16" fill="none" {...props}>
       <g clipPath="url(#clip_usdt)">
         <path
@@ -501,7 +501,7 @@ export const icons: Record<IconName, IconComponent> = {
       </defs>
     </svg>
   ),
-  visa: (props) => (
+  "visa-colored": (props) => (
     <svg viewBox="0 0 20 12" fill="none" {...props}>
       <g clipPath="url(#clip_visa)">
         <path
@@ -556,7 +556,7 @@ export const icons: Record<IconName, IconComponent> = {
       />
     </svg>
   ),
-  "silver-star": (props) => (
+  "silver-star-colored": (props) => (
     <svg viewBox="0 0 16 16" fill="none" {...props}>
       <path
         d="M14.6668 7.9999C14.6668 11.6819 11.6821 14.6667 8.00008 14.6667C7.44894 14.6667 6.91337 14.5997 6.40106 14.4736C4.21788 13.516 2.69281 11.3354 2.69281 8.79848C2.69281 5.37766 5.46621 2.60449 8.88703 2.60449C11.1942 2.60449 13.2069 3.86608 14.2727 5.73695C14.5278 6.44344 14.6668 7.20551 14.6668 7.9999Z"
@@ -588,7 +588,7 @@ export const icons: Record<IconName, IconComponent> = {
       />
     </svg>
   ),
-  "gold-star": (props) => (
+  "gold-star-colored": (props) => (
     <svg viewBox="0 0 16 16" fill="none" {...props}>
       <g clipPath="url(#clip_goldstar)">
         <path
