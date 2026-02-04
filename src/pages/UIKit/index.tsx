@@ -1,9 +1,18 @@
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
-import { Avatar, Icon, SocialOauthButton } from "../../components/atoms";
+import {
+  Avatar,
+  Button,
+  Icon,
+  SocialOauthButton,
+} from "../../components/atoms";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
 import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
 import { AvatarSize } from "../../components/atoms/Avatar/Avatar.types";
+import {
+  ButtonVariant,
+  ButtonSize,
+} from "../../components/atoms/Button/Button.types";
 
 const iconNames = Object.keys(icons) as IconName[];
 const socialProviders: SocialProvider[] = [
@@ -16,6 +25,16 @@ const socialProviders: SocialProvider[] = [
   "discord",
 ];
 const avatarSizes: AvatarSize[] = [24, 32, 48, 64, 128];
+const buttonVariants: ButtonVariant[] = [
+  "primary",
+  "secondary",
+  "gray",
+  "white",
+  "text",
+  "negative",
+  "liquid",
+];
+const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
 
 const UIKit = () => {
   return (
@@ -84,6 +103,181 @@ const UIKit = () => {
               >
                 <Avatar size={size} email="user@example.com" name="John Doe" />
                 <Typography sx={uikitStyles.caseLabel}>{size}px</Typography>
+              </Box>
+            ))}
+          </Box>
+
+          {/* Button - Variants */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Button - Variants
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {buttonVariants.map((variant) => (
+              <Box
+                key={variant}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 1,
+                  p: variant === "liquid" ? 2 : 0,
+                  borderRadius: 2,
+                  bgcolor:
+                    variant === "liquid" ? "grayscale.950" : "transparent",
+                }}
+              >
+                <Button variant={variant} text="Button" />
+                <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
+              </Box>
+            ))}
+          </Box>
+
+          {/* Button - Sizes */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Button - Sizes
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {buttonSizes.map((size) => (
+              <Box
+                key={size}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Button size={size} text="Button" />
+                <Typography sx={uikitStyles.caseLabel}>{size}</Typography>
+              </Box>
+            ))}
+          </Box>
+
+          {/* Button - With Icons */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Button - With Icons
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button leftIcon="plus" text="Add Item" />
+              <Typography sx={uikitStyles.caseLabel}>left icon</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button rightIcon="chevron-right" text="Next" />
+              <Typography sx={uikitStyles.caseLabel}>right icon</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button leftIcon="plus" rightIcon="chevron-right" text="Add" />
+              <Typography sx={uikitStyles.caseLabel}>both icons</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button leftIcon="plus" />
+              <Typography sx={uikitStyles.caseLabel}>icon only</Typography>
+            </Box>
+          </Box>
+
+          {/* Button - States */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Button - States
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button text="Default" />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button text="Disabled" disabled />
+              <Typography sx={uikitStyles.caseLabel}>disabled</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button text="Loading" loading />
+              <Typography sx={uikitStyles.caseLabel}>loading</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button leftIcon="tick" text="Loading" loading />
+              <Typography sx={uikitStyles.caseLabel}>
+                loading w/ icon
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Button - Disabled Variants */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Button - Disabled Variants
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {buttonVariants.map((variant) => (
+              <Box
+                key={variant}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 1,
+                  p: variant === "liquid" ? 2 : 0,
+                  borderRadius: 2,
+                  bgcolor:
+                    variant === "liquid" ? "grayscale.950" : "transparent",
+                }}
+              >
+                <Button variant={variant} text="Disabled" disabled />
+                <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
               </Box>
             ))}
           </Box>
