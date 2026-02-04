@@ -1,29 +1,44 @@
 import { ButtonProps as MuiButtonProps } from "@mui/material";
+import { IconName } from "../Icon/Icon.types";
 
-export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "gray"
+  | "white"
+  | "text"
+  | "negative"
+  | "liquid";
+
+export type ButtonSize = "large" | "normal" | "small" | "xs";
+
+export interface ButtonProps
+  extends Omit<MuiButtonProps, "variant" | "size" | "color"> {
   /**
-   * The color of the button
+   * The variant of the button
    * @default "primary"
    */
-  color?: "primary" | "secondary" | "error" | "warning" | "info" | "success";
+  variant?: ButtonVariant;
+  /**
+   * The size of the button
+   * @default "normal"
+   */
+  size?: ButtonSize;
+  /**
+   * Icon displayed at the left of the button
+   */
+  leftIcon?: IconName;
+  /**
+   * Icon displayed at the right of the button
+   */
+  rightIcon?: IconName;
+  /**
+   * The text content of the button
+   */
+  text?: string;
   /**
    * If `true`, the button will show a loading spinner
    * @default false
    */
   loading?: boolean;
-  /**
-   * The variant to use
-   * @default "contained"
-   */
-  variant?: "contained" | "outlined" | "text";
-  /**
-   * The size of the button
-   * @default "medium"
-   */
-  size?: "small" | "medium" | "large";
-  /**
-   * If `true`, the button will take up the full width of its container
-   * @default false
-   */
-  fullWidth?: boolean;
 }
