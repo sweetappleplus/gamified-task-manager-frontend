@@ -29,11 +29,11 @@ export const SocialOauthButton: React.FC<SocialOauthButtonProps> = ({
     <MuiButton
       disabled={disabled || loading}
       fullWidth
-      sx={(theme) => ({
+      sx={{
         height: 48,
         borderRadius: 3,
-        backgroundColor: theme.palette.grayscale[0],
-      })}
+        backgroundColor: "grayscale.0",
+      }}
       {...props}
     >
       {loading ? (
