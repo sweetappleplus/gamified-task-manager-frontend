@@ -4,6 +4,7 @@ import {
   Avatar,
   Button,
   Icon,
+  Input,
   SocialOauthButton,
 } from "../../components/atoms";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
@@ -280,6 +281,78 @@ const UIKit = () => {
                 <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
               </Box>
             ))}
+          </Box>
+
+          {/* Input - Variants */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Input - Variants
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
+            <Box sx={{ maxWidth: 320 }}>
+              <Input
+                placeholder="Номер телефона"
+                label="Дополнительная информация"
+              />
+              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+                normal (empty)
+              </Typography>
+            </Box>
+            <Box sx={{ maxWidth: 320 }}>
+              <Input
+                placeholder="Номер телефона"
+                defaultValue="+7 999 999 99 99"
+                label="Дополнительная информация"
+              />
+              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+                normal (filled)
+              </Typography>
+            </Box>
+            <Box sx={{ maxWidth: 320 }}>
+              <Input
+                variant="validated"
+                placeholder="Номер телефона"
+                defaultValue="+7 999 999 99 99"
+                label="Дополнительная информация"
+              />
+              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+                validated
+              </Typography>
+            </Box>
+            <Box sx={{ maxWidth: 320 }}>
+              <Input
+                variant="error"
+                placeholder="Номер телефона"
+                defaultValue="+7 999 999 99 99"
+                label="Дополнительная информация"
+              />
+              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+                error
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Input - With Icons */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Input - With Icons
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
+            <Box sx={{ maxWidth: 320 }}>
+              <Input placeholder="Search" leftIcon="search" label="Search" />
+              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+                left icon
+              </Typography>
+            </Box>
+            <Box sx={{ maxWidth: 320 }}>
+              <Input
+                placeholder="Search"
+                defaultValue="Search"
+                leftIcon="search"
+                label="Search"
+              />
+              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+                left icon (filled)
+              </Typography>
+            </Box>
           </Box>
         </Box>
 
