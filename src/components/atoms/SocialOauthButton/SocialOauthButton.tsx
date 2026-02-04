@@ -31,7 +31,7 @@ export const SocialOauthButton: React.FC<SocialOauthButtonProps> = ({
       fullWidth
       sx={(theme) => ({
         height: 48,
-        borderRadius: theme.radius.md,
+        borderRadius: 3,
         backgroundColor: theme.palette.grayscale[0],
       })}
       {...props}
