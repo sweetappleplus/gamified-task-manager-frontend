@@ -23,6 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# TypeScript cache
+*.tsbuildinfo
+
 # AI IDE rules
 .cursorrules
 CLAUDE.md
