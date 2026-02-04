@@ -7,6 +7,21 @@ declare module "@mui/material/styles" {
     end: string;
   }
 
+  interface Theme {
+    radius: {
+      xs: number;
+      sm: number;
+      md: number;
+      lg: number;
+      xl: number;
+      xxl: number;
+    };
+  }
+
+  interface ThemeOptions {
+    radius?: Theme["radius"];
+  }
+
   interface Palette {
     grayscale: {
       0: string;
@@ -58,6 +73,11 @@ declare module "@mui/material/styles" {
 
 export const theme = createTheme({
   palette: {
+    primary: {
+      "50": "#E5F4FF",
+      main: "#33A7FF",
+      "500": "#0091FF",
+    },
     grayscale: {
       0: "#FFFFFF",
       50: "#F2F2F2",
@@ -99,5 +119,13 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: FontFamily.primary,
+  },
+  radius: {
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 3.5,
+    xl: 4,
+    xxl: 6,
   },
 });
