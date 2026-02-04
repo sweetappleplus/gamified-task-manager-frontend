@@ -1,4 +1,4 @@
-export type AvatarSize = 24 | 48 | 64;
+export type AvatarSize = 24 | 32 | 48 | 64 | 128;
 
 export interface AvatarProps {
   /**
