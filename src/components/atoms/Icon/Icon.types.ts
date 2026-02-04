@@ -43,7 +43,13 @@ export type IconName =
   | "pencil"
   | "check-2"
   | "calendar"
-  | "prize";
+  | "prize"
+  | "microsoft-colored"
+  | "facebook-colored"
+  | "linkedin-colored"
+  | "whatsapp-colored"
+  | "telegram-colored"
+  | "discord-colored";
 
 export interface IconProps {
   /**
