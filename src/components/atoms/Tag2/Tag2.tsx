@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, styled, useTheme } from "@mui/material";
 import { Tag2Props } from "./Tag2.types";
-import { Icon } from "../Icon";
+import { Icon } from "components";
 
 const ICON_SIZE = 20;
 const INDICATOR_SIZE = 10;
