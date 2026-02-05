@@ -9,3 +9,4 @@ export * from "./Tag";
 export * from "./Tag2";
 export * from "./Text";
 export * from "./Toast";
+export * from "./IconButton";
