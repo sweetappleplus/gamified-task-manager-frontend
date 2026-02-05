@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Snackbar, styled, Theme, useTheme } from "@mui/material";
+import {
+  Box,
+  SnackbarCloseReason,
+  Snackbar,
+  styled,
+  Theme,
+  useTheme,
+} from "@mui/material";
 import { ToastProps, ToastVariant } from "./Toast.types";
 import { Icon, IconName } from "components";
 
@@ -79,7 +86,10 @@ export const Toast: React.FC<ToastProps> = ({
   return (
     <Snackbar
       open={open}
-      onClose={onClose}
+      onClose={(_: unknown, reason: SnackbarCloseReason) => {
+        if (reason === "clickaway") return;
+        onClose();
+      }}
       autoHideDuration={autoHideDuration}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       {...props}
