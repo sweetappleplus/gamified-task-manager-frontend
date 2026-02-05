@@ -1,4 +1,4 @@
-import { IconName } from "../Icon/Icon.types";
+import { IconName } from "components";
 
 export type IconButtonVariant = "gray" | "white";
 

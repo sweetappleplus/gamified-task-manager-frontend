@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, styled, useTheme } from "@mui/material";
 import { IconButtonProps, IconButtonVariant } from "./IconButton.types";
-import { Icon } from "../Icon";
+import { Icon } from "components";
 
 const ICON_SIZE = 18;
 
