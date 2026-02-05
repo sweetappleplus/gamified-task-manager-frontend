@@ -6,6 +6,7 @@ import {
   Button,
   Icon,
   Input,
+  Leaf,
   SocialOauthButton,
   Tag,
   Tag2,
@@ -17,6 +18,7 @@ import {
   ButtonVariant,
   ButtonSize,
 } from "../../components/atoms/Button/Button.types";
+import { LeafVariant } from "../../components/atoms/Leaf/Leaf.types";
 
 const iconNames = Object.keys(icons) as IconName[];
 const socialProviders: SocialProvider[] = [
@@ -39,6 +41,7 @@ const buttonVariants: ButtonVariant[] = [
   "liquid",
 ];
 const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
+const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
 
 const UIKit = () => {
   return (
@@ -63,10 +66,7 @@ const UIKit = () => {
               <Box
                 key={name}
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 1,
+                  ...uikitStyles.caseItem,
                   p: 1.5,
                   borderRadius: 2,
                   "&:hover": { bgcolor: "grayscale.50" },
@@ -96,15 +96,7 @@ const UIKit = () => {
           </Typography>
           <Box sx={uikitStyles.componentRow}>
             {avatarSizes.map((size) => (
-              <Box
-                key={size}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 1,
-                }}
-              >
+              <Box key={size} sx={uikitStyles.caseItem}>
                 <Avatar size={size} email="user@example.com" name="John Doe" />
                 <Typography sx={uikitStyles.caseLabel}>{size}px</Typography>
               </Box>
@@ -120,10 +112,7 @@ const UIKit = () => {
               <Box
                 key={variant}
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 1,
+                  ...uikitStyles.caseItem,
                   p: variant === "liquid" ? 2 : 0,
                   borderRadius: 2,
                   bgcolor:
@@ -142,15 +131,7 @@ const UIKit = () => {
           </Typography>
           <Box sx={uikitStyles.componentRow}>
             {buttonSizes.map((size) => (
-              <Box
-                key={size}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 1,
-                }}
-              >
+              <Box key={size} sx={uikitStyles.caseItem}>
                 <Button size={size} text="Button" />
                 <Typography sx={uikitStyles.caseLabel}>{size}</Typography>
               </Box>
@@ -162,47 +143,19 @@ const UIKit = () => {
             Button - With Icons
           </Typography>
           <Box sx={uikitStyles.componentRow}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button leftIcon="plus" text="Add Item" />
               <Typography sx={uikitStyles.caseLabel}>left icon</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button rightIcon="chevron-right" text="Next" />
               <Typography sx={uikitStyles.caseLabel}>right icon</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button leftIcon="plus" rightIcon="chevron-right" text="Add" />
               <Typography sx={uikitStyles.caseLabel}>both icons</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button leftIcon="plus" />
               <Typography sx={uikitStyles.caseLabel}>icon only</Typography>
             </Box>
@@ -213,47 +166,19 @@ const UIKit = () => {
             Button - States
           </Typography>
           <Box sx={uikitStyles.componentRow}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button text="Default" />
               <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button text="Disabled" disabled />
               <Typography sx={uikitStyles.caseLabel}>disabled</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button text="Loading" loading />
               <Typography sx={uikitStyles.caseLabel}>loading</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Button leftIcon="tick" text="Loading" loading />
               <Typography sx={uikitStyles.caseLabel}>
                 loading w/ icon
@@ -270,10 +195,7 @@ const UIKit = () => {
               <Box
                 key={variant}
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 1,
+                  ...uikitStyles.caseItem,
                   p: variant === "liquid" ? 2 : 0,
                   borderRadius: 2,
                   bgcolor:
@@ -363,47 +285,19 @@ const UIKit = () => {
             Badge
           </Typography>
           <Box sx={uikitStyles.componentRow}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Badge text="1" />
               <Typography sx={uikitStyles.caseLabel}>primary</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Badge variant="secondary" text="5" />
               <Typography sx={uikitStyles.caseLabel}>secondary</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Badge text="99+" />
               <Typography sx={uikitStyles.caseLabel}>wide</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Badge variant="secondary" text="12" />
               <Typography sx={uikitStyles.caseLabel}>secondary wide</Typography>
             </Box>
@@ -413,36 +307,15 @@ const UIKit = () => {
             Tag
           </Typography>
           <Box sx={uikitStyles.componentRow}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Tag text="Default" />
               <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Tag text="Custom" bgColor="primary.50" textColor="primary.600" />
               <Typography sx={uikitStyles.caseLabel}>custom colors</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Tag
                 text="Success"
                 bgColor="additional.green.200"
@@ -450,14 +323,7 @@ const UIKit = () => {
               />
               <Typography sx={uikitStyles.caseLabel}>green</Typography>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            <Box sx={uikitStyles.caseItem}>
               <Tag
                 text="Error"
                 bgColor="additional.red.200"
@@ -472,12 +338,43 @@ const UIKit = () => {
             Tag2
           </Typography>
           <Box sx={uikitStyles.componentRow}>
-            <Tag2 text="All" active />
-            <Tag2 text="In Progress" indicator="primary.main" />
-            <Tag2 text="High Priority" indicator="additional.red.main" />
-            <Tag2 text="Details" indicator="grayscale.400" />
-            <Tag2 text="Premium" icon="star-gold-colored" />
-            <Tag2 text="High-Value" icon="chart" />
+            <Box sx={uikitStyles.caseItem}>
+              <Tag2 text="All" active />
+              <Typography sx={uikitStyles.caseLabel}>active</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag2 text="In Progress" indicator="primary.main" />
+              <Typography sx={uikitStyles.caseLabel}>indicator</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag2 text="High Priority" indicator="additional.red.main" />
+              <Typography sx={uikitStyles.caseLabel}>indicator</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag2 text="Details" indicator="grayscale.400" />
+              <Typography sx={uikitStyles.caseLabel}>indicator</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag2 text="Premium" icon="star-gold-colored" />
+              <Typography sx={uikitStyles.caseLabel}>icon</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag2 text="High-Value" icon="chart" />
+              <Typography sx={uikitStyles.caseLabel}>icon</Typography>
+            </Box>
+          </Box>
+
+          {/* Leaf */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Leaf
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {leafVariants.map((variant) => (
+              <Box key={variant} sx={uikitStyles.caseItem}>
+                <Leaf variant={variant} />
+                <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
+              </Box>
+            ))}
           </Box>
         </Box>
 

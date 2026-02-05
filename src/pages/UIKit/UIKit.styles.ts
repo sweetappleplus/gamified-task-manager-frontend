@@ -39,6 +39,12 @@ export const uikitStyles: Record<string, SxProps<Theme>> = {
     alignItems: "center",
     mb: 2,
   },
+  caseItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 1,
+  },
   caseLabel: {
     fontSize: 10,
     color: "grayscale.500",
