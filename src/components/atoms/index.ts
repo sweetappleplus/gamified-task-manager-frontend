@@ -7,4 +7,5 @@ export * from "./Leaf";
 export * from "./SocialOauthButton";
 export * from "./Tag";
 export * from "./Tag2";
+export * from "./Text";
 export * from "./Toast";
