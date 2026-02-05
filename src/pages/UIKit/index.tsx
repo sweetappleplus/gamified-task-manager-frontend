@@ -8,6 +8,7 @@ import {
   Input,
   SocialOauthButton,
   Tag,
+  Tag2,
 } from "../../components/atoms";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
 import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
@@ -464,6 +465,19 @@ const UIKit = () => {
               />
               <Typography sx={uikitStyles.caseLabel}>red</Typography>
             </Box>
+          </Box>
+
+          {/* Tag2 */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Tag2
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Tag2 text="All" active />
+            <Tag2 text="In Progress" indicator="primary.main" />
+            <Tag2 text="High Priority" indicator="additional.red.main" />
+            <Tag2 text="Details" indicator="grayscale.400" />
+            <Tag2 text="Premium" icon="star-gold-colored" />
+            <Tag2 text="High-Value" icon="chart" />
           </Box>
         </Box>
 
