@@ -28,7 +28,12 @@ const variantConfig: Record<
 
 const StyledText = styled(Typography)({});
 
-export const Text: React.FC<TextProps> = ({ variant = "body", children }) => {
+export const Text: React.FC<TextProps> = ({
+  variant = "body",
+  children,
+  sx,
+  ...props
+}) => {
   const config = variantConfig[variant];
 
   return (
@@ -38,7 +43,9 @@ export const Text: React.FC<TextProps> = ({ variant = "body", children }) => {
         lineHeight: config.lineHeight,
         fontWeight: config.fontWeight,
         color: config.color,
+        ...sx,
       }}
+      {...props}
     >
       {children}
     </StyledText>
