@@ -1,6 +1,11 @@
 import { TypographyProps } from "@mui/material";
 
-export type TextVariant = "heading" | "body" | "bodyMuted";
+export type TextVariant =
+  | "heading"
+  | "body"
+  | "bodyMuted"
+  | "bodyStrong"
+  | "small";
 
 export interface TextProps extends Omit<TypographyProps, "variant"> {
   /**
