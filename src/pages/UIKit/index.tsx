@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
 import {
@@ -10,7 +11,9 @@ import {
   SocialOauthButton,
   Tag,
   Tag2,
+  Toast,
 } from "../../components/atoms";
+import { ToastVariant } from "../../components/atoms/Toast/Toast.types";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
 import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
 import { AvatarSize } from "../../components/atoms/Avatar/Avatar.types";
@@ -42,8 +45,11 @@ const buttonVariants: ButtonVariant[] = [
 ];
 const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
 const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
+const toastVariants: ToastVariant[] = ["info", "success", "warning", "error"];
 
 const UIKit = () => {
+  const [activeToast, setActiveToast] = useState<ToastVariant | null>(null);
+
   return (
     <Box sx={uikitStyles.container}>
       <Container maxWidth="lg">
@@ -376,6 +382,32 @@ const UIKit = () => {
               </Box>
             ))}
           </Box>
+
+          {/* Toast */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Toast
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {toastVariants.map((variant) => (
+              <Box key={variant} sx={uikitStyles.caseItem}>
+                <Button
+                  variant={variant === "error" ? "negative" : "gray"}
+                  size="xs"
+                  text={variant}
+                  onClick={() => setActiveToast(variant)}
+                />
+                <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
+              </Box>
+            ))}
+          </Box>
+          {activeToast && (
+            <Toast
+              variant={activeToast}
+              message={`This is a ${activeToast} toast message`}
+              open={!!activeToast}
+              onClose={() => setActiveToast(null)}
+            />
+          )}
         </Box>
 
         {/* Molecules Section */}
