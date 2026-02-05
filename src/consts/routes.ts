@@ -18,7 +18,7 @@ export const ROUTES: Record<string, RouteConfig> = {
     component: LoginPage,
   },
   DASHBOARD: {
-    path: "/",
+    path: "/dashboard",
     component: DashboardPage,
   },
 } as const;
