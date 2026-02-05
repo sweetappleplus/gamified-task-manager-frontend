@@ -23,6 +23,7 @@ import {
   ICONS,
   NotificationItem,
   NotificationList,
+  Reward,
 } from "components";
 import { useToast } from "hooks";
 
@@ -451,6 +452,25 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <IconButton icon="plus" disabled />
               <Typography sx={uikitStyles.caseLabel}>disabled</Typography>
+            </Box>
+          </Box>
+
+          {/* Reward */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Reward
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <Reward text="150k" />
+              <Typography sx={uikitStyles.caseLabel}>blue</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Reward variant="red" text="20k" />
+              <Typography sx={uikitStyles.caseLabel}>red</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Reward variant="orange" text="10k" />
+              <Typography sx={uikitStyles.caseLabel}>orange</Typography>
             </Box>
           </Box>
         </Box>
