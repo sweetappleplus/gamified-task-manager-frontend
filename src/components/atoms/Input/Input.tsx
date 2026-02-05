@@ -109,6 +109,11 @@ const StyledInputBase = styled(InputBase)<{
     "&::placeholder": {
       opacity: 0,
     },
+    "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus": {
+      WebkitBoxShadow: `0 0 0 1000px ${theme.palette.grayscale[50]} inset`,
+      WebkitTextFillColor: theme.palette.grayscale[950],
+      transition: "background-color 5000s ease-in-out 0s",
+    },
   },
 }));
 
