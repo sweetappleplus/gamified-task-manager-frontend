@@ -50,6 +50,12 @@ api.interceptors.response.use(
       originalRequest.url?.includes(ep)
     );
 
+    // 403 Forbidden: user is authenticated but lacks permission
+    if (error.response?.status === 403) {
+      window.location.href = "/dashboard";
+      return Promise.reject(error);
+    }
+
     if (
       error.response?.status !== 401 ||
       originalRequest._retry ||
