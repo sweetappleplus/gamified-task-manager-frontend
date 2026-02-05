@@ -11,6 +11,7 @@ import {
   Tag,
   Tag2,
 } from "../../components/atoms";
+import { OtpInput } from "../../components/molecules";
 import { useToast } from "../../hooks";
 import { ToastVariant } from "../../components/atoms/Toast/Toast.types";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
@@ -411,7 +412,20 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Molecules
           </Typography>
-          {/* Add molecule components here */}
+          {/* OtpInput */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            OtpInput
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={uikitStyles.caseItem}>
+              <OtpInput />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <OtpInput length={4} />
+              <Typography sx={uikitStyles.caseLabel}>length=4</Typography>
+            </Box>
+          </Box>
         </Box>
 
         {/* Organisms Section */}

@@ -39,6 +39,13 @@ export const uikitStyles: Record<string, SxProps<Theme>> = {
     alignItems: "center",
     mb: 2,
   },
+  componentColumn: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+    alignItems: "flex-start",
+    mb: 2,
+  },
   caseItem: {
     display: "flex",
     flexDirection: "column",
