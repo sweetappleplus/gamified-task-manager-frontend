@@ -4,8 +4,7 @@ import {
   SocialOauthButtonProps,
   SocialProvider,
 } from "./SocialOauthButton.types";
-import { Icon } from "../Icon/Icon";
-import { IconName } from "../Icon/Icon.types";
+import { Icon, IconName } from "components";
 
 const socialIconMap: Record<SocialProvider, IconName> = {
   google: "google-colored",
