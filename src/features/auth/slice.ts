@@ -4,11 +4,13 @@ import { User } from "types";
 type AuthState = {
   user: User | null;
   isAuthenticated: boolean;
+  isInitialized: boolean;
 };
 
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
+  isInitialized: false,
 };
 
 const authSlice = createSlice({
@@ -23,9 +25,12 @@ const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
     },
+    setInitialized: (state) => {
+      state.isInitialized = true;
+    },
   },
 });
 
-export const { setUser, logout } = authSlice.actions;
+export const { setUser, logout, setInitialized } = authSlice.actions;
 
 export default authSlice.reducer;
