@@ -24,6 +24,7 @@ import {
   NotificationItem,
   NotificationList,
   Reward,
+  Textarea,
 } from "components";
 import { useToast } from "hooks";
 
@@ -471,6 +472,26 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Reward variant="orange" text="10k" />
               <Typography sx={uikitStyles.caseLabel}>orange</Typography>
+            </Box>
+          </Box>
+
+          {/* Textarea */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Textarea
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={{ ...uikitStyles.caseItem, width: 400 }}>
+              <Textarea
+                placeholder="Add a note or a short explanation (optional)"
+                maxLength={300}
+              />
+              <Typography sx={uikitStyles.caseLabel}>with counter</Typography>
+            </Box>
+            <Box sx={{ ...uikitStyles.caseItem, width: 400 }}>
+              <Textarea placeholder="Write something..." />
+              <Typography sx={uikitStyles.caseLabel}>
+                without counter
+              </Typography>
             </Box>
           </Box>
         </Box>
