@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
-import { Toast } from "../components/atoms";
-import { ToastVariant } from "../components/atoms/Toast/Toast.types";
+import { Toast, ToastVariant } from "components";
 
 interface ToastOptions {
   variant?: ToastVariant;
@@ -8,10 +7,8 @@ interface ToastOptions {
   autoHideDuration?: number;
 }
 
-interface ToastState
-  extends Required<Pick<ToastOptions, "variant" | "message">> {
-  open: boolean;
-  autoHideDuration: number;
+interface ToastItem extends ToastOptions {
+  id: number;
 }
 
 interface ToastContextValue {
@@ -20,41 +17,49 @@ interface ToastContextValue {
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-const INITIAL_STATE: ToastState = {
-  open: false,
-  variant: "info",
-  message: "",
-  autoHideDuration: 3000,
-};
+const TOAST_GAP = 64;
+const TOAST_TOP_OFFSET = 24;
+
+let toastIdCounter = 0;
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [state, setState] = useState<ToastState>(INITIAL_STATE);
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
 
-  const showToast = useCallback((options: ToastOptions) => {
-    setState({
-      open: true,
-      variant: options.variant ?? "info",
-      message: options.message,
-      autoHideDuration: options.autoHideDuration ?? 3000,
-    });
+  const removeToast = useCallback((id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  const handleClose = useCallback(() => {
-    setState((prev) => ({ ...prev, open: false }));
+  const showToast = useCallback((options: ToastOptions) => {
+    const id = ++toastIdCounter;
+    setToasts((prev) => [
+      ...prev,
+      {
+        id,
+        ...options,
+      },
+    ]);
   }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <Toast
-        variant={state.variant}
-        message={state.message}
-        open={state.open}
-        onClose={handleClose}
-        autoHideDuration={state.autoHideDuration}
-      />
+      {toasts.map((toast, index) => (
+        <Toast
+          key={toast.id}
+          variant={toast.variant}
+          message={toast.message}
+          open
+          onClose={() => removeToast(toast.id)}
+          autoHideDuration={toast.autoHideDuration}
+          sx={{
+            "&.MuiSnackbar-root": {
+              top: `${TOAST_TOP_OFFSET + index * TOAST_GAP}px`,
+            },
+          }}
+        />
+      ))}
     </ToastContext.Provider>
   );
 };
