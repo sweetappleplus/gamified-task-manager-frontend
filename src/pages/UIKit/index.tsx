@@ -189,7 +189,7 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Button leftIcon="tick" text="Loading" loading />
               <Typography sx={uikitStyles.caseLabel}>
-                loading w/ icon
+                loading with icon
               </Typography>
             </Box>
           </Box>
