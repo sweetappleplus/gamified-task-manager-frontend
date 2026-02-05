@@ -1,6 +1,12 @@
 import { createTheme } from "@mui/material/styles";
 import { FontFamily } from "../../styles/fonts";
 
+declare module "@mui/material/styles/createTypography" {
+  interface FontStyle {
+    accent: string;
+  }
+}
+
 declare module "@mui/material/styles" {
   interface GradientColors {
     start: string;
@@ -144,5 +150,6 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: FontFamily.primary,
+    accent: FontFamily.accent,
   },
 });
