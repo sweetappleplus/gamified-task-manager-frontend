@@ -1,13 +1,12 @@
 import React from "react";
-import { IconProps } from "./Icon.types";
-import { icons } from "./icons";
+import { IconProps, ICONS } from "./Icon.types";
 
 export const Icon: React.FC<IconProps> = ({
   name,
   size = 18,
   color = "currentColor",
 }) => {
-  const IconComponent = icons[name];
+  const IconComponent = ICONS[name];
 
   return (
     <IconComponent
