@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Snackbar, styled, Theme, useTheme } from "@mui/material";
 import { ToastProps, ToastVariant } from "./Toast.types";
-import { Icon } from "../Icon";
-import { IconName } from "../Icon/Icon.types";
+import { Icon, IconName } from "components";
 
 const iconMap: Record<ToastVariant, IconName> = {
   info: "information-circle",
