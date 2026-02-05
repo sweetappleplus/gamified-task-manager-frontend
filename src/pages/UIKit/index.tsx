@@ -12,20 +12,19 @@ import {
   Tag,
   Tag2,
   Text,
-} from "../../components/atoms";
-import { OtpInput } from "../../components/molecules";
-import { useToast } from "../../hooks";
-import { ToastVariant } from "../../components/atoms/Toast/Toast.types";
-import { icons, IconName } from "../../components/atoms/Icon/icons";
-import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
-import { AvatarSize } from "../../components/atoms/Avatar/Avatar.types";
-import {
+  ToastVariant,
+  OTPInput,
+  IconName,
+  SocialProvider,
+  AvatarSize,
   ButtonVariant,
   ButtonSize,
-} from "../../components/atoms/Button/Button.types";
-import { LeafVariant } from "../../components/atoms/Leaf/Leaf.types";
+  LeafVariant,
+  ICONS,
+} from "components";
+import { useToast } from "hooks";
 
-const iconNames = Object.keys(icons) as IconName[];
+const iconNames = Object.keys(ICONS) as IconName[];
 const socialProviders: SocialProvider[] = [
   "google",
   "microsoft",
@@ -465,11 +464,11 @@ const UIKit = () => {
           </Typography>
           <Box sx={uikitStyles.componentColumn}>
             <Box sx={uikitStyles.caseItem}>
-              <OtpInput />
+              <OTPInput />
               <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
             <Box sx={uikitStyles.caseItem}>
-              <OtpInput length={4} />
+              <OTPInput length={4} />
               <Typography sx={uikitStyles.caseLabel}>length=4</Typography>
             </Box>
           </Box>
