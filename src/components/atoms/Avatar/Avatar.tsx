@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar as MuiAvatar } from "@mui/material";
 import { AvatarProps } from "./Avatar.types";
-import { getInitials } from "utils";
+import { getCharsForAvatar } from "utils";
 
 export const Avatar: React.FC<AvatarProps> = ({
   size = 48,
@@ -9,7 +9,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   name,
   email,
 }) => {
-  const initials = getInitials(name, email);
+  const initials = getCharsForAvatar(name, email);
 
   return (
     <MuiAvatar
