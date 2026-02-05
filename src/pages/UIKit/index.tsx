@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
 import {
@@ -11,8 +10,8 @@ import {
   SocialOauthButton,
   Tag,
   Tag2,
-  Toast,
 } from "../../components/atoms";
+import { useToast } from "../../hooks";
 import { ToastVariant } from "../../components/atoms/Toast/Toast.types";
 import { icons, IconName } from "../../components/atoms/Icon/icons";
 import { SocialProvider } from "../../components/atoms/SocialOauthButton/SocialOauthButton.types";
@@ -48,7 +47,7 @@ const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
 const toastVariants: ToastVariant[] = ["info", "success", "warning", "error"];
 
 const UIKit = () => {
-  const [activeToast, setActiveToast] = useState<ToastVariant | null>(null);
+  const { showToast } = useToast();
 
   return (
     <Box sx={uikitStyles.container}>
@@ -394,20 +393,17 @@ const UIKit = () => {
                   variant={variant === "error" ? "negative" : "gray"}
                   size="xs"
                   text={variant}
-                  onClick={() => setActiveToast(variant)}
+                  onClick={() =>
+                    showToast({
+                      variant,
+                      message: `This is a ${variant} toast message`,
+                    })
+                  }
                 />
                 <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
               </Box>
             ))}
           </Box>
-          {activeToast && (
-            <Toast
-              variant={activeToast}
-              message={`This is a ${activeToast} toast message`}
-              open={!!activeToast}
-              onClose={() => setActiveToast(null)}
-            />
-          )}
         </Box>
 
         {/* Molecules Section */}
