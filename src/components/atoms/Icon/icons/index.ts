@@ -81,7 +81,7 @@ import { ReactComponent as JcbColored } from "./jcb-colored.svg";
 import { ReactComponent as DinersClubColored } from "./diners-club-colored.svg";
 import { ReactComponent as AmericanExpressColored } from "./american-express-colored.svg";
 
-export const icons = {
+export const ICONS = {
   "arrow-right": ArrowRight,
   "arrow-left": ArrowLeft,
   "arrow-up": ArrowUp,
@@ -166,4 +166,4 @@ export const icons = {
   "american-express-colored": AmericanExpressColored,
 };
 
-export type IconName = keyof typeof icons;
+export type IconName = keyof typeof ICONS;

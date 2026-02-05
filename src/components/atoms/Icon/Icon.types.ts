@@ -1,6 +1,6 @@
-import { IconName, icons } from "./icons";
+import { IconName, ICONS } from "./icons";
 
-export type { IconName, icons };
+export type { IconName, ICONS };
 
 export interface IconProps {
   /**
