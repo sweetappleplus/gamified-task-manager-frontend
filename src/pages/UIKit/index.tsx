@@ -5,6 +5,7 @@ import {
   Badge,
   Button,
   Icon,
+  IconButton,
   Input,
   Leaf,
   SocialOauthButton,
@@ -422,6 +423,33 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Text variant="bodyMuted">Body muted text</Text>
               <Typography sx={uikitStyles.caseLabel}>bodyMuted</Typography>
+            </Box>
+          </Box>
+
+          {/* IconButton */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            IconButton
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <IconButton icon="dots" />
+              <Typography sx={uikitStyles.caseLabel}>gray</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <IconButton variant="white" icon="dots" />
+              <Typography sx={uikitStyles.caseLabel}>white</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <IconButton icon="bell" />
+              <Typography sx={uikitStyles.caseLabel}>gray (bell)</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <IconButton variant="white" icon="bell" />
+              <Typography sx={uikitStyles.caseLabel}>white (bell)</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <IconButton icon="plus" disabled />
+              <Typography sx={uikitStyles.caseLabel}>disabled</Typography>
             </Box>
           </Box>
         </Box>
