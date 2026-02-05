@@ -21,6 +21,8 @@ import {
   ButtonSize,
   LeafVariant,
   ICONS,
+  NotificationItem,
+  NotificationList,
 } from "components";
 import { useToast } from "hooks";
 
@@ -219,47 +221,41 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             Input - Variants
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
-            <Box sx={{ maxWidth: 320 }}>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={{ ...uikitStyles.caseItem, maxWidth: 320 }}>
               <Input
                 placeholder="Номер телефона"
                 label="Дополнительная информация"
               />
-              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
-                normal (empty)
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>normal (empty)</Typography>
             </Box>
-            <Box sx={{ maxWidth: 320 }}>
+            <Box sx={{ ...uikitStyles.caseItem, maxWidth: 320 }}>
               <Input
                 placeholder="Номер телефона"
                 defaultValue="+7 999 999 99 99"
                 label="Дополнительная информация"
               />
-              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+              <Typography sx={uikitStyles.caseLabel}>
                 normal (filled)
               </Typography>
             </Box>
-            <Box sx={{ maxWidth: 320 }}>
+            <Box sx={{ ...uikitStyles.caseItem, maxWidth: 320 }}>
               <Input
                 variant="validated"
                 placeholder="Номер телефона"
                 defaultValue="+7 999 999 99 99"
                 label="Дополнительная информация"
               />
-              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
-                validated
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>validated</Typography>
             </Box>
-            <Box sx={{ maxWidth: 320 }}>
+            <Box sx={{ ...uikitStyles.caseItem, maxWidth: 320 }}>
               <Input
                 variant="error"
                 placeholder="Номер телефона"
                 defaultValue="+7 999 999 99 99"
                 label="Дополнительная информация"
               />
-              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
-                error
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>error</Typography>
             </Box>
           </Box>
 
@@ -267,21 +263,19 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             Input - With Icons
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
-            <Box sx={{ maxWidth: 320 }}>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={{ ...uikitStyles.caseItem, maxWidth: 320 }}>
               <Input placeholder="Search" leftIcon="search" label="Search" />
-              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
-                left icon
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>left icon</Typography>
             </Box>
-            <Box sx={{ maxWidth: 320 }}>
+            <Box sx={{ ...uikitStyles.caseItem, maxWidth: 320 }}>
               <Input
                 placeholder="Search"
                 defaultValue="Search"
                 leftIcon="search"
                 label="Search"
               />
-              <Typography sx={{ ...uikitStyles.caseLabel, mt: 1 }}>
+              <Typography sx={uikitStyles.caseLabel}>
                 left icon (filled)
               </Typography>
             </Box>
@@ -410,7 +404,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             Text
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 1, mb: 2 }}>
+          <Box sx={uikitStyles.componentColumn}>
             <Box sx={uikitStyles.caseItem}>
               <Text variant="heading">Heading text</Text>
               <Typography sx={uikitStyles.caseLabel}>heading</Typography>
@@ -422,6 +416,14 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Text variant="bodyMuted">Body muted text</Text>
               <Typography sx={uikitStyles.caseLabel}>bodyMuted</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Text variant="bodyStrong">Body strong text</Text>
+              <Typography sx={uikitStyles.caseLabel}>bodyStrong</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Text variant="small">Small text</Text>
+              <Typography sx={uikitStyles.caseLabel}>small</Typography>
             </Box>
           </Box>
 
@@ -472,6 +474,28 @@ const UIKit = () => {
               <Typography sx={uikitStyles.caseLabel}>length=4</Typography>
             </Box>
           </Box>
+
+          {/* NotificationItem */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            NotificationItem
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <NotificationItem
+                title="Information"
+                content="Lorem ipsum dolor sit amet consectetur. Molestie amet platea lectus et."
+              />
+              <Typography sx={uikitStyles.caseLabel}>unread</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <NotificationItem
+                title="Information"
+                content="Lorem ipsum dolor sit amet consectetur. Molestie amet platea lectus et."
+                isRead
+              />
+              <Typography sx={uikitStyles.caseLabel}>read</Typography>
+            </Box>
+          </Box>
         </Box>
 
         {/* Organisms Section */}
@@ -479,7 +503,32 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Organisms
           </Typography>
-          {/* Add organism components here */}
+          {/* NotificationList */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            NotificationList
+          </Typography>
+          <Box sx={{ maxWidth: 400 }}>
+            <NotificationList
+              items={[
+                {
+                  title: "Information",
+                  content:
+                    "Lorem ipsum dolor sit amet consectetur. Molestie amet platea lectus et.",
+                },
+                {
+                  title: "Update Available",
+                  content:
+                    "A new version is available. Please update to get the latest features.",
+                },
+                {
+                  title: "Task Completed",
+                  content:
+                    "Your task has been marked as completed successfully.",
+                  isRead: true,
+                },
+              ]}
+            />
+          </Box>
         </Box>
       </Container>
     </Box>
