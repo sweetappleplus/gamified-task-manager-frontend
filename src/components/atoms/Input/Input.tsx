@@ -8,8 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { InputProps, InputVariant } from "./Input.types";
-import { Icon } from "../Icon";
-import { IconName } from "../Icon/Icon.types";
+import { Icon, IconName } from "components";
 
 const ICON_SIZE = 20;
 

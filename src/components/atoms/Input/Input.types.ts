@@ -1,5 +1,5 @@
 import { InputBaseProps } from "@mui/material";
-import { IconName } from "../Icon/Icon.types";
+import { IconName } from "components";
 
 export type InputVariant = "normal" | "validated" | "error";
 
