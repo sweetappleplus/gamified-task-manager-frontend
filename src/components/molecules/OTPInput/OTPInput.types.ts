@@ -1,4 +1,4 @@
-export interface OtpInputProps {
+export interface OTPInputProps {
   /**
    * Number of OTP input fields
    * @default 6

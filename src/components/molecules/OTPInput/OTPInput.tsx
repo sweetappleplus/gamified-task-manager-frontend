@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { Box, InputBase, styled } from "@mui/material";
-import { OtpInputProps } from "./OtpInput.types";
+import { OTPInputProps } from "./OTPInput.types";
 
 const OtpContainer = styled(Box)({
   display: "flex",
@@ -23,7 +23,7 @@ const OtpCell = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const OtpInput: React.FC<OtpInputProps> = ({
+export const OTPInput: React.FC<OTPInputProps> = ({
   length = 6,
   autoComplete = false,
   onChange,
