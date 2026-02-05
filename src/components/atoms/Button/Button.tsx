@@ -1,8 +1,7 @@
 import React from "react";
 import { Button as MuiButton, CircularProgress, styled } from "@mui/material";
 import { ButtonProps, ButtonSize, ButtonVariant } from "./Button.types";
-import { Icon } from "../Icon";
-import { IconName } from "../Icon/Icon.types";
+import { Icon, IconName } from "components";
 
 const sizeConfig: Record<
   ButtonSize,

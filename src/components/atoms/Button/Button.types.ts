@@ -1,5 +1,5 @@
 import { ButtonProps as MuiButtonProps } from "@mui/material";
-import { IconName } from "../Icon/Icon.types";
+import { IconName } from "components";
 
 export type ButtonVariant =
   | "primary"
