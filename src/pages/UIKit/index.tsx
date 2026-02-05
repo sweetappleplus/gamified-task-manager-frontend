@@ -10,6 +10,7 @@ import {
   SocialOauthButton,
   Tag,
   Tag2,
+  Text,
 } from "../../components/atoms";
 import { OtpInput } from "../../components/molecules";
 import { useToast } from "../../hooks";
@@ -404,6 +405,24 @@ const UIKit = () => {
                 <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
               </Box>
             ))}
+          </Box>
+          {/* Text */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Text
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1, mb: 2 }}>
+            <Box sx={uikitStyles.caseItem}>
+              <Text variant="heading">Heading text</Text>
+              <Typography sx={uikitStyles.caseLabel}>heading</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Text variant="body">Body text</Text>
+              <Typography sx={uikitStyles.caseLabel}>body</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Text variant="bodyMuted">Body muted text</Text>
+              <Typography sx={uikitStyles.caseLabel}>bodyMuted</Typography>
+            </Box>
           </Box>
         </Box>
 
