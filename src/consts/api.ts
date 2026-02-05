@@ -10,3 +10,8 @@ export const PUBLIC_ENDPOINTS = [
   API_URL_AUTH_VERIFY_OTP,
   API_URL_AUTH_REFRESH,
 ];
+
+export const API_STATUSES = {
+  SUCCESS: "success",
+  FAILURE: "failure",
+} as const;
