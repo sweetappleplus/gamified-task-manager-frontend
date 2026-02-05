@@ -5,3 +5,4 @@ export * from "./Icon";
 export * from "./Input";
 export * from "./SocialOauthButton";
 export * from "./Tag";
+export * from "./Tag2";
