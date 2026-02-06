@@ -42,7 +42,7 @@ export interface RouteConfig {
   path: string;
   component: ComponentType;
   access?: RouteAccess;
-  roles?: UserRole[];
+  roles?: readonly UserRole[];
 }
 
 export type PublicRouteProps = {
@@ -51,7 +51,7 @@ export type PublicRouteProps = {
 
 export type ProtectedRouteProps = {
   children: React.ReactNode;
-  roles?: UserRole[];
+  roles?: readonly UserRole[];
 };
 
 export const LOGIN_STEPS = {
