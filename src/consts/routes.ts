@@ -1,4 +1,4 @@
-import { RouteConfig, ROUTE_ACCESS } from "types";
+import { RouteConfig, ROUTE_ACCESS, USER_ROLES } from "types";
 import UIKitPage from "pages/UIKit";
 import LoginPage from "pages/Login";
 import DashboardPage from "pages/Dashboard";
@@ -18,5 +18,6 @@ export const ROUTES: Record<string, RouteConfig> = {
     path: "/dashboard",
     component: DashboardPage,
     access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN, USER_ROLES.WORKER],
   },
 } as const;
