@@ -32,7 +32,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            REACT_APP_API_URL=http://${{ secrets.VPS_HOST }}/api
+            REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
