@@ -1,0 +1,13 @@
+node_modules
+build
+coverage
+.env.local
+.env.*.local
+.git
+.gitignore
+.vscode
+.idea
+*.md
+.cursorrules
+CLAUDE.md
+.husky
