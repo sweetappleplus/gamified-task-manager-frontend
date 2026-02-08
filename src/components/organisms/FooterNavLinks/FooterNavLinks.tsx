@@ -3,7 +3,7 @@ import { Box, styled } from "@mui/material";
 import { FooterNavButton } from "components";
 import { FooterNavLinksProps } from "./FooterNavLinks.types";
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -14,7 +14,7 @@ const Container = styled(Box)(({ theme }) => ({
   borderRadius: 20,
   width: "fit-content",
   overflow: "visible",
-}));
+});
 
 const HighlightedWrapper = styled(Box)({
   position: "relative",
