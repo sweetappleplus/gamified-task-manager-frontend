@@ -30,7 +30,7 @@ import {
   FooterNavButton,
   FooterNavLinks,
 } from "components";
-import { WorkerSidebar } from "components/layouts";
+import { WorkerSidebar, WorkerFooter } from "components/layouts";
 import { useToast } from "hooks";
 
 const iconNames = Object.keys(ICONS) as IconName[];
@@ -743,6 +743,14 @@ const UIKit = () => {
               </Box>
               <Typography sx={uikitStyles.caseLabel}>admin user</Typography>
             </Box>
+          </Box>
+
+          {/* WorkerFooter */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            WorkerFooter
+          </Typography>
+          <Box sx={{ mb: 2 }}>
+            <WorkerFooter activeRoute="/" />
           </Box>
         </Box>
       </Container>
