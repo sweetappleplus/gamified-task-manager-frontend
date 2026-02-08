@@ -26,6 +26,7 @@ import {
   Reward,
   Textarea,
   SidebarNavItem,
+  SidebarLinks,
 } from "components";
 import { useToast } from "hooks";
 
@@ -622,6 +623,38 @@ const UIKit = () => {
                   isRead: true,
                 },
               ]}
+            />
+          </Box>
+
+          {/* SidebarLinks */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            SidebarLinks
+          </Typography>
+          <Box sx={{ maxWidth: 300 }}>
+            <SidebarLinks
+              items={[
+                { icon: "home", label: "Dashboard", route: "/dashboard" },
+                { icon: "lists", label: "Tasks", route: "/tasks" },
+                { icon: "message", label: "Chats", route: "/chats" },
+                {
+                  icon: "bell",
+                  label: "Notifications",
+                  route: "/notifications",
+                  badge: 2,
+                },
+                {
+                  icon: "user-square",
+                  label: "Profile",
+                  route: "/profile",
+                },
+                {
+                  icon: "rocket",
+                  label: "Start Work",
+                  route: "/start-work",
+                  variant: "highlighted",
+                },
+              ]}
+              activeRoute="/dashboard"
             />
           </Box>
         </Box>
