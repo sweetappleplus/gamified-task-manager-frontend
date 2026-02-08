@@ -65,6 +65,12 @@ export const ROUTES: Record<string, RouteConfig> = {
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
+  ADMIN_XP_SETTINGS: {
+    path: "/admin/xp-settings",
+    component: PlaceholderPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
 } as const;
 
 export const getWorkerSidebarNavItems = (
@@ -137,3 +143,18 @@ export const WORKER_FOOTER_NAV_ITEMS: FooterNavItem[] = [
     route: ROUTES.PROFILE.path,
   },
 ];
+
+export const ADMIN_SIDEBAR_NAV_ITEMS = [
+  {
+    label: "Dashboard",
+    route: ROUTES.ADMIN_DASHBOARD.path,
+  },
+  {
+    label: "XP Setting",
+    route: ROUTES.ADMIN_XP_SETTINGS.path,
+  },
+  {
+    label: "Home",
+    route: ROUTES.DASHBOARD.path,
+  },
+] as const;
