@@ -30,7 +30,12 @@ import {
   FooterNavButton,
   FooterNavLinks,
 } from "components";
-import { WorkerSidebar, WorkerFooter, AdminSidebar } from "components/layouts";
+import {
+  WorkerSidebar,
+  WorkerFooter,
+  AdminSidebar,
+  AdminLayout,
+} from "components/layouts";
 import { useToast } from "hooks";
 
 const iconNames = Object.keys(ICONS) as IconName[];
@@ -759,6 +764,19 @@ const UIKit = () => {
           </Typography>
           <Box sx={{ mb: 2 }}>
             <AdminSidebar activeRoute="/admin/dashboard" />
+          </Box>
+
+          {/* AdminLayout */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            AdminLayout
+          </Typography>
+          <Box sx={{ mb: 2 }}>
+            <AdminLayout activeRoute="/admin/dashboard">
+              <Typography variant="h4">Admin Dashboard</Typography>
+              <Typography variant="body1" sx={{ mt: 2 }}>
+                This is the main content area of the admin layout.
+              </Typography>
+            </AdminLayout>
           </Box>
         </Box>
       </Container>
