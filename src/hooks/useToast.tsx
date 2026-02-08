@@ -5,6 +5,7 @@ interface ToastOptions {
   variant?: ToastVariant;
   message: string;
   autoHideDuration?: number;
+  onClickCloseButton?: () => void;
 }
 
 interface ToastItem extends ToastOptions {
@@ -52,6 +53,14 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
           message={toast.message}
           open
           onClose={() => removeToast(toast.id)}
+          onClickCloseButton={
+            toast.onClickCloseButton
+              ? () => {
+                  toast.onClickCloseButton?.();
+                  removeToast(toast.id);
+                }
+              : undefined
+          }
           autoHideDuration={toast.autoHideDuration}
           sx={{
             "&.MuiSnackbar-root": {
