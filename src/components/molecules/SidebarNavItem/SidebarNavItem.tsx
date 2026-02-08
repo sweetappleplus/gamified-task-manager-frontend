@@ -2,11 +2,14 @@ import React from "react";
 import { Box, styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Icon, Badge, Text } from "components";
-import { SidebarNavItemProps } from "./SidebarNavItem.types";
+import {
+  SidebarNavItemProps,
+  SidebarNavItemVariant,
+} from "./SidebarNavItem.types";
 
 const Container = styled(Box)<{
   ownerState: {
-    variant: SidebarNavItemProps["variant"];
+    variant: SidebarNavItemVariant;
     isActive: boolean;
   };
 }>(({ theme, ownerState }) => {
