@@ -32,18 +32,17 @@ const Container = styled(Box)<{
       : isActive
         ? `${theme.palette.grayscale[0]}CC`
         : "transparent",
-    border: isActive && !isHighlighted ? "none" : "1.4px solid transparent",
-    backgroundImage: isActive && !isHighlighted ? "none" : `${gradientBorder}`,
+    border: isHighlighted || isActive ? "1.4px solid transparent" : "none",
+    backgroundImage: isHighlighted || isActive ? `${gradientBorder}` : "none",
     backgroundOrigin: "border-box",
     backgroundClip:
-      isActive && !isHighlighted ? "padding-box" : "padding-box, border-box",
+      isHighlighted || isActive ? "padding-box, border-box" : "padding-box",
     cursor: "pointer",
     flexShrink: 0,
     position: "relative",
     "&::before":
-      isActive && !isHighlighted
-        ? {}
-        : {
+      isHighlighted || isActive
+        ? {
             content: '""',
             position: "absolute",
             top: 0,
@@ -58,7 +57,8 @@ const Container = styled(Box)<{
             WebkitMaskComposite: "xor",
             maskComposite: "exclude",
             pointerEvents: "none",
-          },
+          }
+        : {},
   };
 });
 
