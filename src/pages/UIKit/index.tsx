@@ -647,7 +647,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             NotificationList
           </Typography>
-          <Box sx={{ maxWidth: 400, mb: 4 }}>
+          <Box sx={{ maxWidth: 400, mb: 2 }}>
             <NotificationList
               items={[
                 {
@@ -674,7 +674,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             SidebarLinks
           </Typography>
-          <Box sx={{ maxWidth: 300, mb: 4 }}>
+          <Box sx={{ maxWidth: 300, mb: 2 }}>
             <SidebarLinks
               items={[
                 { icon: "home", label: "Dashboard", route: "/dashboard" },
@@ -706,7 +706,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             FooterNavLinks
           </Typography>
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: 2 }}>
             <FooterNavLinks activeRoute="/" />
           </Box>
         </Box>
