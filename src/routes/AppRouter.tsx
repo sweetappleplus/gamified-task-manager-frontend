@@ -2,12 +2,15 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ROUTES } from "consts";
 import { useAuth } from "features/auth";
+import { useNotificationSocket } from "hooks/useNotificationSocket";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 import { ROUTE_ACCESS } from "types";
 
 const AppRoutes = () => {
   const { isAuthenticated, isInitialized, initializeAuth } = useAuth();
+
+  useNotificationSocket();
 
   useEffect(() => {
     initializeAuth();
