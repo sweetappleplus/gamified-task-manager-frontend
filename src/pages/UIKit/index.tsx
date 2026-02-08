@@ -27,6 +27,7 @@ import {
   Textarea,
   SidebarNavItem,
   SidebarLinks,
+  FooterNavButton,
 } from "components";
 import { useToast } from "hooks";
 
@@ -590,6 +591,48 @@ const UIKit = () => {
               <Typography sx={uikitStyles.caseLabel}>
                 with large badge
               </Typography>
+            </Box>
+          </Box>
+
+          {/* FooterNavButton */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            FooterNavButton
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <FooterNavButton icon="home" label="Home" route="/home" />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <FooterNavButton
+                icon="home"
+                label="Home"
+                route="/home"
+                isActive
+              />
+              <Typography sx={uikitStyles.caseLabel}>active</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <FooterNavButton
+                icon="rocket"
+                label="Start"
+                route="/start"
+                variant="highlighted"
+              />
+              <Typography sx={uikitStyles.caseLabel}>highlighted</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <FooterNavButton icon="lists" label="Tasks" route="/tasks" />
+              <Typography sx={uikitStyles.caseLabel}>tasks</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <FooterNavButton
+                icon="message"
+                label="Chats"
+                route="/chats"
+                isActive
+              />
+              <Typography sx={uikitStyles.caseLabel}>chats active</Typography>
             </Box>
           </Box>
         </Box>
