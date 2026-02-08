@@ -67,23 +67,23 @@ export const getWorkerSidebarNavItems = (
   {
     icon: "home",
     label: "Dashboard",
-    route: "/dashboard",
+    route: ROUTES.DASHBOARD.path,
   },
   {
     icon: "lists",
     label: "Tasks",
-    route: "/tasks",
+    route: ROUTES.TASKS.path,
   },
   {
     icon: "message",
     label: "Chats",
-    route: "/chats",
+    route: ROUTES.CHATS.path,
     ...(chatCount !== undefined && chatCount > 0 ? { badge: chatCount } : {}),
   },
   {
     icon: "bell",
     label: "Notifications",
-    route: "/notifications",
+    route: ROUTES.NOTIFICATIONS.path,
     ...(notificationCount !== undefined && notificationCount > 0
       ? { badge: notificationCount }
       : {}),
@@ -91,12 +91,12 @@ export const getWorkerSidebarNavItems = (
   {
     icon: "user-square",
     label: "Profile",
-    route: "/profile",
+    route: ROUTES.PROFILE.path,
   },
   {
     icon: "rocket",
     label: "Start Work",
-    route: "/start-work",
+    route: ROUTES.START_WORK.path,
     variant: "highlighted",
   },
 ];

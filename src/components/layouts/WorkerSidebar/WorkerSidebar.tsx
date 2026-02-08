@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Box } from "@mui/material";
 import { SidebarLinks, SidebarNavItemProps } from "components";
-import { getWorkerSidebarNavItems } from "consts/routes";
+import { getWorkerSidebarNavItems, ROUTES } from "consts/routes";
 import { WorkerSidebarProps } from "./WorkerSidebar.types";
 
 export const WorkerSidebar: React.FC<WorkerSidebarProps> = ({
@@ -19,7 +19,7 @@ export const WorkerSidebar: React.FC<WorkerSidebarProps> = ({
         {
           icon: "user-square",
           label: "Admin",
-          route: "/admin",
+          route: ROUTES.ADMIN_DASHBOARD.path,
         },
       ];
     }
