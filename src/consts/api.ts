@@ -5,6 +5,8 @@ export const API_URL_AUTH_VERIFY_OTP = "/auth/verify-otp";
 export const API_URL_AUTH_REFRESH = "/auth/refresh";
 export const API_URL_AUTH_LOGOUT = "/auth/logout";
 
+export const API_URL_NOTIFICATIONS_MARK_AS_READ = "/notifications/:id/read";
+
 export const PUBLIC_ENDPOINTS = [
   API_URL_AUTH_SEND_OTP,
   API_URL_AUTH_VERIFY_OTP,
