@@ -25,6 +25,7 @@ import {
   NotificationList,
   Reward,
   Textarea,
+  SidebarNavItem,
 } from "components";
 import { useToast } from "hooks";
 
@@ -535,6 +536,59 @@ const UIKit = () => {
                 isRead
               />
               <Typography sx={uikitStyles.caseLabel}>read</Typography>
+            </Box>
+          </Box>
+
+          {/* SidebarNavItem */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            SidebarNavItem
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={uikitStyles.caseItem}>
+              <SidebarNavItem
+                icon="home"
+                label="Dashboard"
+                route="/dashboard"
+              />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <SidebarNavItem
+                icon="home"
+                label="Dashboard"
+                route="/dashboard"
+                isActive
+              />
+              <Typography sx={uikitStyles.caseLabel}>active</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <SidebarNavItem
+                icon="bell"
+                label="Notifications"
+                route="/notifications"
+                badge={2}
+              />
+              <Typography sx={uikitStyles.caseLabel}>with badge</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <SidebarNavItem
+                icon="rocket"
+                label="Start Work"
+                route="/start-work"
+                variant="highlighted"
+              />
+              <Typography sx={uikitStyles.caseLabel}>highlighted</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <SidebarNavItem
+                icon="message"
+                label="Messages"
+                route="/messages"
+                badge={99}
+              />
+              <Typography sx={uikitStyles.caseLabel}>
+                with large badge
+              </Typography>
             </Box>
           </Box>
         </Box>
