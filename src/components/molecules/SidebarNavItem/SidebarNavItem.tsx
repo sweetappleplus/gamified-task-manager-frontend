@@ -17,7 +17,7 @@ const Container = styled(Box)<{
     display: "flex",
     alignItems: "center",
     gap: 12,
-    width: 252,
+    width: "100%",
     padding: 12,
     borderRadius: 16,
     backgroundColor: isHighlighted
