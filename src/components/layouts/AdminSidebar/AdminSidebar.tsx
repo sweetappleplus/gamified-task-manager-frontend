@@ -28,6 +28,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
     <Box
       sx={{
         width: isExpanded ? 268 : 60,
+        height: "100dvh",
         bgcolor: "grayscale.950",
         transition: "width 0.3s ease",
         overflow: "hidden",
