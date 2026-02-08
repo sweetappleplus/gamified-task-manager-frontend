@@ -32,6 +32,7 @@ export const WorkerSidebar: React.FC<WorkerSidebarProps> = ({
         display: "flex",
         flexDirection: "column",
         gap: "20px",
+        width: 268,
       }}
     >
       <SidebarLinks items={navItems} activeRoute={activeRoute} />
