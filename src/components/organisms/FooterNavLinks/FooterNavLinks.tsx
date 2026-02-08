@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, styled } from "@mui/material";
 import { FooterNavButton } from "components";
+import { WORKER_FOOTER_NAV_ITEMS } from "consts/routes";
 import { FooterNavLinksProps } from "./FooterNavLinks.types";
 
 const Container = styled(Box)({
@@ -47,38 +48,24 @@ export const FooterNavLinks: React.FC<FooterNavLinksProps> = ({
 }) => {
   return (
     <Container>
-      <FooterNavButton
-        icon="home"
-        label="Home"
-        route="/"
-        isActive={activeRoute === "/"}
-      />
-      <FooterNavButton
-        icon="lists"
-        label="Tasks"
-        route="/tasks"
-        isActive={activeRoute === "/tasks"}
-      />
-      <HighlightedWrapper>
-        <FooterNavButton
-          icon="rocket"
-          label="Start"
-          route="/start"
-          variant="highlighted"
-        />
-      </HighlightedWrapper>
-      <FooterNavButton
-        icon="message"
-        label="Chats"
-        route="/chats"
-        isActive={activeRoute === "/chats"}
-      />
-      <FooterNavButton
-        icon="user-square"
-        label="Profile"
-        route="/profile"
-        isActive={activeRoute === "/profile"}
-      />
+      {WORKER_FOOTER_NAV_ITEMS.map((item, index) => {
+        const button = (
+          <FooterNavButton
+            key={index}
+            icon={item.icon}
+            label={item.label}
+            route={item.route}
+            variant={item.variant}
+            isActive={activeRoute === item.route}
+          />
+        );
+
+        if (item.isHighlighted) {
+          return <HighlightedWrapper key={index}>{button}</HighlightedWrapper>;
+        }
+
+        return button;
+      })}
     </Container>
   );
 };
