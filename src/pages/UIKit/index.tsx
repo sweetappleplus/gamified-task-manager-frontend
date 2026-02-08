@@ -28,6 +28,7 @@ import {
   SidebarNavItem,
   SidebarLinks,
   FooterNavButton,
+  FooterNavLinks,
 } from "components";
 import { useToast } from "hooks";
 
@@ -646,7 +647,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             NotificationList
           </Typography>
-          <Box sx={{ maxWidth: 400 }}>
+          <Box sx={{ maxWidth: 400, mb: 4 }}>
             <NotificationList
               items={[
                 {
@@ -673,7 +674,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             SidebarLinks
           </Typography>
-          <Box sx={{ maxWidth: 300 }}>
+          <Box sx={{ maxWidth: 300, mb: 4 }}>
             <SidebarLinks
               items={[
                 { icon: "home", label: "Dashboard", route: "/dashboard" },
@@ -699,6 +700,14 @@ const UIKit = () => {
               ]}
               activeRoute="/dashboard"
             />
+          </Box>
+
+          {/* FooterNavLinks */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            FooterNavLinks
+          </Typography>
+          <Box sx={{ mb: 4 }}>
+            <FooterNavLinks activeRoute="/" />
           </Box>
         </Box>
       </Container>
