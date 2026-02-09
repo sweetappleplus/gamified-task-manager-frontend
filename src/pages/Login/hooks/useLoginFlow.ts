@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "features/auth";
 import { useToast } from "hooks";
 import { LoginStep, LOGIN_STEPS } from "types";
-import { RESEND_COOLDOWN_SECONDS } from "consts";
+import { RESEND_COOLDOWN_SECONDS, ROUTES } from "consts";
 import { getErrorMessage, isValidEmail } from "utils";
 
 export const useLoginFlow = () => {
@@ -65,7 +65,7 @@ export const useLoginFlow = () => {
       try {
         const response = await verifyOtp(email, code);
         showToast({ variant: "success", message: response.message });
-        const redirect = searchParams.get("redirect") || "/dashboard";
+        const redirect = searchParams.get("redirect") || ROUTES.DASHBOARD.path;
         navigate(redirect, { replace: true });
       } catch (error: unknown) {
         showToast({

@@ -1,5 +1,10 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
-import { API_URL, API_URL_AUTH_REFRESH, PUBLIC_ENDPOINTS } from "consts";
+import {
+  API_URL,
+  API_URL_AUTH_REFRESH,
+  PUBLIC_ENDPOINTS,
+  ROUTES,
+} from "consts";
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from "utils";
 import { ApiResponse, AuthResponse, FailedRequest } from "types";
 
@@ -52,7 +57,7 @@ api.interceptors.response.use(
 
     // 403 Forbidden: user is authenticated but lacks permission
     if (error.response?.status === 403) {
-      window.location.href = "/dashboard";
+      window.location.href = ROUTES.DASHBOARD.path;
       return Promise.reject(error);
     }
 
@@ -81,7 +86,7 @@ api.interceptors.response.use(
     const refreshToken = getRefreshToken();
     if (!refreshToken) {
       clearTokens();
-      window.location.href = "/login";
+      window.location.href = ROUTES.LOGIN.path;
       return Promise.reject(error);
     }
 
@@ -104,7 +109,7 @@ api.interceptors.response.use(
     } catch (refreshError) {
       processQueue(refreshError as AxiosError, null);
       clearTokens();
-      window.location.href = "/login";
+      window.location.href = ROUTES.LOGIN.path;
       return Promise.reject(refreshError);
     } finally {
       isRefreshing = false;
