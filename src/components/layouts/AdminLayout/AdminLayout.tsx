@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { AdminSidebar } from "components/layouts";
+import { AdminSidebar } from "components";
 import { AdminLayoutProps } from "./AdminLayout.types";
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({

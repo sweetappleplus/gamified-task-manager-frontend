@@ -29,13 +29,11 @@ import {
   SidebarLinks,
   FooterNavButton,
   FooterNavLinks,
-} from "components";
-import {
   WorkerSidebar,
   WorkerFooter,
   AdminSidebar,
   AdminLayout,
-} from "components/layouts";
+} from "components";
 import { WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
 

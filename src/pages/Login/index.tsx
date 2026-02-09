@@ -5,8 +5,9 @@ import {
   Button,
   SocialOauthButton,
   IconButton,
-} from "components/atoms";
-import { OTPInput, SocialProvider } from "components";
+  OTPInput,
+  SocialProvider,
+} from "components";
 import { useLoginFlow } from "./hooks";
 import { loginStyles } from "./Login.styles";
 import { LOGIN_STEPS } from "types";
