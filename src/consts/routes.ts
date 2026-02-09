@@ -4,6 +4,7 @@ import UIKitPage from "pages/UIKit";
 import LoginPage from "pages/Login";
 import DashboardPage from "pages/Dashboard";
 import PlaceholderPage from "pages/Placeholder";
+import AdminPlaceholderPage from "pages/admin/Placeholder";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -54,13 +55,13 @@ export const ROUTES: Record<string, RouteConfig> = {
   },
   ADMIN_DASHBOARD: {
     path: "/admin/dashboard",
-    component: PlaceholderPage,
+    component: AdminPlaceholderPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
   ADMIN_XP_SETTINGS: {
     path: "/admin/xp-settings",
-    component: PlaceholderPage,
+    component: AdminPlaceholderPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
