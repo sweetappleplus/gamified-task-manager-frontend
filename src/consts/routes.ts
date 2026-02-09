@@ -2,7 +2,6 @@ import { RouteConfig, ROUTE_ACCESS, USER_ROLES } from "types";
 import { SidebarNavItemProps, FooterNavButtonProps } from "components";
 import UIKitPage from "pages/UIKit";
 import LoginPage from "pages/Login";
-import DashboardPage from "pages/Dashboard";
 import PlaceholderPage from "pages/Placeholder";
 import AdminPlaceholderPage from "pages/admin/Placeholder";
 
@@ -19,7 +18,7 @@ export const ROUTES: Record<string, RouteConfig> = {
   },
   DASHBOARD: {
     path: "/dashboard",
-    component: DashboardPage,
+    component: PlaceholderPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN, USER_ROLES.WORKER],
   },
