@@ -1,15 +1,13 @@
 import { SxProps, Theme } from "@mui/material";
 
 export const placeholderStyles: Record<string, SxProps<Theme>> = {
-  container: {
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "grayscale.50",
-  },
   content: {
     textAlign: "center",
+    minHeight: "80vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontWeight: 600,

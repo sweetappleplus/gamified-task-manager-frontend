@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import { WorkerLayout } from "components";
 import { placeholderStyles } from "./Placeholder.styles";
 
 const Placeholder = () => {
@@ -16,7 +17,7 @@ const Placeholder = () => {
   };
 
   return (
-    <Box sx={placeholderStyles.container}>
+    <WorkerLayout activeRoute={location.pathname}>
       <Container maxWidth="md">
         <Box sx={placeholderStyles.content}>
           <Typography
@@ -35,7 +36,7 @@ const Placeholder = () => {
           </Typography>
         </Box>
       </Container>
-    </Box>
+    </WorkerLayout>
   );
 };
 
