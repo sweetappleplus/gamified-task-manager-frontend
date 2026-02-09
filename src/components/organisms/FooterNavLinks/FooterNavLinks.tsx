@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, styled } from "@mui/material";
 import { FooterNavButton } from "components";
-import { WORKER_FOOTER_NAV_ITEMS } from "consts/routes";
 import { FooterNavLinksProps } from "./FooterNavLinks.types";
 
 const Container = styled(Box)({
@@ -44,11 +43,12 @@ const HighlightedWrapper = styled(Box)({
 });
 
 export const FooterNavLinks: React.FC<FooterNavLinksProps> = ({
+  items,
   activeRoute,
 }) => {
   return (
     <Container>
-      {WORKER_FOOTER_NAV_ITEMS.map((item, index) => {
+      {items.map((item, index) => {
         const button = (
           <FooterNavButton
             key={index}
@@ -60,7 +60,7 @@ export const FooterNavLinks: React.FC<FooterNavLinksProps> = ({
           />
         );
 
-        if (item.isHighlighted) {
+        if (item.variant === "highlighted") {
           return <HighlightedWrapper key={index}>{button}</HighlightedWrapper>;
         }
 
