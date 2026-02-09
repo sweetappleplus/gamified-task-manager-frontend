@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Icon } from "components";
-import { ADMIN_SIDEBAR_NAV_ITEMS } from "consts/routes";
+import { ADMIN_SIDEBAR_NAV_ITEMS } from "consts";
 import { AdminSidebarProps } from "./AdminSidebar.types";
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
