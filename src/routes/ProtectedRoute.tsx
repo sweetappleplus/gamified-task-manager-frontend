@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "features/auth";
 import { ProtectedRouteProps } from "types";
+import { ROUTES } from "consts";
 
 export const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
   const { isAuthenticated, user } = useAuth();
@@ -14,7 +15,7 @@ export const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
   }
 
   if (roles && roles.length > 0 && user && !roles.includes(user.role)) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={ROUTES.DASHBOARD.path} replace />;
   }
 
   return <>{children}</>;

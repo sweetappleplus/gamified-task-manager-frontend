@@ -23,7 +23,10 @@ const AppRoutes = () => {
       <Route
         path="/"
         element={
-          <Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />
+          <Navigate
+            to={isAuthenticated ? ROUTES.DASHBOARD.path : ROUTES.LOGIN.path}
+            replace
+          />
         }
       />
 
