@@ -5,13 +5,6 @@ import LoginPage from "pages/Login";
 import DashboardPage from "pages/Dashboard";
 import PlaceholderPage from "pages/Placeholder";
 
-export interface FooterNavItem extends Omit<FooterNavButtonProps, "isActive"> {
-  /**
-   * Whether this item should be wrapped with the highlighted ring
-   */
-  isHighlighted?: boolean;
-}
-
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
     path: "/uikit",
@@ -114,7 +107,7 @@ export const getWorkerSidebarNavItems = (
   },
 ];
 
-export const WORKER_FOOTER_NAV_ITEMS: FooterNavItem[] = [
+export const WORKER_FOOTER_NAV_ITEMS: FooterNavButtonProps[] = [
   {
     icon: "home",
     label: "Home",
@@ -130,7 +123,6 @@ export const WORKER_FOOTER_NAV_ITEMS: FooterNavItem[] = [
     label: "Start",
     route: ROUTES.START_WORK.path,
     variant: "highlighted",
-    isHighlighted: true,
   },
   {
     icon: "message",
