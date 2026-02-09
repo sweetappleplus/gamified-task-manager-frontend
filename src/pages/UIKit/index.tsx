@@ -33,6 +33,7 @@ import {
   WorkerFooter,
   AdminSidebar,
   AdminLayout,
+  WorkerLayout,
 } from "components";
 import { WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
@@ -776,6 +777,37 @@ const UIKit = () => {
                 This is the main content area of the admin layout.
               </Typography>
             </AdminLayout>
+          </Box>
+
+          {/* WorkerLayout */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            WorkerLayout
+          </Typography>
+          <Box
+            sx={{
+              height: 500,
+              mb: 2,
+              overflow: "hidden",
+              border: "1px solid",
+              borderColor: "grayscale.200",
+            }}
+          >
+            <WorkerLayout
+              activeRoute="/dashboard"
+              isAdmin
+              notificationCount={2}
+              chatCount={5}
+            >
+              <Typography variant="h4" sx={{ fontWeight: 600 }}>
+                Dashboard
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ mt: 2, color: "grayscale.500" }}
+              >
+                This is the main content area of the worker layout.
+              </Typography>
+            </WorkerLayout>
           </Box>
         </Box>
       </Container>
