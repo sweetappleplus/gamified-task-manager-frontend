@@ -35,7 +35,7 @@ import {
   AdminLayout,
   WorkerLayout,
 } from "components";
-import { WORKER_FOOTER_NAV_ITEMS } from "consts";
+import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
 
 const iconNames = Object.keys(ICONS) as IconName[];
@@ -557,7 +557,7 @@ const UIKit = () => {
               <SidebarNavItem
                 icon="home"
                 label="Dashboard"
-                route="/dashboard"
+                route={ROUTES.DASHBOARD.path}
               />
               <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
@@ -565,7 +565,7 @@ const UIKit = () => {
               <SidebarNavItem
                 icon="home"
                 label="Dashboard"
-                route="/dashboard"
+                route={ROUTES.DASHBOARD.path}
                 isActive
               />
               <Typography sx={uikitStyles.caseLabel}>active</Typography>
@@ -574,7 +574,7 @@ const UIKit = () => {
               <SidebarNavItem
                 icon="bell"
                 label="Notifications"
-                route="/notifications"
+                route={ROUTES.NOTIFICATIONS.path}
                 badge={2}
               />
               <Typography sx={uikitStyles.caseLabel}>with badge</Typography>
@@ -583,7 +583,7 @@ const UIKit = () => {
               <SidebarNavItem
                 icon="rocket"
                 label="Start Work"
-                route="/start-work"
+                route={ROUTES.START_WORK.path}
                 variant="highlighted"
               />
               <Typography sx={uikitStyles.caseLabel}>highlighted</Typography>
@@ -592,7 +592,7 @@ const UIKit = () => {
               <SidebarNavItem
                 icon="message"
                 label="Messages"
-                route="/messages"
+                route={ROUTES.CHATS.path}
                 badge={99}
               />
               <Typography sx={uikitStyles.caseLabel}>
@@ -607,14 +607,18 @@ const UIKit = () => {
           </Typography>
           <Box sx={uikitStyles.componentRow}>
             <Box sx={uikitStyles.caseItem}>
-              <FooterNavButton icon="home" label="Home" route="/home" />
+              <FooterNavButton
+                icon="home"
+                label="Home"
+                route={ROUTES.DASHBOARD.path}
+              />
               <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
             <Box sx={uikitStyles.caseItem}>
               <FooterNavButton
                 icon="home"
                 label="Home"
-                route="/home"
+                route={ROUTES.DASHBOARD.path}
                 isActive
               />
               <Typography sx={uikitStyles.caseLabel}>active</Typography>
@@ -623,20 +627,24 @@ const UIKit = () => {
               <FooterNavButton
                 icon="rocket"
                 label="Start"
-                route="/start"
+                route={ROUTES.START_WORK.path}
                 variant="highlighted"
               />
               <Typography sx={uikitStyles.caseLabel}>highlighted</Typography>
             </Box>
             <Box sx={uikitStyles.caseItem}>
-              <FooterNavButton icon="lists" label="Tasks" route="/tasks" />
+              <FooterNavButton
+                icon="lists"
+                label="Tasks"
+                route={ROUTES.TASKS.path}
+              />
               <Typography sx={uikitStyles.caseLabel}>tasks</Typography>
             </Box>
             <Box sx={uikitStyles.caseItem}>
               <FooterNavButton
                 icon="message"
                 label="Chats"
-                route="/chats"
+                route={ROUTES.CHATS.path}
                 isActive
               />
               <Typography sx={uikitStyles.caseLabel}>chats active</Typography>
@@ -683,28 +691,32 @@ const UIKit = () => {
           <Box sx={{ maxWidth: 300, mb: 2 }}>
             <SidebarLinks
               items={[
-                { icon: "home", label: "Dashboard", route: "/dashboard" },
-                { icon: "lists", label: "Tasks", route: "/tasks" },
-                { icon: "message", label: "Chats", route: "/chats" },
+                {
+                  icon: "home",
+                  label: "Dashboard",
+                  route: ROUTES.DASHBOARD.path,
+                },
+                { icon: "lists", label: "Tasks", route: ROUTES.TASKS.path },
+                { icon: "message", label: "Chats", route: ROUTES.CHATS.path },
                 {
                   icon: "bell",
                   label: "Notifications",
-                  route: "/notifications",
+                  route: ROUTES.NOTIFICATIONS.path,
                   badge: 2,
                 },
                 {
                   icon: "user-square",
                   label: "Profile",
-                  route: "/profile",
+                  route: ROUTES.PROFILE.path,
                 },
                 {
                   icon: "rocket",
                   label: "Start Work",
-                  route: "/start-work",
+                  route: ROUTES.START_WORK.path,
                   variant: "highlighted",
                 },
               ]}
-              activeRoute="/dashboard"
+              activeRoute={ROUTES.DASHBOARD.path}
             />
           </Box>
 
@@ -713,7 +725,10 @@ const UIKit = () => {
             FooterNavLinks
           </Typography>
           <Box sx={{ mb: 2 }}>
-            <FooterNavLinks items={WORKER_FOOTER_NAV_ITEMS} activeRoute="/" />
+            <FooterNavLinks
+              items={WORKER_FOOTER_NAV_ITEMS}
+              activeRoute={ROUTES.DASHBOARD.path}
+            />
           </Box>
         </Box>
 
@@ -730,7 +745,7 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Box sx={{ maxWidth: 300 }}>
                 <WorkerSidebar
-                  activeRoute="/dashboard"
+                  activeRoute={ROUTES.DASHBOARD.path}
                   notificationCount={2}
                   chatCount={5}
                 />
@@ -740,7 +755,7 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Box sx={{ maxWidth: 300 }}>
                 <WorkerSidebar
-                  activeRoute="/dashboard"
+                  activeRoute={ROUTES.DASHBOARD.path}
                   isAdmin
                   notificationCount={10}
                   chatCount={3}
@@ -755,7 +770,7 @@ const UIKit = () => {
             WorkerFooter
           </Typography>
           <Box sx={{ mb: 2 }}>
-            <WorkerFooter activeRoute="/" />
+            <WorkerFooter activeRoute={ROUTES.DASHBOARD.path} />
           </Box>
 
           {/* AdminSidebar */}
@@ -763,7 +778,7 @@ const UIKit = () => {
             AdminSidebar
           </Typography>
           <Box sx={{ mb: 2 }}>
-            <AdminSidebar activeRoute="/admin/dashboard" />
+            <AdminSidebar activeRoute={ROUTES.ADMIN_DASHBOARD.path} />
           </Box>
 
           {/* AdminLayout */}
@@ -771,7 +786,7 @@ const UIKit = () => {
             AdminLayout
           </Typography>
           <Box sx={{ mb: 2 }}>
-            <AdminLayout activeRoute="/admin/dashboard">
+            <AdminLayout activeRoute={ROUTES.ADMIN_DASHBOARD.path}>
               <Typography variant="h4">Admin Dashboard</Typography>
               <Typography variant="body1" sx={{ mt: 2 }}>
                 This is the main content area of the admin layout.
@@ -793,7 +808,7 @@ const UIKit = () => {
             }}
           >
             <WorkerLayout
-              activeRoute="/dashboard"
+              activeRoute={ROUTES.DASHBOARD.path}
               isAdmin
               notificationCount={2}
               chatCount={5}
