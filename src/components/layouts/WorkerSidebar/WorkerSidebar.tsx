@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Box } from "@mui/material";
 import { SidebarLinks, SidebarNavItemProps } from "components";
-import { getWorkerSidebarNavItems, ROUTES } from "consts/routes";
+import { getWorkerSidebarNavItems, ROUTES } from "consts";
 import { WorkerSidebarProps } from "./WorkerSidebar.types";
 
 export const WorkerSidebar: React.FC<WorkerSidebarProps> = ({
