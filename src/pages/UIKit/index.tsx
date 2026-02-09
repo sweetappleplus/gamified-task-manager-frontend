@@ -36,6 +36,7 @@ import {
   AdminSidebar,
   AdminLayout,
 } from "components/layouts";
+import { WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
 
 const iconNames = Object.keys(ICONS) as IconName[];
@@ -713,7 +714,7 @@ const UIKit = () => {
             FooterNavLinks
           </Typography>
           <Box sx={{ mb: 2 }}>
-            <FooterNavLinks activeRoute="/" />
+            <FooterNavLinks items={WORKER_FOOTER_NAV_ITEMS} activeRoute="/" />
           </Box>
         </Box>
 
