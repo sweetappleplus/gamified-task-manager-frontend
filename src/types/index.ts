@@ -3,3 +3,4 @@ export * from "./auth.types";
 export * from "./api.types";
 export * from "./notification.types";
 export * from "./task-category.types";
+export * from "./system-setting.types";
