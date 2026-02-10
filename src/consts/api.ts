@@ -13,6 +13,9 @@ export const API_URL_TASK_CATEGORIES_BY_ID = "/task-categories/:id";
 export const API_URL_SYSTEM_SETTINGS = "/system-settings";
 export const API_URL_SYSTEM_SETTINGS_BY_KEY = "/system-settings/:key";
 
+export const API_URL_LEVEL_CONFIGS = "/level-configs";
+export const API_URL_LEVEL_CONFIGS_BY_ID = "/level-configs/:id";
+
 export const PUBLIC_ENDPOINTS = [
   API_URL_AUTH_SEND_OTP,
   API_URL_AUTH_VERIFY_OTP,
