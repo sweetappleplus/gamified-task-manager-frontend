@@ -74,7 +74,7 @@ const LevelConfigs = () => {
   const isNameProtected =
     dialogMode === "edit" &&
     selectedConfig !== null &&
-    PROTECTED_LEVEL_NAMES.includes(selectedConfig.name);
+    Object.values(PROTECTED_LEVEL_NAMES).includes(selectedConfig.name);
 
   const handleSubmit = () => {
     if (dialogMode === "create") {
@@ -187,7 +187,9 @@ const LevelConfigs = () => {
                           <EditIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      {!PROTECTED_LEVEL_NAMES.includes(config.name) && (
+                      {!Object.values(PROTECTED_LEVEL_NAMES).includes(
+                        config.name
+                      ) && (
                         <Tooltip title="Delete">
                           <IconButton
                             size="small"
