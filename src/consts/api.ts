@@ -10,6 +10,9 @@ export const API_URL_NOTIFICATIONS_MARK_AS_READ = "/notifications/:id/read";
 export const API_URL_TASK_CATEGORIES = "/task-categories";
 export const API_URL_TASK_CATEGORIES_BY_ID = "/task-categories/:id";
 
+export const API_URL_SYSTEM_SETTINGS = "/system-settings";
+export const API_URL_SYSTEM_SETTINGS_BY_KEY = "/system-settings/:key";
+
 export const PUBLIC_ENDPOINTS = [
   API_URL_AUTH_SEND_OTP,
   API_URL_AUTH_VERIFY_OTP,

@@ -5,6 +5,7 @@ import LoginPage from "pages/Login";
 import PlaceholderPage from "pages/Placeholder";
 import AdminPlaceholderPage from "pages/admin/Placeholder";
 import TaskCategoriesPage from "pages/admin/TaskCategories";
+import SystemSettingsPage from "pages/admin/SystemSettings";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -61,7 +62,7 @@ export const ROUTES: Record<string, RouteConfig> = {
   },
   ADMIN_XP_SETTINGS: {
     path: "/admin/xp-settings",
-    component: AdminPlaceholderPage,
+    component: SystemSettingsPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
@@ -149,7 +150,7 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
     route: ROUTES.ADMIN_DASHBOARD.path,
   },
   {
-    label: "XP Setting",
+    label: "System Settings",
     route: ROUTES.ADMIN_XP_SETTINGS.path,
   },
   {
