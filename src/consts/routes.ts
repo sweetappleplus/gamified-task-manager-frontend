@@ -146,18 +146,22 @@ export const WORKER_FOOTER_NAV_ITEMS: FooterNavButtonProps[] = [
 
 export const ADMIN_SIDEBAR_NAV_ITEMS = [
   {
+    icon: "chart" as const,
     label: "Dashboard",
     route: ROUTES.ADMIN_DASHBOARD.path,
   },
   {
+    icon: "document-text" as const,
     label: "System Settings",
     route: ROUTES.ADMIN_XP_SETTINGS.path,
   },
   {
+    icon: "lists" as const,
     label: "Task Categories",
     route: ROUTES.ADMIN_TASK_CATEGORIES.path,
   },
   {
+    icon: "home" as const,
     label: "Home",
     route: ROUTES.DASHBOARD.path,
   },

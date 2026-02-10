@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   IconButton,
 } from "@mui/material";
@@ -81,6 +82,15 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
                   },
                 }}
               >
+                <ListItemIcon
+                  sx={{
+                    color: "inherit",
+                    minWidth: isExpanded ? 36 : "unset",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Icon name={item.icon} size={20} />
+                </ListItemIcon>
                 {isExpanded && (
                   <ListItemText
                     primary={item.label}
@@ -92,16 +102,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
                           lineHeight: "20px",
                         },
                       },
-                    }}
-                  />
-                )}
-                {!isExpanded && (
-                  <Box
-                    sx={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: "50%",
-                      bgcolor: isActive ? "primary.main" : "grayscale.400",
                     }}
                   />
                 )}
