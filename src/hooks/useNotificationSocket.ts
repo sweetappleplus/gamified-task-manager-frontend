@@ -1,11 +1,28 @@
 import { useEffect, useRef } from "react";
+import axios from "axios";
 import { useToast } from "./useToast";
-import { connectSocket, disconnectSocket } from "services/socket";
+import {
+  connectSocket,
+  disconnectSocket,
+  reconnectSocket,
+} from "services/socket";
 import { markNotificationAsReadApi } from "services/api";
-import { getAccessToken } from "utils";
+import {
+  getAccessToken,
+  getRefreshToken,
+  getTokenExpiryMs,
+  setTokens,
+  clearTokens,
+} from "utils";
 import { useAppSelector } from "app/hooks";
-import { Notification, NOTIFICATION_TYPES } from "types";
+import {
+  ApiResponse,
+  AuthResponse,
+  Notification,
+  NOTIFICATION_TYPES,
+} from "types";
 import { ToastVariant } from "components";
+import { API_URL, API_URL_AUTH_REFRESH, ROUTES } from "consts";
 
 const getToastVariant = (type: Notification["type"]): ToastVariant => {
   switch (type) {
@@ -27,6 +44,7 @@ export const useNotificationSocket = () => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const showToastRef = useRef(showToast);
   showToastRef.current = showToast;
+  const isRefreshingRef = useRef(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -39,7 +57,7 @@ export const useNotificationSocket = () => {
       return;
     }
 
-    const socket = connectSocket(token);
+    const socket = connectSocket();
 
     const handleNotification = (notification: Notification) => {
       showToastRef.current({
@@ -52,12 +70,47 @@ export const useNotificationSocket = () => {
       });
     };
 
-    const handleConnectError = () => {
-      showToastRef.current({
-        variant: "error",
-        message: "Real-time notifications unavailable. Retrying...",
-        autoHideDuration: 4000,
-      });
+    const handleConnectError = async () => {
+      const currentToken = getAccessToken();
+      const expiryMs = currentToken ? getTokenExpiryMs(currentToken) : null;
+      const isExpired = !expiryMs || expiryMs <= Date.now();
+
+      if (!isExpired) {
+        showToastRef.current({
+          variant: "error",
+          message: "Real-time notifications unavailable. Retrying...",
+          autoHideDuration: 4000,
+        });
+        return;
+      }
+
+      if (isRefreshingRef.current) return;
+      isRefreshingRef.current = true;
+
+      const refreshToken = getRefreshToken();
+      if (!refreshToken) {
+        isRefreshingRef.current = false;
+        clearTokens();
+        window.location.href = ROUTES.LOGIN.path;
+        return;
+      }
+
+      try {
+        const response = await axios.post<ApiResponse<AuthResponse>>(
+          `${API_URL}${API_URL_AUTH_REFRESH}`,
+          { refreshToken }
+        );
+        const data = response.data.data;
+        if (data) {
+          setTokens(data.accessToken, data.refreshToken);
+          reconnectSocket();
+        }
+      } catch {
+        clearTokens();
+        window.location.href = ROUTES.LOGIN.path;
+      } finally {
+        isRefreshingRef.current = false;
+      }
     };
 
     socket.on("notification", handleNotification);

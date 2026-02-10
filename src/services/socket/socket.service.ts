@@ -4,6 +4,7 @@ import {
   SOCKET_RECONNECTION_ATTEMPTS,
   SOCKET_RECONNECTION_DELAY_MS,
 } from "consts";
+import { getAccessToken } from "utils";
 
 let socket: Socket | null = null;
 
@@ -12,7 +13,7 @@ const getSocketUrl = (): string => {
   return apiUrl.replace(/\/api\/?$/, "");
 };
 
-export const connectSocket = (token: string): Socket => {
+export const connectSocket = (): Socket => {
   if (socket?.connected) {
     return socket;
   }
@@ -22,7 +23,9 @@ export const connectSocket = (token: string): Socket => {
   }
 
   socket = io(getSocketUrl(), {
-    auth: { token },
+    auth: (cb) => {
+      cb({ token: getAccessToken() ?? "" });
+    },
     transports: ["websocket"],
     reconnection: true,
     reconnectionAttempts: SOCKET_RECONNECTION_ATTEMPTS,
@@ -37,6 +40,12 @@ export const disconnectSocket = (): void => {
     socket.disconnect();
     socket = null;
   }
+};
+
+export const reconnectSocket = (): void => {
+  if (!socket) return;
+  socket.disconnect();
+  socket.connect();
 };
 
 export const getSocket = (): Socket | null => socket;
