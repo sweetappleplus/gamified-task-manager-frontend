@@ -30,6 +30,11 @@ const AppRoutes = () => {
         }
       />
 
+      <Route
+        path="/admin"
+        element={<Navigate to={ROUTES.ADMIN_DASHBOARD.path} replace />}
+      />
+
       {Object.values(ROUTES).map((route) => {
         const Component = route.component;
 
