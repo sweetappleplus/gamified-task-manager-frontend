@@ -4,6 +4,7 @@ import UIKitPage from "pages/UIKit";
 import LoginPage from "pages/Login";
 import PlaceholderPage from "pages/Placeholder";
 import AdminPlaceholderPage from "pages/admin/Placeholder";
+import TaskCategoriesPage from "pages/admin/TaskCategories";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -61,6 +62,12 @@ export const ROUTES: Record<string, RouteConfig> = {
   ADMIN_XP_SETTINGS: {
     path: "/admin/xp-settings",
     component: AdminPlaceholderPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
+  ADMIN_TASK_CATEGORIES: {
+    path: "/admin/task-categories",
+    component: TaskCategoriesPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
@@ -144,6 +151,10 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
   {
     label: "XP Setting",
     route: ROUTES.ADMIN_XP_SETTINGS.path,
+  },
+  {
+    label: "Task Categories",
+    route: ROUTES.ADMIN_TASK_CATEGORIES.path,
   },
   {
     label: "Home",
