@@ -10,19 +10,24 @@ import {
   IconButton,
 } from "@mui/material";
 import { Icon } from "components";
-import { ADMIN_SIDEBAR_NAV_ITEMS } from "consts";
+import { ADMIN_SIDEBAR_NAV_ITEMS, ADMIN_SIDEBAR_EXPANDED_KEY } from "consts";
 import { AdminSidebarProps } from "./AdminSidebar.types";
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
   const navigate = useNavigate();
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(() => {
+    const stored = localStorage.getItem(ADMIN_SIDEBAR_EXPANDED_KEY);
+    return stored !== null ? stored === "true" : true;
+  });
 
   const handleNavigation = (route: string) => {
     navigate(route);
   };
 
   const handleToggle = () => {
-    setIsExpanded(!isExpanded);
+    const next = !isExpanded;
+    setIsExpanded(next);
+    localStorage.setItem(ADMIN_SIDEBAR_EXPANDED_KEY, String(next));
   };
 
   return (

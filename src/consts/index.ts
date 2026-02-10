@@ -4,3 +4,4 @@ export * from "./auth";
 export * from "./validation";
 export * from "./socket";
 export * from "./xp";
+export * from "./storage";
