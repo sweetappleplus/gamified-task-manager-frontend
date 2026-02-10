@@ -6,6 +6,7 @@ import PlaceholderPage from "pages/Placeholder";
 import AdminPlaceholderPage from "pages/admin/Placeholder";
 import TaskCategoriesPage from "pages/admin/TaskCategories";
 import SystemSettingsPage from "pages/admin/SystemSettings";
+import LevelConfigsPage from "pages/admin/LevelConfigs";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -61,7 +62,7 @@ export const ROUTES: Record<string, RouteConfig> = {
     roles: [USER_ROLES.SUPER_ADMIN],
   },
   ADMIN_XP_SETTINGS: {
-    path: "/admin/xp-settings",
+    path: "/admin/system-settings",
     component: SystemSettingsPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
@@ -69,6 +70,12 @@ export const ROUTES: Record<string, RouteConfig> = {
   ADMIN_TASK_CATEGORIES: {
     path: "/admin/task-categories",
     component: TaskCategoriesPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
+  ADMIN_LEVEL_CONFIGS: {
+    path: "/admin/level-configs",
+    component: LevelConfigsPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
@@ -159,6 +166,11 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
     icon: "lists" as const,
     label: "Task Categories",
     route: ROUTES.ADMIN_TASK_CATEGORIES.path,
+  },
+  {
+    icon: "star" as const,
+    label: "Level Configs",
+    route: ROUTES.ADMIN_LEVEL_CONFIGS.path,
   },
   {
     icon: "home" as const,
