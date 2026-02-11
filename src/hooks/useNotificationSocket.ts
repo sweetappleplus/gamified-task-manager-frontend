@@ -1,9 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useToast } from "./useToast";
 import { connectSocket, disconnectSocket } from "services/socket";
-import { markNotificationAsReadApi } from "services/api";
+import {
+  markNotificationAsReadApi,
+  getUnreadNotificationCountApi,
+} from "services/api";
 import { getAccessToken } from "utils";
 import { useAppSelector } from "app/hooks";
+import { useNotifications } from "features/notification";
 import { Notification, NOTIFICATION_TYPES } from "types";
 import { ToastVariant } from "components";
 
@@ -27,14 +31,25 @@ const getToastVariant = (type: Notification["type"]): ToastVariant => {
 
 export const useNotificationSocket = () => {
   const { showToast } = useToast();
+  const { updateUnreadCount } = useNotifications();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const showToastRef = useRef(showToast);
   showToastRef.current = showToast;
+
   useEffect(() => {
     if (!isAuthenticated) {
+      updateUnreadCount(0);
       disconnectSocket();
       return;
     }
+
+    getUnreadNotificationCountApi()
+      .then((res) => {
+        if (res.data) {
+          updateUnreadCount(res.data.count);
+        }
+      })
+      .catch(() => {});
 
     const token = getAccessToken();
     if (!token) {
@@ -54,6 +69,10 @@ export const useNotificationSocket = () => {
       });
     };
 
+    const handleUnreadCount = (data: { count: number }) => {
+      updateUnreadCount(data.count);
+    };
+
     const handleConnectError = () => {
       showToastRef.current({
         variant: "error",
@@ -63,12 +82,14 @@ export const useNotificationSocket = () => {
     };
 
     socket.on("notification", handleNotification);
+    socket.on("unread-count", handleUnreadCount);
     socket.on("connect_error", handleConnectError);
 
     return () => {
       socket.off("notification", handleNotification);
+      socket.off("unread-count", handleUnreadCount);
       socket.off("connect_error", handleConnectError);
       disconnectSocket();
     };
-  }, [isAuthenticated]);
+  }, [isAuthenticated, updateUnreadCount]);
 };

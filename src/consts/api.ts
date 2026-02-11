@@ -7,6 +7,7 @@ export const API_URL_AUTH_REFRESH = "/auth/refresh";
 export const API_URL_AUTH_LOGOUT = "/auth/logout";
 
 export const API_URL_NOTIFICATIONS_MARK_AS_READ = "/notifications/:id/read";
+export const API_URL_NOTIFICATIONS_UNREAD_COUNT = "/notifications/unread-count";
 
 export const API_URL_TASK_CATEGORIES = "/task-categories";
 export const API_URL_TASK_CATEGORIES_BY_ID = "/task-categories/:id";
