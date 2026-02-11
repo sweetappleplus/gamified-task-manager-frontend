@@ -535,35 +535,19 @@ const UIKit = () => {
           >
             <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
               <ProgressIndicator variant="bar" percentage={50} color="blue" />
-              <Typography
-                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
-              >
-                blue 50%
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>blue 50%</Typography>
             </Box>
             <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
               <ProgressIndicator variant="bar" percentage={50} color="green" />
-              <Typography
-                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
-              >
-                green 50%
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>green 50%</Typography>
             </Box>
             <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
               <ProgressIndicator variant="bar" percentage={0} color="blue" />
-              <Typography
-                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
-              >
-                blue 0%
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>blue 0%</Typography>
             </Box>
             <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
               <ProgressIndicator variant="bar" percentage={100} color="green" />
-              <Typography
-                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
-              >
-                green 100%
-              </Typography>
+              <Typography sx={uikitStyles.caseLabel}>green 100%</Typography>
             </Box>
           </Box>
 
@@ -573,28 +557,52 @@ const UIKit = () => {
           </Typography>
           <Box sx={uikitStyles.componentRow}>
             <Box sx={uikitStyles.caseItem}>
-              <PatternPanel variant="blue">
+              <PatternPanel variant="dots" color="blue">
                 <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
-                  Blue Panel
+                  Dots Blue
                 </Typography>
               </PatternPanel>
-              <Typography sx={uikitStyles.caseLabel}>blue</Typography>
+              <Typography sx={uikitStyles.caseLabel}>dots / blue</Typography>
             </Box>
             <Box sx={uikitStyles.caseItem}>
-              <PatternPanel variant="green">
+              <PatternPanel variant="dots" color="green">
                 <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
-                  Green Panel
+                  Dots Green
                 </Typography>
               </PatternPanel>
-              <Typography sx={uikitStyles.caseLabel}>green</Typography>
+              <Typography sx={uikitStyles.caseLabel}>dots / green</Typography>
             </Box>
             <Box sx={uikitStyles.caseItem}>
-              <PatternPanel variant="blue" padding={24}>
+              <PatternPanel variant="magic" color="blue">
                 <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
-                  Custom Padding
+                  Magic Blue
                 </Typography>
               </PatternPanel>
-              <Typography sx={uikitStyles.caseLabel}>padding=24</Typography>
+              <Typography sx={uikitStyles.caseLabel}>magic / blue</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <PatternPanel variant="magic" color="green">
+                <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
+                  Magic Green
+                </Typography>
+              </PatternPanel>
+              <Typography sx={uikitStyles.caseLabel}>magic / green</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <PatternPanel variant="star" color="blue">
+                <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
+                  Star Blue
+                </Typography>
+              </PatternPanel>
+              <Typography sx={uikitStyles.caseLabel}>star / blue</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <PatternPanel variant="star" color="green">
+                <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
+                  Star Green
+                </Typography>
+              </PatternPanel>
+              <Typography sx={uikitStyles.caseLabel}>star / green</Typography>
             </Box>
           </Box>
         </Box>
