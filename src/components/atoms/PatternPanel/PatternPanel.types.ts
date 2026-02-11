@@ -1,12 +1,18 @@
 import { ReactNode } from "react";
 
-export type PatternPanelVariant = "blue" | "green";
+export type PatternPanelVariant = "dots" | "star" | "magic";
+
+export type PatternPanelColor = "blue" | "green";
 
 export interface PatternPanelProps {
   /**
-   * The background color variant
+   * The pattern style
    */
   variant: PatternPanelVariant;
+  /**
+   * The background color
+   */
+  color: PatternPanelColor;
   /**
    * Inner padding in pixels
    * @default 16
