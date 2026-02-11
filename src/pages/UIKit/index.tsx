@@ -12,7 +12,7 @@ import {
   Tag,
   Tag2,
   Text,
-  TextVariant,
+  TEXT_VARIANTS,
   ToastVariant,
   OTPInput,
   IconName,
@@ -40,6 +40,7 @@ import {
   AdminLayout,
   WorkerLayout,
   TaskTicket,
+  HorizontalScroll,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
@@ -69,14 +70,6 @@ const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
 const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
 const toastVariants: ToastVariant[] = ["info", "success", "warning", "error"];
 const spinnerSizes: SpinnerSize[] = ["sm", "md", "lg"];
-const textVariants: TextVariant[] = [
-  "heading",
-  "body",
-  "bodyMuted",
-  "bodyMutedStrong",
-  "bodyStrong",
-  "small",
-];
 
 const mockTaskBase: Task = {
   id: "1",
@@ -475,7 +468,7 @@ const UIKit = () => {
             Text
           </Typography>
           <Box sx={uikitStyles.componentColumn}>
-            {textVariants.map((variant) => (
+            {TEXT_VARIANTS.map((variant) => (
               <Box key={variant} sx={uikitStyles.caseItem}>
                 <Text variant={variant}>
                   {variant.charAt(0).toUpperCase() + variant.slice(1)} text
@@ -677,6 +670,44 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Molecules
           </Typography>
+          {/* HorizontalScroll */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            HorizontalScroll
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={{ ...uikitStyles.caseItem, width: 400 }}>
+              <HorizontalScroll gap={8}>
+                <Tag2 text="All" active />
+                <Tag2 text="In Progress" indicator="primary.main" />
+                <Tag2 text="High Priority" indicator="additional.orange.main" />
+                <Tag2 text="Swagger documentation" indicator="grayscale.400" />
+                <Tag2
+                  text="Frontend task with TailwindCSS"
+                  indicator="grayscale.400"
+                />
+                <Tag2 text="Idea Generation" indicator="grayscale.400" />
+                <Tag2 text="Content Creation" indicator="grayscale.400" />
+                <Tag2 text="Research" indicator="grayscale.400" />
+              </HorizontalScroll>
+              <Typography sx={uikitStyles.caseLabel}>
+                with Tag2 (swipe or drag)
+              </Typography>
+            </Box>
+            <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
+              <HorizontalScroll gap={8}>
+                {buttonVariants.map((variant) => (
+                  <Button
+                    key={variant}
+                    variant={variant}
+                    text={variant}
+                    size="small"
+                  />
+                ))}
+              </HorizontalScroll>
+              <Typography sx={uikitStyles.caseLabel}>with Buttons</Typography>
+            </Box>
+          </Box>
+
           {/* TaskTicket */}
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             TaskTicket
