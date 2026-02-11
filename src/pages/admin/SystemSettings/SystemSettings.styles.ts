@@ -14,7 +14,8 @@ export const systemSettingsStyles: Record<string, SxProps<Theme>> = {
   tableContainer: {
     bgcolor: "grayscale.800",
     borderRadius: 2,
-    overflow: "hidden",
+    overflowX: "auto",
+    overflowY: "hidden",
   },
   tableHead: {
     bgcolor: "grayscale.900",
