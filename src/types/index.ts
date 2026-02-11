@@ -6,3 +6,5 @@ export * from "./task-category.types";
 export * from "./system-setting.types";
 export * from "./level-config.types";
 export * from "./task.types";
+export * from "./file.types";
+export * from "./pagination.types";
