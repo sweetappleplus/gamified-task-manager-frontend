@@ -102,7 +102,7 @@ export const Toast: React.FC<ToastProps> = ({
         }}
       >
         <Icon name={iconMap[variant]} size={20} color={colors.icon} />
-        {message}
+        <Box sx={{ whiteSpace: "pre-line", flex: 1 }}>{message}</Box>
         <CloseButton onClick={onClickCloseButton || onClose}>
           <Icon name="x" size={18} color={theme.palette.grayscale[400]} />
         </CloseButton>
