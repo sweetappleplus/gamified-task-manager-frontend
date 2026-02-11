@@ -13,4 +13,8 @@ export interface TagProps {
    * @default "grayscale.950"
    */
   textColor?: string;
+  /**
+   * Maximum width of the tag in pixels. Text will be truncated with ellipsis.
+   */
+  maxWidth?: number;
 }

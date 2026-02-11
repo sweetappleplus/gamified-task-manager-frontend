@@ -17,6 +17,7 @@ const StyledTag = styled(Box)<{
   fontSize: 14,
   lineHeight: "20px",
   fontWeight: 500,
+  whiteSpace: "nowrap",
   color: theme.palette.grayscale[950],
   backgroundColor: ownerState.active
     ? theme.palette.primary[50]

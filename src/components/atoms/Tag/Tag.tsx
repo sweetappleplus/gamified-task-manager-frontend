@@ -11,15 +11,28 @@ const StyledTag = styled(Box)(({ theme }) => ({
   fontSize: 13,
   lineHeight: "16px",
   fontWeight: 500,
+  whiteSpace: "nowrap",
   backgroundColor: theme.palette.grayscale[50],
   color: theme.palette.grayscale[950],
 }));
 
-export const Tag: React.FC<TagProps> = ({ text, bgColor, textColor }) => (
+export const Tag: React.FC<TagProps> = ({
+  text,
+  bgColor,
+  textColor,
+  maxWidth,
+}) => (
   <StyledTag
     sx={{
       ...(bgColor && { backgroundColor: bgColor }),
       ...(textColor && { color: textColor }),
+      ...(maxWidth && {
+        display: "inline-block",
+        maxWidth,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        textAlign: "center",
+      }),
     }}
   >
     {text}
