@@ -4,8 +4,11 @@ export const tasksStyles: Record<string, SxProps<Theme>> = {
   container: {
     pb: "20px",
   },
+  title: {
+    display: { xs: "none", md: "block" },
+  },
   searchWrapper: {
-    mt: "12px",
+    mt: { xs: "20px", md: "12px" },
   },
   filterTags: {
     mt: "16px",

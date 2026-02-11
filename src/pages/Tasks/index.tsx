@@ -30,7 +30,9 @@ const Tasks = () => {
   return (
     <WorkerLayout activeRoute={ROUTES.TASKS.path}>
       <Box sx={tasksStyles.container}>
-        <Text variant="pageTitle">Tasks</Text>
+        <Text variant="pageTitle" sx={tasksStyles.title}>
+          Tasks
+        </Text>
 
         <Box sx={tasksStyles.searchWrapper}>
           <Input
