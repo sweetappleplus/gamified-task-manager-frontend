@@ -39,9 +39,11 @@ import {
   AdminSidebar,
   AdminLayout,
   WorkerLayout,
+  TaskTicket,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
+import { Task, TASK_STATUSES, TASK_PRIORITIES, TASK_TYPES } from "types";
 
 const iconNames = Object.keys(ICONS) as IconName[];
 const socialProviders: SocialProvider[] = [
@@ -74,6 +76,48 @@ const textVariants: TextVariant[] = [
   "bodyMutedStrong",
   "bodyStrong",
   "small",
+];
+
+const mockTaskBase: Task = {
+  id: "1",
+  title: "Power-Up Mission",
+  description: "",
+  steps: [],
+  priority: TASK_PRIORITIES.MEDIUM,
+  type: TASK_TYPES.STANDARD,
+  budget: "12",
+  commissionPercent: "10",
+  timeToCompleteMin: 60,
+  deadline: new Date(Date.now() + 86400000).toISOString(),
+  maxSubmissionDelayMin: 30,
+  status: TASK_STATUSES.PENDING,
+  createdById: "u1",
+  categoryId: "c1",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  category: { id: "c1", name: "Idea Generation" },
+};
+
+const mockTasks: Task[] = [
+  mockTaskBase,
+  {
+    ...mockTaskBase,
+    id: "2",
+    title: "Write Product Review",
+    priority: TASK_PRIORITIES.HIGH,
+    status: TASK_STATUSES.IN_ACTION,
+    startedAt: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+    category: { id: "c2", name: "Content Creation" },
+  },
+  {
+    ...mockTaskBase,
+    id: "3",
+    title: "Quick Survey Task",
+    priority: TASK_PRIORITIES.LOW,
+    status: TASK_STATUSES.FAILED,
+    startedAt: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
+    category: { id: "c3", name: "Research" },
+  },
 ];
 
 const UIKit = () => {
@@ -633,6 +677,21 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Molecules
           </Typography>
+          {/* TaskTicket */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            TaskTicket
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {mockTasks.map((task) => (
+              <Box key={task.id} sx={{ ...uikitStyles.caseItem, width: 362 }}>
+                <TaskTicket task={task} />
+                <Typography sx={uikitStyles.caseLabel}>
+                  {task.status.toLowerCase()}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+
           {/* OtpInput */}
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             OtpInput
