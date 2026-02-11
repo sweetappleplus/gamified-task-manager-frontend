@@ -11,3 +11,9 @@ export type User = {
   name?: string | null;
   role: UserRole;
 };
+
+export type FilterUsersParams = {
+  role?: UserRole;
+  isActive?: boolean;
+  search?: string;
+};
