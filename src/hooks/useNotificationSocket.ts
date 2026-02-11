@@ -12,11 +12,14 @@ const getToastVariant = (type: Notification["type"]): ToastVariant => {
     case NOTIFICATION_TYPES.TASK_APPROVED:
     case NOTIFICATION_TYPES.PAYMENT_RECORDED:
       return "success";
-    case NOTIFICATION_TYPES.TASK_REJECTED:
-      return "error";
+    case NOTIFICATION_TYPES.WORKER_JOINED:
     case NOTIFICATION_TYPES.TASK_ASSIGNED:
     case NOTIFICATION_TYPES.TASK_SUBMITTED:
+      return "info";
+    case NOTIFICATION_TYPES.TASK_CANCELLED:
       return "warning";
+    case NOTIFICATION_TYPES.TASK_REJECTED:
+      return "error";
     default:
       return "info";
   }
