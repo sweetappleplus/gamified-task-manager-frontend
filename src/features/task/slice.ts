@@ -31,6 +31,11 @@ const taskSlice = createSlice({
     setFilters: (state, action: PayloadAction<TaskFilterParams>) => {
       state.filters = action.payload;
     },
+    appendTasks: (state, action: PayloadAction<Task[]>) => {
+      const existingIds = new Set(state.tasks.map((t) => t.id));
+      const newTasks = action.payload.filter((t) => !existingIds.has(t.id));
+      state.tasks.push(...newTasks);
+    },
     updateTaskInList: (state, action: PayloadAction<Task>) => {
       const index = state.tasks.findIndex((t) => t.id === action.payload.id);
       if (index !== -1) {
@@ -46,6 +51,7 @@ const taskSlice = createSlice({
 
 export const {
   setTasks,
+  appendTasks,
   setTotal,
   setLoading,
   setFilters,

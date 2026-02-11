@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { RootState } from "app/store";
 import {
   setTasks,
+  appendTasks,
   setTotal,
   setLoading,
   setFilters,
@@ -15,6 +16,7 @@ import {
   updateTaskApi,
   deleteTaskApi,
   assignTaskApi,
+  startTaskApi,
   reviewTaskApi,
   markTaskPaidApi,
   cancelTaskApi,
@@ -54,6 +56,25 @@ export const useTask = () => {
     [dispatch, filters]
   );
 
+  const fetchMoreTasks = useCallback(
+    async (params: TaskFilterParams) => {
+      dispatch(setLoading(true));
+      try {
+        const response = await getTasksApi(params);
+        if (response.data) {
+          dispatch(appendTasks(response.data));
+        }
+        if (response.pagination) {
+          dispatch(setTotal(response.pagination.total));
+        }
+        return response;
+      } finally {
+        dispatch(setLoading(false));
+      }
+    },
+    [dispatch]
+  );
+
   const createTask = useCallback(
     async (data: CreateTaskRequest) => {
       const response = await createTaskApi(data);
@@ -86,6 +107,17 @@ export const useTask = () => {
   const assignTask = useCallback(
     async (id: string, data: AssignTaskRequest) => {
       const response = await assignTaskApi(id, data);
+      if (response.data) {
+        dispatch(updateTaskInList(response.data));
+      }
+      return response;
+    },
+    [dispatch]
+  );
+
+  const startTask = useCallback(
+    async (id: string) => {
+      const response = await startTaskApi(id);
       if (response.data) {
         dispatch(updateTaskInList(response.data));
       }
@@ -140,10 +172,12 @@ export const useTask = () => {
     isLoading,
     filters,
     fetchTasks,
+    fetchMoreTasks,
     createTask,
     updateTask,
     deleteTask,
     assignTask,
+    startTask,
     reviewTask,
     markTaskPaid,
     cancelTask,
