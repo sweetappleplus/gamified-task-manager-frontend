@@ -6,14 +6,12 @@ import {
   PatternPanelColor,
 } from "./PatternPanel.types";
 
-const BASE_URL = process.env.PUBLIC_URL;
-
 const PATTERN_IMAGES: Record<PatternPanelVariant, string[]> = {
-  dots: [`${BASE_URL}/assets/images/common/pattern.png`],
-  magic: [`${BASE_URL}/assets/images/common/pattern-2.png`],
+  dots: ["/assets/images/common/pattern.png"],
+  magic: ["/assets/images/common/pattern-2.png"],
   star: [
-    `${BASE_URL}/assets/images/common/pattern-3.png`,
-    `${BASE_URL}/assets/images/common/pattern-4.png`,
+    "/assets/images/common/pattern-3.png",
+    "/assets/images/common/pattern-4.png",
   ],
 };
 
