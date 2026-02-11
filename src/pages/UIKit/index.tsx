@@ -28,6 +28,8 @@ import {
   Textarea,
   ProgressIndicator,
   PatternPanel,
+  Spinner,
+  SpinnerSize,
   SidebarNavItem,
   SidebarLinks,
   FooterNavButton,
@@ -64,6 +66,7 @@ const buttonVariants: ButtonVariant[] = [
 const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
 const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
 const toastVariants: ToastVariant[] = ["info", "success", "warning", "error"];
+const spinnerSizes: SpinnerSize[] = ["sm", "md", "lg"];
 const textVariants: TextVariant[] = [
   "heading",
   "body",
@@ -600,6 +603,27 @@ const UIKit = () => {
                 </Typography>
               </PatternPanel>
               <Typography sx={uikitStyles.caseLabel}>star / green</Typography>
+            </Box>
+          </Box>
+
+          {/* Spinner */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Spinner
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {spinnerSizes.map((size) => (
+              <Box key={size} sx={uikitStyles.caseItem}>
+                <Spinner size={size} />
+                <Typography sx={uikitStyles.caseLabel}>{size}</Typography>
+              </Box>
+            ))}
+            <Box sx={uikitStyles.caseItem}>
+              <Spinner message="Please wait..." />
+              <Typography sx={uikitStyles.caseLabel}>custom message</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Spinner message="" />
+              <Typography sx={uikitStyles.caseLabel}>no message</Typography>
             </Box>
           </Box>
         </Box>

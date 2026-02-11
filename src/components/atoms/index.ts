@@ -14,3 +14,4 @@ export * from "./Reward";
 export * from "./Textarea";
 export * from "./ProgressIndicator";
 export * from "./PatternPanel";
+export * from "./Spinner";
