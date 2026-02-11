@@ -34,6 +34,10 @@ import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as InformationCircle } from "./information-circle.svg";
 import { ReactComponent as Link } from "./link.svg";
 import { ReactComponent as Lists } from "./lists.svg";
+import { ReactComponent as Number1 } from "./number_1.svg";
+import { ReactComponent as Number2 } from "./number_2.svg";
+import { ReactComponent as Number3 } from "./number_3.svg";
+import { ReactComponent as Number4 } from "./number_4.svg";
 import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Minus } from "./minus.svg";
 import { ReactComponent as PlusCircle } from "./plus-circle.svg";
@@ -86,6 +90,11 @@ export const ICONS = {
   "arrow-left": ArrowLeft,
   "arrow-up": ArrowUp,
   "arrow-down": ArrowDown,
+
+  "number-1": Number1,
+  "number-2": Number2,
+  "number-3": Number3,
+  "number-4": Number4,
 
   "arrow-right-double-sharp": ArrowRightDoubleSharp,
   "arrow-up-double-sharp": ArrowUpDoubleSharp,
