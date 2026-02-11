@@ -167,14 +167,19 @@ const LevelConfigs = () => {
                     </TableCell>
                     <TableCell sx={levelConfigsStyles.tableCell}>
                       <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
-                        {config.unlockedTaskTypes.map((type) => (
-                          <Chip
-                            key={type}
-                            label={type}
-                            size="small"
-                            sx={levelConfigsStyles.chip}
-                          />
-                        ))}
+                        {[...config.unlockedTaskTypes]
+                          .sort((a, b) => {
+                            const order = ["STANDARD", "HIGH_VALUE", "PREMIUM"];
+                            return order.indexOf(a) - order.indexOf(b);
+                          })
+                          .map((type) => (
+                            <Chip
+                              key={type}
+                              label={type}
+                              size="small"
+                              sx={levelConfigsStyles.chip}
+                            />
+                          ))}
                       </Box>
                     </TableCell>
                     <TableCell sx={levelConfigsStyles.tableCell} align="right">
