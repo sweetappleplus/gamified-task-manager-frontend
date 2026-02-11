@@ -26,6 +26,7 @@ import {
   Reward,
   Textarea,
   ProgressIndicator,
+  PatternPanel,
   SidebarNavItem,
   SidebarLinks,
   FooterNavButton,
@@ -563,6 +564,37 @@ const UIKit = () => {
               >
                 green 100%
               </Typography>
+            </Box>
+          </Box>
+
+          {/* PatternPanel */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            PatternPanel
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <PatternPanel variant="blue">
+                <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
+                  Blue Panel
+                </Typography>
+              </PatternPanel>
+              <Typography sx={uikitStyles.caseLabel}>blue</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <PatternPanel variant="green">
+                <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
+                  Green Panel
+                </Typography>
+              </PatternPanel>
+              <Typography sx={uikitStyles.caseLabel}>green</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <PatternPanel variant="blue" padding={24}>
+                <Typography sx={{ color: "grayscale.0", fontWeight: 600 }}>
+                  Custom Padding
+                </Typography>
+              </PatternPanel>
+              <Typography sx={uikitStyles.caseLabel}>padding=24</Typography>
             </Box>
           </Box>
         </Box>
