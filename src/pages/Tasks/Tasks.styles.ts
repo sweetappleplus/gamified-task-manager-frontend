@@ -22,6 +22,7 @@ export const tasksStyles: Record<string, SxProps<Theme>> = {
       xl: "repeat(3, 1fr)",
     },
     gap: "12px",
+    alignItems: "start",
   },
   sentinel: {
     display: "flex",
