@@ -1,17 +1,21 @@
 import React from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { WorkerSidebar, WorkerFooter } from "components";
+import { useAppSelector } from "app/hooks";
+import { useNotifications } from "features/notification";
+import { USER_ROLES } from "types";
 import { WorkerLayoutProps } from "./WorkerLayout.types";
 
 export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
   children,
   activeRoute,
-  isAdmin = false,
-  notificationCount,
   chatCount,
 }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const user = useAppSelector((state) => state.auth.user);
+  const { unreadCount: notificationCount } = useNotifications();
+  const isAdmin = user?.role === USER_ROLES.SUPER_ADMIN;
 
   if (isDesktop) {
     return (
