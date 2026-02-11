@@ -25,6 +25,7 @@ import {
   NotificationList,
   Reward,
   Textarea,
+  ProgressIndicator,
   SidebarNavItem,
   SidebarLinks,
   FooterNavButton,
@@ -501,6 +502,66 @@ const UIKit = () => {
               <Textarea placeholder="Write something..." />
               <Typography sx={uikitStyles.caseLabel}>
                 without counter
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* ProgressIndicator - Ring */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            ProgressIndicator - Ring
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {[0, 25, 50, 75, 99, 100].map((pct) => (
+              <Box key={pct} sx={uikitStyles.caseItem}>
+                <ProgressIndicator variant="ring" percentage={pct} />
+                <Typography sx={uikitStyles.caseLabel}>{pct}%</Typography>
+              </Box>
+            ))}
+          </Box>
+
+          {/* ProgressIndicator - Bar */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            ProgressIndicator - Bar
+          </Typography>
+          <Box
+            sx={{
+              ...uikitStyles.componentColumn,
+              bgcolor: "grayscale.950",
+              p: 3,
+              borderRadius: 2,
+              width: "fit-content",
+            }}
+          >
+            <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
+              <ProgressIndicator variant="bar" percentage={50} color="blue" />
+              <Typography
+                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
+              >
+                blue 50%
+              </Typography>
+            </Box>
+            <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
+              <ProgressIndicator variant="bar" percentage={50} color="green" />
+              <Typography
+                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
+              >
+                green 50%
+              </Typography>
+            </Box>
+            <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
+              <ProgressIndicator variant="bar" percentage={0} color="blue" />
+              <Typography
+                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
+              >
+                blue 0%
+              </Typography>
+            </Box>
+            <Box sx={{ ...uikitStyles.caseItem, width: 300 }}>
+              <ProgressIndicator variant="bar" percentage={100} color="green" />
+              <Typography
+                sx={{ ...uikitStyles.caseLabel, color: "grayscale.300" }}
+              >
+                green 100%
               </Typography>
             </Box>
           </Box>
