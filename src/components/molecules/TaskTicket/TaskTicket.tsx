@@ -108,7 +108,7 @@ export const TaskTicket: React.FC<TaskTicketProps> = ({
               textColor={priorityColor.text}
             />
             <Dot />
-            <Tag text={task.category?.name ?? "General"} />
+            <Tag text={task.category?.name ?? "General"} maxWidth={120} />
           </TagRow>
         </Box>
         <ProgressIndicator variant="ring" percentage={progress} />
