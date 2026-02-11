@@ -8,6 +8,7 @@ import TaskCategoriesPage from "pages/admin/TaskCategories";
 import SystemSettingsPage from "pages/admin/SystemSettings";
 import LevelConfigsPage from "pages/admin/LevelConfigs";
 import AdminTasksPage from "pages/admin/Tasks";
+import TasksPage from "pages/Tasks";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -28,7 +29,7 @@ export const ROUTES: Record<string, RouteConfig> = {
   },
   TASKS: {
     path: "/tasks",
-    component: PlaceholderPage,
+    component: TasksPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN, USER_ROLES.WORKER],
   },
