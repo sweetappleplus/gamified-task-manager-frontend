@@ -24,6 +24,12 @@ const variantConfig: Record<
     fontWeight: 400,
     color: "grayscale.500",
   },
+  bodyMutedStrong: {
+    fontSize: 16,
+    lineHeight: "22px",
+    fontWeight: 500,
+    color: "grayscale.500",
+  },
   bodyStrong: {
     fontSize: 16,
     lineHeight: "22px",

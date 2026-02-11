@@ -4,6 +4,7 @@ export type TextVariant =
   | "heading"
   | "body"
   | "bodyMuted"
+  | "bodyMutedStrong"
   | "bodyStrong"
   | "small";
 
