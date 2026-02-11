@@ -114,6 +114,7 @@ export type TaskFilterParams = {
   limit?: number;
   search?: string;
   status?: TaskStatus;
+  statuses?: TaskStatus[];
   priority?: TaskPriority;
   type?: TaskType;
   categoryId?: string;

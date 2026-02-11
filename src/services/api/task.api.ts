@@ -3,6 +3,7 @@ import {
   API_URL_TASKS,
   API_URL_TASKS_BY_ID,
   API_URL_TASKS_ASSIGN,
+  API_URL_TASKS_START,
   API_URL_TASKS_REVIEW,
   API_URL_TASKS_MARK_PAID,
   API_URL_TASKS_CANCEL,
@@ -77,6 +78,12 @@ export const reviewTaskApi = (
 export const markTaskPaidApi = (id: string): Promise<ApiResponse<Task>> => {
   return api
     .post<ApiResponse<Task>>(API_URL_TASKS_MARK_PAID.replace(":id", id))
+    .then((res) => res.data);
+};
+
+export const startTaskApi = (id: string): Promise<ApiResponse<Task>> => {
+  return api
+    .post<ApiResponse<Task>>(API_URL_TASKS_START.replace(":id", id))
     .then((res) => res.data);
 };
 

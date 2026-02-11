@@ -23,6 +23,7 @@ export const API_URL_TASKS_BY_ID = "/tasks/:id";
 export const API_URL_TASKS_ASSIGN = "/tasks/:id/assign";
 export const API_URL_TASKS_REVIEW = "/tasks/:id/review";
 export const API_URL_TASKS_MARK_PAID = "/tasks/:id/mark-paid";
+export const API_URL_TASKS_START = "/tasks/:id/start";
 export const API_URL_TASKS_CANCEL = "/tasks/:id/cancel";
 export const API_URL_TASKS_FILES = "/tasks/:id/files";
 
