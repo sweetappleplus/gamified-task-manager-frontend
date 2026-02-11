@@ -1,6 +1,7 @@
 import { TypographyProps } from "@mui/material";
 
 export type TextVariant =
+  | "pageTitle"
   | "heading"
   | "body"
   | "bodyMuted"

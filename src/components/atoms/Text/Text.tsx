@@ -6,6 +6,12 @@ const variantConfig: Record<
   TextVariant,
   { fontSize: number; lineHeight: string; fontWeight: number; color: string }
 > = {
+  pageTitle: {
+    fontSize: 18,
+    lineHeight: "24px",
+    fontWeight: 600,
+    color: "grayscale.950",
+  },
   heading: {
     fontSize: 20,
     lineHeight: "28px",
@@ -43,6 +49,8 @@ const variantConfig: Record<
     color: "grayscale.700",
   },
 };
+
+export const TEXT_VARIANTS = Object.keys(variantConfig) as TextVariant[];
 
 const StyledText = styled(Typography)({});
 
