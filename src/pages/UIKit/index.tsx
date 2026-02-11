@@ -12,6 +12,7 @@ import {
   Tag,
   Tag2,
   Text,
+  TextVariant,
   ToastVariant,
   OTPInput,
   IconName,
@@ -63,6 +64,14 @@ const buttonVariants: ButtonVariant[] = [
 const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
 const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
 const toastVariants: ToastVariant[] = ["info", "success", "warning", "error"];
+const textVariants: TextVariant[] = [
+  "heading",
+  "body",
+  "bodyMuted",
+  "bodyMutedStrong",
+  "bodyStrong",
+  "small",
+];
 
 const UIKit = () => {
   const { showToast } = useToast();
@@ -419,26 +428,14 @@ const UIKit = () => {
             Text
           </Typography>
           <Box sx={uikitStyles.componentColumn}>
-            <Box sx={uikitStyles.caseItem}>
-              <Text variant="heading">Heading text</Text>
-              <Typography sx={uikitStyles.caseLabel}>heading</Typography>
-            </Box>
-            <Box sx={uikitStyles.caseItem}>
-              <Text variant="body">Body text</Text>
-              <Typography sx={uikitStyles.caseLabel}>body</Typography>
-            </Box>
-            <Box sx={uikitStyles.caseItem}>
-              <Text variant="bodyMuted">Body muted text</Text>
-              <Typography sx={uikitStyles.caseLabel}>bodyMuted</Typography>
-            </Box>
-            <Box sx={uikitStyles.caseItem}>
-              <Text variant="bodyStrong">Body strong text</Text>
-              <Typography sx={uikitStyles.caseLabel}>bodyStrong</Typography>
-            </Box>
-            <Box sx={uikitStyles.caseItem}>
-              <Text variant="small">Small text</Text>
-              <Typography sx={uikitStyles.caseLabel}>small</Typography>
-            </Box>
+            {textVariants.map((variant) => (
+              <Box key={variant} sx={uikitStyles.caseItem}>
+                <Text variant={variant}>
+                  {variant.charAt(0).toUpperCase() + variant.slice(1)} text
+                </Text>
+                <Typography sx={uikitStyles.caseLabel}>{variant}</Typography>
+              </Box>
+            ))}
           </Box>
 
           {/* IconButton */}
