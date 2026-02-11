@@ -1,6 +1,8 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { Box, styled } from "@mui/material";
 import { HorizontalScrollProps } from "./HorizontalScroll.types";
+
+const DRAG_THRESHOLD = 5;
 
 const Wrapper = styled(Box)({
   position: "relative",
@@ -29,40 +31,48 @@ export const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
   sx,
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragState = useRef({ startX: 0, scrollLeft: 0 });
+  const dragState = useRef({
+    isDown: false,
+    hasDragged: false,
+    startX: 0,
+    scrollLeft: 0,
+  });
 
-  const handlePointerDown = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      const track = trackRef.current;
-      if (!track) return;
-      setIsDragging(true);
-      dragState.current.startX = e.clientX;
-      dragState.current.scrollLeft = track.scrollLeft;
-      track.setPointerCapture(e.pointerId);
+  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track) return;
+    dragState.current.isDown = true;
+    dragState.current.hasDragged = false;
+    dragState.current.startX = e.clientX;
+    dragState.current.scrollLeft = track.scrollLeft;
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragState.current.isDown) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const dx = e.clientX - dragState.current.startX;
+    if (Math.abs(dx) > DRAG_THRESHOLD) {
+      dragState.current.hasDragged = true;
       track.style.scrollBehavior = "auto";
-    },
-    []
-  );
-
-  const handlePointerMove = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      if (!isDragging) return;
-      const track = trackRef.current;
-      if (!track) return;
-      const dx = e.clientX - dragState.current.startX;
       track.scrollLeft = dragState.current.scrollLeft - dx;
-    },
-    [isDragging]
-  );
+    }
+  }, []);
 
-  const handlePointerUp = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      setIsDragging(false);
-      const track = trackRef.current;
-      if (track) {
-        track.releasePointerCapture(e.pointerId);
-        track.style.scrollBehavior = "smooth";
+  const handleMouseUp = useCallback(() => {
+    const track = trackRef.current;
+    if (track) {
+      track.style.scrollBehavior = "smooth";
+    }
+    dragState.current.isDown = false;
+  }, []);
+
+  const handleClickCapture = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (dragState.current.hasDragged) {
+        e.stopPropagation();
+        e.preventDefault();
+        dragState.current.hasDragged = false;
       }
     },
     []
@@ -73,11 +83,15 @@ export const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
       <Track
         ref={trackRef}
         ownerState={{ gap }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-        sx={{ cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onClickCapture={handleClickCapture}
+        sx={{
+          cursor: dragState.current.isDown ? "grabbing" : "default",
+          userSelect: "none",
+        }}
       >
         {children}
       </Track>
