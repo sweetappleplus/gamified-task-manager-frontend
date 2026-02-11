@@ -908,12 +908,7 @@ const UIKit = () => {
               borderColor: "grayscale.200",
             }}
           >
-            <WorkerLayout
-              activeRoute={ROUTES.DASHBOARD.path}
-              isAdmin
-              notificationCount={2}
-              chatCount={5}
-            >
+            <WorkerLayout activeRoute={ROUTES.DASHBOARD.path} chatCount={5}>
               <Typography variant="h4" sx={{ fontWeight: 600 }}>
                 Dashboard
               </Typography>
