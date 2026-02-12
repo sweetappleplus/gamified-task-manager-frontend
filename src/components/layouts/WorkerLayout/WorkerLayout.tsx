@@ -63,6 +63,7 @@ export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
             flex: 1,
             ml: "20px",
             overflow: "auto",
+            mb: "20px",
           }}
         >
           {children}
