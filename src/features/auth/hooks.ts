@@ -3,7 +3,13 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { setUser, logout as logoutAction, setInitialized } from "./slice";
 import { RootState } from "app/store";
 import { User, AuthResponse } from "types";
-import { sendOtpApi, verifyOtpApi, logoutApi, refreshTokenApi } from "services";
+import {
+  sendOtpApi,
+  verifyOtpApi,
+  logoutApi,
+  refreshTokenApi,
+  getMeApi,
+} from "services";
 import {
   setTokens,
   clearTokens,
@@ -61,13 +67,25 @@ export const useAuth = () => {
     [clearRefreshTimer, dispatch]
   );
 
+  const fetchProfile = useCallback(async () => {
+    try {
+      const response = await getMeApi();
+      if (response.data) {
+        dispatch(setUser(response.data));
+      }
+    } catch {
+      // Profile fetch failed silently; basic user data from token is still available
+    }
+  }, [dispatch]);
+
   const handleAuthSuccess = useCallback(
     (data: AuthResponse) => {
       setTokens(data.accessToken, data.refreshToken);
       dispatch(setUser(data.user));
       scheduleTokenRefresh(data.accessToken);
+      fetchProfile();
     },
-    [dispatch, scheduleTokenRefresh]
+    [dispatch, scheduleTokenRefresh, fetchProfile]
   );
 
   const sendOtp = useCallback(async (email: string) => {
@@ -125,7 +143,8 @@ export const useAuth = () => {
     dispatch(setUser(userData));
     scheduleTokenRefresh(accessToken);
     dispatch(setInitialized());
-  }, [dispatch, scheduleTokenRefresh]);
+    fetchProfile();
+  }, [dispatch, scheduleTokenRefresh, fetchProfile]);
 
   useEffect(() => {
     return () => {
