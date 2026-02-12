@@ -12,7 +12,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
       sx={{
         display: "flex",
         height: "100dvh",
-        bgcolor: "grayscale.950",
+        bgcolor: "grayscale.0",
       }}
     >
       <AdminSidebar activeRoute={activeRoute} />
@@ -20,10 +20,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
         sx={{
           flex: 1,
           overflow: "auto",
-          bgcolor: "grayscale.900",
+          bgcolor: "grayscale.50",
         }}
       >
-        <Box sx={{ padding: 4, color: "grayscale.0" }}>{children}</Box>
+        <Box sx={{ padding: 4, color: "grayscale.900" }}>{children}</Box>
       </Box>
     </Box>
   );

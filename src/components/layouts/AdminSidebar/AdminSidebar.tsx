@@ -35,7 +35,9 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
       sx={{
         width: isExpanded ? 268 : 60,
         height: "100dvh",
-        bgcolor: "grayscale.950",
+        bgcolor: "grayscale.0",
+        borderRight: "1px solid",
+        borderColor: "grayscale.100",
         transition: "width 0.3s ease",
         overflow: "hidden",
       }}
@@ -50,9 +52,9 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
         <IconButton
           onClick={handleToggle}
           sx={{
-            color: "grayscale.0",
+            color: "grayscale.600",
             "&:hover": {
-              bgcolor: "rgba(255, 255, 255, 0.05)",
+              bgcolor: "grayscale.50",
             },
           }}
         >
@@ -71,18 +73,16 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
                 onClick={() => handleNavigation(item.route)}
                 selected={isActive}
                 sx={{
-                  color: isActive ? "primary.main" : "grayscale.0",
-                  bgcolor: isActive ? "rgba(0, 145, 255, 0.1)" : "transparent",
+                  color: isActive ? "primary.main" : "grayscale.700",
+                  bgcolor: isActive ? "primary.50" : "transparent",
                   justifyContent: isExpanded ? "flex-start" : "center",
                   "&:hover": {
-                    bgcolor: isActive
-                      ? "rgba(0, 145, 255, 0.15)"
-                      : "rgba(255, 255, 255, 0.05)",
+                    bgcolor: isActive ? "primary.100" : "grayscale.50",
                   },
                   "&.Mui-selected": {
-                    bgcolor: "rgba(0, 145, 255, 0.1)",
+                    bgcolor: "primary.50",
                     "&:hover": {
-                      bgcolor: "rgba(0, 145, 255, 0.15)",
+                      bgcolor: "primary.100",
                     },
                   },
                 }}
@@ -103,7 +103,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
                       primary: {
                         sx: {
                           fontSize: 14,
-                          fontWeight: 500,
+                          fontWeight: isActive ? 600 : 500,
                           lineHeight: "20px",
                         },
                       },
