@@ -4,5 +4,6 @@ export * from "./SidebarNavItem";
 export * from "./FooterNavButton";
 export * from "./TaskTicket";
 export * from "./HorizontalScroll";
+export * from "./StepsDescription";
 export * from "./TimeCounter";
 export * from "./UserInfo";
