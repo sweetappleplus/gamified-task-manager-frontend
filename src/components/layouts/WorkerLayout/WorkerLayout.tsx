@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { WorkerSidebar, WorkerFooter } from "components";
 import { useAppSelector } from "app/hooks";
 import { useNotifications } from "features/notification";
-import { USER_ROLES } from "types";
+import { useLevelConfig } from "features/level-config";
+import { getLeafVariant } from "utils";
 import { WorkerLayoutProps } from "./WorkerLayout.types";
 
 export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
@@ -15,7 +16,20 @@ export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const user = useAppSelector((state) => state.auth.user);
   const { unreadCount: notificationCount } = useNotifications();
-  const isAdmin = user?.role === USER_ROLES.SUPER_ADMIN;
+  const { levelConfigs, fetchLevelConfigs } = useLevelConfig();
+
+  useEffect(() => {
+    fetchLevelConfigs();
+  }, [fetchLevelConfigs]);
+
+  const leafVariant = useMemo(
+    () =>
+      user?.level && levelConfigs.length > 0
+        ? getLeafVariant(user.level.totalXp, levelConfigs)
+        : undefined,
+    [user?.level, levelConfigs]
+  );
+  const leafText = user?.level?.currentLevel.name;
 
   if (isDesktop) {
     return (
@@ -37,9 +51,11 @@ export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
         >
           <WorkerSidebar
             activeRoute={activeRoute}
-            isAdmin={isAdmin}
             notificationCount={notificationCount}
             chatCount={chatCount}
+            user={user ?? undefined}
+            leafVariant={leafVariant}
+            leafText={leafText}
           />
         </Box>
         <Box
