@@ -35,6 +35,7 @@ export type TaskUser = {
   id: string;
   email: string;
   name?: string | null;
+  earning?: string;
 };
 
 export type TaskCategoryInfo = {

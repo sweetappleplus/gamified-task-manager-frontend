@@ -12,6 +12,7 @@ export type User = {
   email: string;
   name?: string | null;
   role: UserRole;
+  balance?: string;
   level?: UserLevel;
 };
 
