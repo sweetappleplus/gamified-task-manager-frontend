@@ -1,3 +1,5 @@
+import { UserLevel } from "./level-config.types";
+
 export const USER_ROLES = {
   WORKER: "WORKER",
   SUPER_ADMIN: "SUPER_ADMIN",
@@ -10,6 +12,7 @@ export type User = {
   email: string;
   name?: string | null;
   role: UserRole;
+  level?: UserLevel;
 };
 
 export type FilterUsersParams = {

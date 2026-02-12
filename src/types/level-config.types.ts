@@ -23,3 +23,14 @@ export type UpdateLevelConfigRequest = {
   earningMultiplier?: string;
   unlockedTaskTypes?: TaskType[];
 };
+
+export type UserLevelInfo = {
+  name: string;
+  xpRequired: number;
+};
+
+export type UserLevel = {
+  currentLevel: UserLevelInfo;
+  nextLevel: UserLevelInfo | null;
+  totalXp: number;
+};
