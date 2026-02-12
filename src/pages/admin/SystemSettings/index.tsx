@@ -196,9 +196,6 @@ const SystemSettings = () => {
           onClose={closeDialog}
           maxWidth="sm"
           fullWidth
-          PaperProps={{
-            sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-          }}
         >
           <DialogTitle sx={systemSettingsStyles.dialogTitle}>
             <Box
@@ -209,7 +206,7 @@ const SystemSettings = () => {
               }}
             >
               {dialogMode === "create" ? "Create Setting" : "Edit Setting"}
-              <IconButton onClick={closeDialog} sx={{ color: "grayscale.400" }}>
+              <IconButton onClick={closeDialog} sx={{ color: "grayscale.500" }}>
                 <CloseIcon />
               </IconButton>
             </Box>
@@ -273,9 +270,6 @@ const SystemSettings = () => {
           onClose={closeDeleteDialog}
           maxWidth="xs"
           fullWidth
-          PaperProps={{
-            sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-          }}
         >
           <DialogTitle sx={systemSettingsStyles.dialogTitle}>
             <Box
@@ -288,7 +282,7 @@ const SystemSettings = () => {
               Delete Setting
               <IconButton
                 onClick={closeDeleteDialog}
-                sx={{ color: "grayscale.400" }}
+                sx={{ color: "grayscale.500" }}
               >
                 <CloseIcon />
               </IconButton>
@@ -301,7 +295,7 @@ const SystemSettings = () => {
             </Typography>
           </DialogContent>
           <DialogActions sx={systemSettingsStyles.dialogActions}>
-            <Button onClick={closeDeleteDialog} sx={{ color: "grayscale.400" }}>
+            <Button onClick={closeDeleteDialog} color="inherit">
               Cancel
             </Button>
             <Button

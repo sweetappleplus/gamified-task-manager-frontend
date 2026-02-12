@@ -180,9 +180,6 @@ const TaskCategories = () => {
           onClose={closeDialog}
           maxWidth="sm"
           fullWidth
-          PaperProps={{
-            sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-          }}
         >
           <DialogTitle sx={taskCategoriesStyles.dialogTitle}>
             <Box
@@ -193,7 +190,7 @@ const TaskCategories = () => {
               }}
             >
               {dialogMode === "create" ? "Create Category" : "Edit Category"}
-              <IconButton onClick={closeDialog} sx={{ color: "grayscale.400" }}>
+              <IconButton onClick={closeDialog} sx={{ color: "grayscale.500" }}>
                 <CloseIcon />
               </IconButton>
             </Box>
@@ -240,9 +237,6 @@ const TaskCategories = () => {
           onClose={closeDeleteDialog}
           maxWidth="xs"
           fullWidth
-          PaperProps={{
-            sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-          }}
         >
           <DialogTitle sx={taskCategoriesStyles.dialogTitle}>
             <Box
@@ -255,7 +249,7 @@ const TaskCategories = () => {
               Delete Category
               <IconButton
                 onClick={closeDeleteDialog}
-                sx={{ color: "grayscale.400" }}
+                sx={{ color: "grayscale.500" }}
               >
                 <CloseIcon />
               </IconButton>
@@ -268,7 +262,7 @@ const TaskCategories = () => {
             </Typography>
           </DialogContent>
           <DialogActions sx={taskCategoriesStyles.dialogActions}>
-            <Button onClick={closeDeleteDialog} sx={{ color: "grayscale.400" }}>
+            <Button onClick={closeDeleteDialog} color="inherit">
               Cancel
             </Button>
             <Button

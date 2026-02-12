@@ -219,9 +219,6 @@ const LevelConfigs = () => {
           onClose={closeDialog}
           maxWidth="sm"
           fullWidth
-          PaperProps={{
-            sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-          }}
         >
           <DialogTitle sx={levelConfigsStyles.dialogTitle}>
             <Box
@@ -232,7 +229,7 @@ const LevelConfigs = () => {
               }}
             >
               {dialogMode === "create" ? "Create Level" : "Edit Level"}
-              <IconButton onClick={closeDialog} sx={{ color: "grayscale.400" }}>
+              <IconButton onClick={closeDialog} sx={{ color: "grayscale.500" }}>
                 <CloseIcon />
               </IconButton>
             </Box>
@@ -306,19 +303,10 @@ const LevelConfigs = () => {
                   sx={{ ...levelConfigsStyles.textField, mt: 2 }}
                 />
               )}
-              sx={{
-                "& .MuiAutocomplete-popupIndicator": {
-                  color: "grayscale.400",
-                },
-                "& .MuiAutocomplete-clearIndicator": {
-                  color: "grayscale.400",
-                },
-              }}
               slotProps={{
                 paper: {
                   sx: {
-                    bgcolor: "grayscale.700",
-                    color: "grayscale.0",
+                    bgcolor: "grayscale.0",
                   },
                 },
               }}
@@ -345,9 +333,6 @@ const LevelConfigs = () => {
           onClose={closeDeleteDialog}
           maxWidth="xs"
           fullWidth
-          PaperProps={{
-            sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-          }}
         >
           <DialogTitle sx={levelConfigsStyles.dialogTitle}>
             <Box
@@ -360,7 +345,7 @@ const LevelConfigs = () => {
               Delete Level
               <IconButton
                 onClick={closeDeleteDialog}
-                sx={{ color: "grayscale.400" }}
+                sx={{ color: "grayscale.500" }}
               >
                 <CloseIcon />
               </IconButton>
@@ -373,7 +358,7 @@ const LevelConfigs = () => {
             </Typography>
           </DialogContent>
           <DialogActions sx={levelConfigsStyles.dialogActions}>
-            <Button onClick={closeDeleteDialog} sx={{ color: "grayscale.400" }}>
+            <Button onClick={closeDeleteDialog} color="inherit">
               Cancel
             </Button>
             <Button

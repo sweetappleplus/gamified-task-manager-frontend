@@ -8,33 +8,35 @@ export const systemSettingsStyles: Record<string, SxProps<Theme>> = {
     mb: 3,
   },
   title: {
-    color: "grayscale.0",
+    color: "grayscale.900",
     fontWeight: 600,
   },
   tableContainer: {
-    bgcolor: "grayscale.800",
+    bgcolor: "grayscale.0",
     borderRadius: 2,
+    border: "1px solid",
+    borderColor: "grayscale.100",
     overflowX: "auto",
     overflowY: "hidden",
   },
   tableHead: {
-    bgcolor: "grayscale.900",
+    bgcolor: "grayscale.50",
   },
   tableHeadCell: {
-    color: "grayscale.400",
+    color: "grayscale.600",
     fontWeight: 600,
     borderBottom: "1px solid",
-    borderColor: "grayscale.700",
+    borderColor: "grayscale.100",
   },
   tableCell: {
-    color: "grayscale.0",
+    color: "grayscale.900",
     borderBottom: "1px solid",
-    borderColor: "grayscale.700",
+    borderColor: "grayscale.100",
   },
   descriptionCell: {
-    color: "grayscale.300",
+    color: "grayscale.600",
     borderBottom: "1px solid",
-    borderColor: "grayscale.700",
+    borderColor: "grayscale.100",
     maxWidth: 300,
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -43,57 +45,24 @@ export const systemSettingsStyles: Record<string, SxProps<Theme>> = {
   emptyState: {
     textAlign: "center",
     py: 6,
-    color: "grayscale.400",
+    color: "grayscale.500",
   },
   loadingContainer: {
     display: "flex",
     justifyContent: "center",
     py: 6,
   },
-  dialogContent: {
-    bgcolor: "grayscale.800",
-  },
+  dialogContent: {},
   dialogTitle: {
-    color: "grayscale.0",
-    bgcolor: "grayscale.800",
+    fontWeight: 600,
   },
   dialogActions: {
-    bgcolor: "grayscale.800",
     px: 3,
     pb: 2,
   },
-  textField: {
-    "& .MuiOutlinedInput-root": {
-      color: "grayscale.0",
-      "& fieldset": {
-        borderColor: "grayscale.600",
-      },
-      "&:hover fieldset": {
-        borderColor: "grayscale.400",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "primary.main",
-      },
-    },
-    "& .MuiInputLabel-root": {
-      color: "grayscale.400",
-    },
-    "& .MuiInputLabel-root.Mui-focused": {
-      color: "primary.main",
-    },
-  },
-  disabledTextField: {
-    "& .MuiOutlinedInput-root": {
-      color: "grayscale.400",
-      "& fieldset": {
-        borderColor: "grayscale.700",
-      },
-    },
-    "& .MuiInputLabel-root": {
-      color: "grayscale.500",
-    },
-  },
+  textField: {},
+  disabledTextField: {},
   deleteDialogText: {
-    color: "grayscale.300",
+    color: "grayscale.600",
   },
 };

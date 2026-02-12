@@ -11,14 +11,14 @@ export const adminPlaceholderStyles: Record<string, SxProps<Theme>> = {
   },
   title: {
     fontWeight: 600,
-    color: "grayscale.0",
+    color: "grayscale.900",
     mb: 2,
   },
   subtitle: {
-    color: "grayscale.400",
+    color: "grayscale.500",
     mb: 4,
   },
   path: {
-    color: "grayscale.500",
+    color: "grayscale.400",
   },
 };
