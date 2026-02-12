@@ -22,8 +22,8 @@ const Title = styled(Box)(({ theme }) => ({
 
 const StepRow = styled(Box)({
   display: "flex",
-  alignItems: "center",
-  height: 32,
+  alignItems: "flex-start",
+  minHeight: 32,
   gap: 4,
 });
 
@@ -32,6 +32,7 @@ const StepText = styled(Box)(({ theme }) => ({
   lineHeight: "20px",
   fontWeight: 500,
   color: theme.palette.grayscale[950],
+  paddingTop: 2,
 }));
 
 const Divider = styled(Box)(({ theme }) => ({
