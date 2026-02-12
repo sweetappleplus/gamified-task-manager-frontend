@@ -2,19 +2,8 @@ import React, { useMemo } from "react";
 import { Box, styled } from "@mui/material";
 import { Text, Tag, ProgressIndicator, Button } from "components";
 import { TASK_STATUSES, TASK_PRIORITIES, TaskPriority } from "types";
+import { PRIORITY_COLORS } from "consts";
 import { TaskTicketProps } from "./TaskTicket.types";
-
-const PRIORITY_COLORS: Record<TaskPriority, { bg: string; text: string }> = {
-  [TASK_PRIORITIES.LOW]: { bg: "primary.50", text: "primary.main" },
-  [TASK_PRIORITIES.MEDIUM]: {
-    bg: "additional.orange.200",
-    text: "additional.orange.main",
-  },
-  [TASK_PRIORITIES.HIGH]: {
-    bg: "additional.pink.200",
-    text: "additional.pink.main",
-  },
-};
 
 const PRIORITY_LABELS: Record<TaskPriority, string> = {
   [TASK_PRIORITIES.LOW]: "Less Priority",
