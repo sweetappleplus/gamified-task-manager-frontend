@@ -43,6 +43,7 @@ import {
   WorkerLayout,
   TaskTicket,
   TimeCounter,
+  StepsDescription,
   HorizontalScroll,
   UserInfo,
 } from "components";
@@ -785,6 +786,21 @@ const UIKit = () => {
               </HorizontalScroll>
               <Typography sx={uikitStyles.caseLabel}>with Buttons</Typography>
             </Box>
+          </Box>
+
+          {/* StepsDescription */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            StepsDescription
+          </Typography>
+          <Box sx={{ mb: 2 }}>
+            <StepsDescription
+              steps={[
+                "Download the app from provided link",
+                "Use the app for at least 10 minutes",
+                "Write a detailed review (minimum 50 words)",
+                "Submit screenshot as proof",
+              ]}
+            />
           </Box>
 
           {/* TimeCounter */}
