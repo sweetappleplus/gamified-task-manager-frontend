@@ -9,7 +9,7 @@ import {
   HorizontalScroll,
 } from "components";
 import { ROUTES } from "consts";
-import { useTasksPage } from "./hooks/useTasksPage";
+import { useTasksPage } from "./hooks";
 import { tasksStyles } from "./Tasks.styles";
 
 const Tasks = () => {
