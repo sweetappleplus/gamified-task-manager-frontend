@@ -27,7 +27,7 @@ const LeafImage = styled("img")({
   height: LEAF_HEIGHT,
 });
 
-export const Leaf: React.FC<LeafProps> = ({ variant }) => {
+export const Leaf: React.FC<LeafProps> = ({ variant, text }) => {
   const theme = useTheme();
   const gradient = theme.palette.gradient[variant];
 
@@ -45,7 +45,7 @@ export const Leaf: React.FC<LeafProps> = ({ variant }) => {
           WebkitTextFillColor: "transparent",
         }}
       >
-        {labelMap[variant]}
+        {text ?? labelMap[variant]}
       </Box>
       <LeafImage
         src={imageMap[variant]}
