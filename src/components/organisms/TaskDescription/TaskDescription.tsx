@@ -63,10 +63,6 @@ const InfoRows = styled(Box)({
   gap: 8,
 });
 
-const AttachmentButton = styled(Box)({
-  cursor: "pointer",
-});
-
 export const TaskDescription: React.FC<TaskDescriptionProps> = ({
   task,
   assigneeLeafVariant,
@@ -117,9 +113,11 @@ export const TaskDescription: React.FC<TaskDescriptionProps> = ({
         {filesCount > 0 && (
           <InfoRow>
             <InfoLabel>Attachments:</InfoLabel>
-            <AttachmentButton onClick={onAttachmentsClick}>
-              <Tag3 icon="document-text" text={String(filesCount)} />
-            </AttachmentButton>
+            <Tag3
+              icon="document-text"
+              text={String(filesCount)}
+              onClick={onAttachmentsClick}
+            />
           </InfoRow>
         )}
       </InfoRows>
