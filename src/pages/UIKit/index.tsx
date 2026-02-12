@@ -42,6 +42,7 @@ import {
   AdminLayout,
   WorkerLayout,
   TaskTicket,
+  TimeCounter,
   HorizontalScroll,
   UserInfo,
 } from "components";
@@ -783,6 +784,30 @@ const UIKit = () => {
                 ))}
               </HorizontalScroll>
               <Typography sx={uikitStyles.caseLabel}>with Buttons</Typography>
+            </Box>
+          </Box>
+
+          {/* TimeCounter */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            TimeCounter
+          </Typography>
+          <Box
+            sx={{
+              ...uikitStyles.componentRow,
+              bgcolor: "additional.green.main",
+              p: 2,
+              borderRadius: 2,
+              width: "fit-content",
+            }}
+          >
+            <Box sx={uikitStyles.caseItem}>
+              <TimeCounter seconds={45518} />
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <TimeCounter seconds={3661} />
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <TimeCounter seconds={0} />
             </Box>
           </Box>
 
