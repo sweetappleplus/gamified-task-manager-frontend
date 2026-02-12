@@ -20,11 +20,14 @@ const StyledTag = styled(Box)(({ theme }) => ({
   whiteSpace: "nowrap",
 }));
 
-export const Tag3: React.FC<Tag3Props> = ({ text, icon }) => {
+export const Tag3: React.FC<Tag3Props> = ({ text, icon, onClick }) => {
   const theme = useTheme();
 
   return (
-    <StyledTag>
+    <StyledTag
+      onClick={onClick}
+      sx={onClick ? { cursor: "pointer" } : undefined}
+    >
       {icon && (
         <Icon
           name={icon}

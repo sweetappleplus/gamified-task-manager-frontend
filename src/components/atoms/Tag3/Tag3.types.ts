@@ -9,4 +9,8 @@ export interface Tag3Props {
    * Optional icon displayed before the text
    */
   icon?: IconName;
+  /**
+   * Optional click handler
+   */
+  onClick?: () => void;
 }
