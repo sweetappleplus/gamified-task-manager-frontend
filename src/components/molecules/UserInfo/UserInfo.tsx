@@ -15,11 +15,19 @@ const Wrapper = styled(Box)({
   gap: 12,
 });
 
+const InfoColumn = styled(Box)({
+  minWidth: 0,
+  flex: 1,
+});
+
 const Name = styled(Box)(({ theme }) => ({
   fontSize: 16,
   lineHeight: "22px",
   fontWeight: 600,
   color: theme.palette.grayscale[950],
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 }));
 
 const LabelsRow = styled(Box)({
@@ -43,12 +51,12 @@ export const UserInfo: React.FC<UserInfoProps> = ({
 }) => (
   <Wrapper sx={sx}>
     <Avatar size={48} email={user.email} name={user.name ?? undefined} />
-    <Box>
+    <InfoColumn>
       <Name>{user.name || user.email}</Name>
       <LabelsRow>
         <Leaf variant={leafVariant} text={leafText} />
         <RoleLabel>{ROLE_LABELS[user.role]}</RoleLabel>
       </LabelsRow>
-    </Box>
+    </InfoColumn>
   </Wrapper>
 );
