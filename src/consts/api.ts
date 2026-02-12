@@ -28,6 +28,7 @@ export const API_URL_TASKS_CANCEL = "/tasks/:id/cancel";
 export const API_URL_TASKS_FILES = "/tasks/:id/files";
 
 export const API_URL_USERS = "/users";
+export const API_URL_USERS_ME = "/users/me";
 
 export const PUBLIC_ENDPOINTS = [
   API_URL_AUTH_SEND_OTP,
