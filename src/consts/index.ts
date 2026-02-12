@@ -5,3 +5,4 @@ export * from "./validation";
 export * from "./socket";
 export * from "./gamification";
 export * from "./storage";
+export * from "./labelColors";
