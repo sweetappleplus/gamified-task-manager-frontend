@@ -48,6 +48,7 @@ import {
   RewardsEconomics,
   HorizontalScroll,
   UserInfo,
+  TaskDescription,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
@@ -1041,6 +1042,54 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Organisms
           </Typography>
+          {/* TaskDescription */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            TaskDescription
+          </Typography>
+          <Box sx={{ width: 700, mb: 2 }}>
+            <TaskDescription
+              task={{
+                ...mockTaskBase,
+                title: "App Store Review & Rating",
+                description:
+                  "Please download and review our mobile app on the App Store. Provide an honest 5-star rating and write a detailed review about your experience with the app features.",
+                type: TASK_TYPES.PREMIUM,
+                priority: TASK_PRIORITIES.MEDIUM,
+                category: { id: "c2", name: "Content Creation" },
+                createdBy: {
+                  id: "u1",
+                  email: "anna@example.com",
+                  name: "Anna Kowalski",
+                },
+                files: [
+                  {
+                    id: "f1",
+                    url: "#",
+                    fileName: "screenshot.png",
+                    fileSize: 1024,
+                    mimeType: "image/png",
+                  },
+                  {
+                    id: "f2",
+                    url: "#",
+                    fileName: "review.pdf",
+                    fileSize: 2048,
+                    mimeType: "application/pdf",
+                  },
+                  {
+                    id: "f3",
+                    url: "#",
+                    fileName: "guide.docx",
+                    fileSize: 512,
+                    mimeType: "application/docx",
+                  },
+                ],
+              }}
+              assigneeLeafVariant="gold"
+              assigneeLeafText="Gold"
+            />
+          </Box>
+
           {/* NotificationList */}
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             NotificationList
