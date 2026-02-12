@@ -2,13 +2,7 @@ import React from "react";
 import { Box, styled } from "@mui/material";
 import { Tag, Tag3, Leaf, IconName } from "components";
 import { PRIORITY_COLORS } from "consts";
-import {
-  Task,
-  TaskType,
-  TaskPriority,
-  TASK_TYPES,
-  TASK_PRIORITIES,
-} from "types";
+import { TaskType, TaskPriority, TASK_TYPES, TASK_PRIORITIES } from "types";
 import { TaskDescriptionProps } from "./TaskDescription.types";
 
 const TYPE_ICONS: Record<TaskType, IconName> = {
