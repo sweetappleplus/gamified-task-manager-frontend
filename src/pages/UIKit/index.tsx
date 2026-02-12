@@ -441,6 +441,21 @@ const UIKit = () => {
             ))}
           </Box>
 
+          {/* Leaf - Custom Text */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Leaf - Custom Text
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            {leafVariants.map((variant) => (
+              <Box key={variant} sx={uikitStyles.caseItem}>
+                <Leaf variant={variant} text="Level 5" />
+                <Typography sx={uikitStyles.caseLabel}>
+                  {variant} custom
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+
           {/* Toast */}
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             Toast
