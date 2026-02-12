@@ -46,6 +46,7 @@ import {
   StepsDescription,
   BalanceCard,
   RewardsEconomics,
+  RemainingTime,
   HorizontalScroll,
   UserInfo,
   TaskDescription,
@@ -844,6 +845,17 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <TimeCounter seconds={0} />
             </Box>
+          </Box>
+
+          {/* RemainingTime */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            RemainingTime
+          </Typography>
+          <Box sx={{ width: 500, mb: 2 }}>
+            <RemainingTime
+              startDateTime={new Date(Date.now() - 25518000).toISOString()}
+              deadlineDateTime={new Date(Date.now() + 45518000).toISOString()}
+            />
           </Box>
 
           {/* UserInfo */}
