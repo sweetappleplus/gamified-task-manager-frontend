@@ -4,3 +4,4 @@ export * from "./SidebarNavItem";
 export * from "./FooterNavButton";
 export * from "./TaskTicket";
 export * from "./HorizontalScroll";
+export * from "./UserInfo";
