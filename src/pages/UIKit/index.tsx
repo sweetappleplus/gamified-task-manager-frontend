@@ -44,6 +44,7 @@ import {
   TaskTicket,
   TimeCounter,
   StepsDescription,
+  BalanceCard,
   HorizontalScroll,
   UserInfo,
 } from "components";
@@ -786,6 +787,14 @@ const UIKit = () => {
               </HorizontalScroll>
               <Typography sx={uikitStyles.caseLabel}>with Buttons</Typography>
             </Box>
+          </Box>
+
+          {/* BalanceCard */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            BalanceCard
+          </Typography>
+          <Box sx={{ mb: 2, width: 500 }}>
+            <BalanceCard amount={21148.7} additionalAmount={20.4} />
           </Box>
 
           {/* StepsDescription */}
