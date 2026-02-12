@@ -53,7 +53,7 @@ export const useTasksPage = () => {
       {
         id: "priority_high",
         text: "High Priority",
-        indicator: "additional.orange.main",
+        indicator: "additional.red.main",
         type: "priority",
         value: TASK_PRIORITIES.HIGH,
       },
