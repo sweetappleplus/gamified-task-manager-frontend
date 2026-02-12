@@ -4,6 +4,7 @@ import {
   Avatar,
   Badge,
   Button,
+  DigitCard,
   Icon,
   IconButton,
   Input,
@@ -719,6 +720,26 @@ const UIKit = () => {
               <Spinner message="" />
               <Typography sx={uikitStyles.caseLabel}>no message</Typography>
             </Box>
+          </Box>
+
+          {/* DigitCard */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            DigitCard
+          </Typography>
+          <Box
+            sx={{
+              ...uikitStyles.componentRow,
+              bgcolor: "additional.green.main",
+              p: 2,
+              borderRadius: 2,
+              width: "fit-content",
+            }}
+          >
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => (
+              <Box key={d} sx={uikitStyles.caseItem}>
+                <DigitCard digit={d} />
+              </Box>
+            ))}
           </Box>
         </Box>
 
