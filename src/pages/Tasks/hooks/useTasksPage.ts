@@ -104,7 +104,7 @@ export const useTasksPage = () => {
 
       return params;
     },
-    [filterTags]
+    [filterTags, user?.id]
   );
 
   const loadInitial = useCallback(
