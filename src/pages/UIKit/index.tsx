@@ -1052,6 +1052,9 @@ const UIKit = () => {
                   activeRoute={ROUTES.DASHBOARD.path}
                   notificationCount={2}
                   chatCount={5}
+                  user={mockWorkerUser}
+                  leafText="Gold"
+                  leafVariant="gold"
                 />
               </Box>
               <Typography sx={uikitStyles.caseLabel}>regular user</Typography>
@@ -1060,9 +1063,11 @@ const UIKit = () => {
               <Box sx={{ maxWidth: 300 }}>
                 <WorkerSidebar
                   activeRoute={ROUTES.DASHBOARD.path}
-                  isAdmin
                   notificationCount={10}
                   chatCount={3}
+                  user={mockAdminUser}
+                  leafText="Bronze"
+                  leafVariant="bronze"
                 />
               </Box>
               <Typography sx={uikitStyles.caseLabel}>admin user</Typography>
