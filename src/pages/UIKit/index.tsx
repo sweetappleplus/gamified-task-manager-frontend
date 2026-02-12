@@ -41,10 +41,18 @@ import {
   WorkerLayout,
   TaskTicket,
   HorizontalScroll,
+  UserInfo,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast } from "hooks";
-import { Task, TASK_STATUSES, TASK_PRIORITIES, TASK_TYPES } from "types";
+import {
+  Task,
+  TASK_STATUSES,
+  TASK_PRIORITIES,
+  TASK_TYPES,
+  User,
+  USER_ROLES,
+} from "types";
 
 const iconNames = Object.keys(ICONS) as IconName[];
 const socialProviders: SocialProvider[] = [
@@ -89,6 +97,20 @@ const mockTaskBase: Task = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   category: { id: "c1", name: "Idea Generation" },
+};
+
+const mockWorkerUser: User = {
+  id: "u1",
+  email: "konstantin@example.com",
+  name: "Konstantin Konstantinov",
+  role: USER_ROLES.WORKER,
+};
+
+const mockAdminUser: User = {
+  id: "u2",
+  email: "admin@example.com",
+  name: "Anna Smith",
+  role: USER_ROLES.SUPER_ADMIN,
 };
 
 const mockTasks: Task[] = [
@@ -720,6 +742,41 @@ const UIKit = () => {
                 ))}
               </HorizontalScroll>
               <Typography sx={uikitStyles.caseLabel}>with Buttons</Typography>
+            </Box>
+          </Box>
+
+          {/* UserInfo */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            UserInfo
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <UserInfo
+                user={mockWorkerUser}
+                leafVariant="gold"
+                leafText="Gold"
+              />
+              <Typography sx={uikitStyles.caseLabel}>worker / gold</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <UserInfo
+                user={mockAdminUser}
+                leafVariant="diamond"
+                leafText="Diamond"
+              />
+              <Typography sx={uikitStyles.caseLabel}>
+                admin / diamond
+              </Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <UserInfo
+                user={mockWorkerUser}
+                leafVariant="bronze"
+                leafText="Level 1"
+              />
+              <Typography sx={uikitStyles.caseLabel}>
+                custom leaf text
+              </Typography>
             </Box>
           </Box>
 
