@@ -45,6 +45,7 @@ import {
   TimeCounter,
   StepsDescription,
   BalanceCard,
+  RewardsEconomics,
   HorizontalScroll,
   UserInfo,
 } from "components";
@@ -795,6 +796,14 @@ const UIKit = () => {
           </Typography>
           <Box sx={{ mb: 2, width: 500 }}>
             <BalanceCard amount={21148.7} additionalAmount={20.4} />
+          </Box>
+
+          {/* RewardsEconomics */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            RewardsEconomics
+          </Typography>
+          <Box sx={{ width: 500, mb: 2 }}>
+            <RewardsEconomics budget={24} commissionPercent={15} />
           </Box>
 
           {/* StepsDescription */}
