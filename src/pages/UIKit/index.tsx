@@ -11,6 +11,7 @@ import {
   SocialOauthButton,
   Tag,
   Tag2,
+  Tag3,
   Text,
   TEXT_VARIANTS,
   ToastVariant,
@@ -447,6 +448,25 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Tag2 text="High-Value" icon="chart" />
               <Typography sx={uikitStyles.caseLabel}>icon</Typography>
+            </Box>
+          </Box>
+
+          {/* Tag3 */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Tag3
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag3 icon="user-square" text="Anna Kowalski" />
+              <Typography sx={uikitStyles.caseLabel}>with icon</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag3 text="Content Creation" />
+              <Typography sx={uikitStyles.caseLabel}>text only</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Tag3 icon="document-text" text="3" />
+              <Typography sx={uikitStyles.caseLabel}>icon + number</Typography>
             </Box>
           </Box>
 
