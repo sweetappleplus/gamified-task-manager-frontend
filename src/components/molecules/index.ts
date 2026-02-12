@@ -6,6 +6,7 @@ export * from "./FooterNavButton";
 export * from "./TaskTicket";
 export * from "./HorizontalScroll";
 export * from "./RewardsEconomics";
+export * from "./RemainingTime";
 export * from "./StepsDescription";
 export * from "./TimeCounter";
 export * from "./UserInfo";
