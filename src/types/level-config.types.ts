@@ -33,4 +33,6 @@ export type UserLevel = {
   currentLevel: UserLevelInfo;
   nextLevel: UserLevelInfo | null;
   totalXp: number;
+  progress: number;
+  remainingEarningToNextLevel: number;
 };
