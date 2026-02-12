@@ -33,15 +33,7 @@ const ConfirmDialog = ({
   onConfirm,
 }: ConfirmDialogProps) => {
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="xs"
-      fullWidth
-      PaperProps={{
-        sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-      }}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle sx={tasksStyles.dialogTitle}>
         <Box
           sx={{
@@ -51,7 +43,7 @@ const ConfirmDialog = ({
           }}
         >
           {title}
-          <IconButton onClick={onClose} sx={{ color: "grayscale.400" }}>
+          <IconButton onClick={onClose} sx={{ color: "grayscale.500" }}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -60,7 +52,7 @@ const ConfirmDialog = ({
         <Typography sx={tasksStyles.deleteDialogText}>{message}</Typography>
       </DialogContent>
       <DialogActions sx={tasksStyles.dialogActions}>
-        <Button onClick={onClose} sx={{ color: "grayscale.400" }}>
+        <Button onClick={onClose} color="inherit">
           Cancel
         </Button>
         <Button

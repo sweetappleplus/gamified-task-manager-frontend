@@ -49,15 +49,7 @@ const AssignTaskDialog = ({
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      maxWidth="sm"
-      fullWidth
-      PaperProps={{
-        sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-      }}
-    >
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle sx={tasksStyles.dialogTitle}>
         <Box
           sx={{
@@ -67,13 +59,13 @@ const AssignTaskDialog = ({
           }}
         >
           Assign Task
-          <IconButton onClick={handleClose} sx={{ color: "grayscale.400" }}>
+          <IconButton onClick={handleClose} sx={{ color: "grayscale.500" }}>
             <CloseIcon />
           </IconButton>
         </Box>
       </DialogTitle>
       <DialogContent sx={tasksStyles.dialogContent}>
-        <Typography sx={{ color: "grayscale.300", mb: 2 }}>
+        <Typography sx={{ color: "grayscale.600", mb: 2 }}>
           Assign &quot;{task?.title}&quot; to a worker
         </Typography>
         <FormControl fullWidth sx={tasksStyles.selectField}>
@@ -92,7 +84,7 @@ const AssignTaskDialog = ({
         </FormControl>
       </DialogContent>
       <DialogActions sx={tasksStyles.dialogActions}>
-        <Button onClick={handleClose} sx={{ color: "grayscale.400" }}>
+        <Button onClick={handleClose} color="inherit">
           Cancel
         </Button>
         <Button

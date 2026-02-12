@@ -191,15 +191,7 @@ const CreateEditTaskDialog = ({
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="md"
-      fullWidth
-      PaperProps={{
-        sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-      }}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={tasksStyles.dialogTitle}>
         <Box
           sx={{
@@ -209,7 +201,7 @@ const CreateEditTaskDialog = ({
           }}
         >
           {mode === "create" ? "Create Task" : "Edit Task"}
-          <IconButton onClick={onClose} sx={{ color: "grayscale.400" }}>
+          <IconButton onClick={onClose} sx={{ color: "grayscale.500" }}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -240,7 +232,7 @@ const CreateEditTaskDialog = ({
         <Box sx={{ mt: 2 }}>
           <Typography
             variant="subtitle2"
-            sx={{ color: "grayscale.300", mb: 1 }}
+            sx={{ color: "grayscale.600", mb: 1 }}
           >
             Steps (max 4) *
           </Typography>
@@ -402,7 +394,7 @@ const CreateEditTaskDialog = ({
           <Box sx={{ mt: 2 }}>
             <Typography
               variant="subtitle2"
-              sx={{ color: "grayscale.300", mb: 1 }}
+              sx={{ color: "grayscale.600", mb: 1 }}
             >
               Attachments (max 10 files, 10MB each)
             </Typography>
@@ -412,7 +404,6 @@ const CreateEditTaskDialog = ({
               size="small"
               startIcon={<AttachFileIcon />}
               disabled={files.length >= 10}
-              sx={{ color: "grayscale.300", borderColor: "grayscale.600" }}
             >
               Choose Files
               <input type="file" hidden multiple onChange={handleFilesChange} />
@@ -426,8 +417,8 @@ const CreateEditTaskDialog = ({
                     onDelete={() => handleRemoveFile(index)}
                     size="small"
                     sx={{
-                      color: "grayscale.200",
-                      bgcolor: "grayscale.700",
+                      color: "grayscale.700",
+                      bgcolor: "grayscale.100",
                       "& .MuiChip-deleteIcon": {
                         color: "grayscale.400",
                         "&:hover": { color: "additional.red.main" },
@@ -441,7 +432,7 @@ const CreateEditTaskDialog = ({
         )}
       </DialogContent>
       <DialogActions sx={tasksStyles.dialogActions}>
-        <Button onClick={onClose} sx={{ color: "grayscale.400" }}>
+        <Button onClick={onClose} color="inherit">
           Cancel
         </Button>
         <Button

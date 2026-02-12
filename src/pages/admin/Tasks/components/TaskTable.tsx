@@ -22,7 +22,11 @@ import PaidIcon from "@mui/icons-material/Paid";
 import CancelIcon from "@mui/icons-material/Cancel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Task, TASK_STATUSES } from "types";
-import { tasksStyles, getStatusColor, getPriorityColor } from "../Tasks.styles";
+import {
+  tasksStyles,
+  getStatusChipSx,
+  getPriorityChipSx,
+} from "../Tasks.styles";
 import { formatDate } from "utils";
 
 type TaskTableProps = {
@@ -82,7 +86,7 @@ const TaskTable = ({
         <IconButton
           size="small"
           onClick={() => onViewDetail(task)}
-          sx={{ color: "grayscale.400" }}
+          sx={{ color: "grayscale.500" }}
         >
           <VisibilityIcon fontSize="small" />
         </IconButton>
@@ -242,22 +246,21 @@ const TaskTable = ({
             <TableRow
               key={task.id}
               hover
-              sx={{ "&:hover": { bgcolor: "grayscale.750" } }}
+              sx={{ "&:hover": { bgcolor: "grayscale.50" } }}
             >
               <TableCell sx={tasksStyles.truncatedCell}>{task.title}</TableCell>
               <TableCell sx={tasksStyles.tableCell}>
                 <Chip
                   label={task.status.replace(/_/g, " ")}
-                  color={getStatusColor(task.status)}
                   size="small"
+                  sx={getStatusChipSx(task.status)}
                 />
               </TableCell>
               <TableCell sx={tasksStyles.tableCell}>
                 <Chip
                   label={task.priority}
-                  color={getPriorityColor(task.priority)}
                   size="small"
-                  variant="outlined"
+                  sx={getPriorityChipSx(task.priority)}
                 />
               </TableCell>
               <TableCell sx={tasksStyles.tableCell}>

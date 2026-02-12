@@ -14,7 +14,11 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { Task } from "types";
 import { BACKEND_URL } from "consts";
-import { tasksStyles, getStatusColor, getPriorityColor } from "../Tasks.styles";
+import {
+  tasksStyles,
+  getStatusChipSx,
+  getPriorityChipSx,
+} from "../Tasks.styles";
 import { formatDateTime } from "utils";
 
 if (!BACKEND_URL) {
@@ -44,15 +48,7 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
   if (!task) return null;
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="md"
-      fullWidth
-      PaperProps={{
-        sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-      }}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={tasksStyles.dialogTitle}>
         <Box
           sx={{
@@ -62,7 +58,7 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           }}
         >
           Task Details
-          <IconButton onClick={onClose} sx={{ color: "grayscale.400" }}>
+          <IconButton onClick={onClose} sx={{ color: "grayscale.500" }}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -81,7 +77,7 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
             <Typography
               key={i}
               variant="body2"
-              sx={{ color: "grayscale.200", ml: 1, mb: 0.5 }}
+              sx={{ color: "grayscale.700", ml: 1, mb: 0.5 }}
             >
               {i + 1}. {step}
             </Typography>
@@ -92,17 +88,16 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           <DetailRow label="Status">
             <Chip
               label={task.status.replace(/_/g, " ")}
-              color={getStatusColor(task.status)}
               size="small"
+              sx={getStatusChipSx(task.status)}
             />
           </DetailRow>
 
           <DetailRow label="Priority">
             <Chip
               label={task.priority}
-              color={getPriorityColor(task.priority)}
               size="small"
-              variant="outlined"
+              sx={getPriorityChipSx(task.priority)}
             />
           </DetailRow>
 
@@ -119,7 +114,7 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           </DetailRow>
         </Box>
 
-        <Divider sx={{ borderColor: "grayscale.700", my: 2 }} />
+        <Divider sx={{ borderColor: "grayscale.100", my: 2 }} />
 
         <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
           <DetailRow label="Budget">
@@ -143,7 +138,7 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           </DetailRow>
         </Box>
 
-        <Divider sx={{ borderColor: "grayscale.700", my: 2 }} />
+        <Divider sx={{ borderColor: "grayscale.100", my: 2 }} />
 
         <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
           <DetailRow label="Assigned To">
@@ -161,9 +156,9 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           </DetailRow>
         </Box>
 
-        <Divider sx={{ borderColor: "grayscale.700", my: 2 }} />
+        <Divider sx={{ borderColor: "grayscale.100", my: 2 }} />
 
-        <Typography variant="subtitle2" sx={{ color: "grayscale.400", mb: 1 }}>
+        <Typography variant="subtitle2" sx={{ color: "grayscale.500", mb: 1 }}>
           Timeline
         </Typography>
         <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
@@ -196,10 +191,10 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
 
         {task.files && task.files.length > 0 && (
           <>
-            <Divider sx={{ borderColor: "grayscale.700", my: 2 }} />
+            <Divider sx={{ borderColor: "grayscale.100", my: 2 }} />
             <Typography
               variant="subtitle2"
-              sx={{ color: "grayscale.400", mb: 1 }}
+              sx={{ color: "grayscale.500", mb: 1 }}
             >
               Attached Files ({task.files.length})
             </Typography>
@@ -215,7 +210,7 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
                 </Link>
                 <Typography
                   variant="caption"
-                  sx={{ color: "grayscale.500", ml: 1 }}
+                  sx={{ color: "grayscale.400", ml: 1 }}
                 >
                   ({(file.fileSize / 1024).toFixed(1)} KB)
                 </Typography>

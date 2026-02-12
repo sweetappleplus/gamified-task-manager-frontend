@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Task } from "types";
-import { tasksStyles, getStatusColor } from "../Tasks.styles";
+import { tasksStyles, getStatusChipSx } from "../Tasks.styles";
 
 type ReviewTaskDialogProps = {
   open: boolean;
@@ -50,15 +50,7 @@ const ReviewTaskDialog = ({
   const canReject = feedback.trim().length > 0;
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      maxWidth="sm"
-      fullWidth
-      PaperProps={{
-        sx: { bgcolor: "grayscale.800", color: "grayscale.0" },
-      }}
-    >
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle sx={tasksStyles.dialogTitle}>
         <Box
           sx={{
@@ -68,7 +60,7 @@ const ReviewTaskDialog = ({
           }}
         >
           Review Task
-          <IconButton onClick={handleClose} sx={{ color: "grayscale.400" }}>
+          <IconButton onClick={handleClose} sx={{ color: "grayscale.500" }}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -79,18 +71,18 @@ const ReviewTaskDialog = ({
             <Box sx={{ mb: 2 }}>
               <Typography
                 variant="subtitle1"
-                sx={{ color: "grayscale.0", fontWeight: 600 }}
+                sx={{ color: "grayscale.900", fontWeight: 600 }}
               >
                 {task.title}
               </Typography>
               <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
                 <Chip
                   label={task.status.replace(/_/g, " ")}
-                  color={getStatusColor(task.status)}
                   size="small"
+                  sx={getStatusChipSx(task.status)}
                 />
                 {task.assignedTo && (
-                  <Typography variant="body2" sx={{ color: "grayscale.400" }}>
+                  <Typography variant="body2" sx={{ color: "grayscale.500" }}>
                     by {task.assignedTo.name || task.assignedTo.email}
                   </Typography>
                 )}
@@ -100,13 +92,13 @@ const ReviewTaskDialog = ({
             <Box sx={{ mb: 2 }}>
               <Typography
                 variant="subtitle2"
-                sx={{ color: "grayscale.400", mb: 0.5 }}
+                sx={{ color: "grayscale.500", mb: 0.5 }}
               >
                 Description
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: "grayscale.200", ml: 1, mb: 1 }}
+                sx={{ color: "grayscale.700", ml: 1, mb: 1 }}
               >
                 {task.description}
               </Typography>
@@ -114,7 +106,7 @@ const ReviewTaskDialog = ({
                 <>
                   <Typography
                     variant="subtitle2"
-                    sx={{ color: "grayscale.400", mb: 0.5 }}
+                    sx={{ color: "grayscale.500", mb: 0.5 }}
                   >
                     Steps
                   </Typography>
@@ -122,7 +114,7 @@ const ReviewTaskDialog = ({
                     <Typography
                       key={i}
                       variant="body2"
-                      sx={{ color: "grayscale.200", ml: 1 }}
+                      sx={{ color: "grayscale.700", ml: 1 }}
                     >
                       {i + 1}. {step}
                     </Typography>
@@ -145,7 +137,7 @@ const ReviewTaskDialog = ({
         )}
       </DialogContent>
       <DialogActions sx={{ ...tasksStyles.dialogActions, gap: 1 }}>
-        <Button onClick={handleClose} sx={{ color: "grayscale.400" }}>
+        <Button onClick={handleClose} color="inherit">
           Cancel
         </Button>
         <Button

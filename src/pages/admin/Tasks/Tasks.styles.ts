@@ -5,6 +5,7 @@ import {
   TaskPriority,
   TaskStatus,
 } from "types";
+import { STATUS_COLORS, PRIORITY_COLORS } from "consts";
 
 export const tasksStyles: Record<string, SxProps<Theme>> = {
   header: {
@@ -14,7 +15,7 @@ export const tasksStyles: Record<string, SxProps<Theme>> = {
     mb: 3,
   },
   title: {
-    color: "grayscale.0",
+    color: "grayscale.900",
     fontWeight: 600,
   },
   filterBar: {
@@ -26,52 +27,37 @@ export const tasksStyles: Record<string, SxProps<Theme>> = {
   },
   filterSelect: {
     minWidth: 140,
-    "& .MuiOutlinedInput-root": {
-      color: "grayscale.0",
-      "& fieldset": { borderColor: "grayscale.600" },
-      "&:hover fieldset": { borderColor: "grayscale.400" },
-      "&.Mui-focused fieldset": { borderColor: "primary.main" },
-    },
-    "& .MuiInputLabel-root": { color: "grayscale.400" },
-    "& .MuiInputLabel-root.Mui-focused": { color: "primary.main" },
-    "& .MuiSelect-icon": { color: "grayscale.400" },
   },
   searchField: {
     minWidth: 200,
-    "& .MuiOutlinedInput-root": {
-      color: "grayscale.0",
-      "& fieldset": { borderColor: "grayscale.600" },
-      "&:hover fieldset": { borderColor: "grayscale.400" },
-      "&.Mui-focused fieldset": { borderColor: "primary.main" },
-    },
-    "& .MuiInputLabel-root": { color: "grayscale.400" },
-    "& .MuiInputLabel-root.Mui-focused": { color: "primary.main" },
   },
   tableContainer: {
-    bgcolor: "grayscale.800",
+    bgcolor: "grayscale.0",
     borderRadius: 2,
+    border: "1px solid",
+    borderColor: "grayscale.100",
     overflowX: "auto",
     overflowY: "hidden",
   },
   tableHead: {
-    bgcolor: "grayscale.900",
+    bgcolor: "grayscale.50",
   },
   tableHeadCell: {
-    color: "grayscale.400",
+    color: "grayscale.600",
     fontWeight: 600,
     borderBottom: "1px solid",
-    borderColor: "grayscale.700",
+    borderColor: "grayscale.100",
     whiteSpace: "nowrap",
   },
   tableCell: {
-    color: "grayscale.0",
+    color: "grayscale.900",
     borderBottom: "1px solid",
-    borderColor: "grayscale.700",
+    borderColor: "grayscale.100",
   },
   truncatedCell: {
-    color: "grayscale.300",
+    color: "grayscale.700",
     borderBottom: "1px solid",
-    borderColor: "grayscale.700",
+    borderColor: "grayscale.100",
     maxWidth: 200,
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -80,66 +66,65 @@ export const tasksStyles: Record<string, SxProps<Theme>> = {
   emptyState: {
     textAlign: "center",
     py: 6,
-    color: "grayscale.400",
+    color: "grayscale.500",
   },
   loadingContainer: {
     display: "flex",
     justifyContent: "center",
     py: 6,
   },
-  dialogContent: {
-    bgcolor: "grayscale.800",
-  },
+  dialogContent: {},
   dialogTitle: {
-    color: "grayscale.0",
-    bgcolor: "grayscale.800",
+    fontWeight: 600,
   },
   dialogActions: {
-    bgcolor: "grayscale.800",
     px: 3,
     pb: 2,
   },
-  textField: {
-    "& .MuiOutlinedInput-root": {
-      color: "grayscale.0",
-      "& fieldset": { borderColor: "grayscale.600" },
-      "&:hover fieldset": { borderColor: "grayscale.400" },
-      "&.Mui-focused fieldset": { borderColor: "primary.main" },
-    },
-    "& .MuiInputLabel-root": { color: "grayscale.400" },
-    "& .MuiInputLabel-root.Mui-focused": { color: "primary.main" },
-  },
-  selectField: {
-    "& .MuiOutlinedInput-root": {
-      color: "grayscale.0",
-      "& fieldset": { borderColor: "grayscale.600" },
-      "&:hover fieldset": { borderColor: "grayscale.400" },
-      "&.Mui-focused fieldset": { borderColor: "primary.main" },
-    },
-    "& .MuiInputLabel-root": { color: "grayscale.400" },
-    "& .MuiInputLabel-root.Mui-focused": { color: "primary.main" },
-    "& .MuiSelect-icon": { color: "grayscale.400" },
-  },
+  textField: {},
+  selectField: {},
   deleteDialogText: {
-    color: "grayscale.300",
+    color: "grayscale.600",
   },
   paginationContainer: {
     borderTop: "1px solid",
-    borderColor: "grayscale.700",
-    "& .MuiTablePagination-root": { color: "grayscale.300" },
-    "& .MuiTablePagination-selectIcon": { color: "grayscale.400" },
-    "& .MuiIconButton-root": { color: "grayscale.400" },
-    "& .MuiIconButton-root.Mui-disabled": { color: "grayscale.700" },
+    borderColor: "grayscale.100",
   },
   detailLabel: {
-    color: "grayscale.400",
+    color: "grayscale.500",
     fontSize: "0.75rem",
     mb: 0.5,
   },
   detailValue: {
-    color: "grayscale.0",
+    color: "grayscale.900",
     mb: 2,
   },
+};
+
+export const getStatusChipSx = (status: TaskStatus) => {
+  const colors = STATUS_COLORS[status] ?? {
+    bg: "grayscale.50",
+    text: "grayscale.600",
+  };
+  return {
+    bgcolor: colors.bg,
+    color: colors.text,
+    fontWeight: 600,
+    border: "none",
+  };
+};
+
+export const getPriorityChipSx = (priority: TaskPriority) => {
+  const colors = PRIORITY_COLORS[priority] ?? {
+    bg: "grayscale.50",
+    text: "grayscale.600",
+  };
+  return {
+    bgcolor: colors.bg,
+    color: colors.text,
+    fontWeight: 600,
+    border: "none",
+  };
 };
 
 export const getStatusColor = (
