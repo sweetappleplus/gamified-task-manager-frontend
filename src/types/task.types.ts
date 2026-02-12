@@ -118,4 +118,5 @@ export type TaskFilterParams = {
   priority?: TaskPriority;
   type?: TaskType;
   categoryId?: string;
+  assignedUserId?: string;
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "features/auth";
 import { useTask } from "features/task";
 import { useTaskCategory } from "features/task-category";
 import {
@@ -28,6 +29,7 @@ type FilterTag = {
 
 export const useTasksPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { tasks, total, isLoading, fetchTasks, fetchMoreTasks, startTask } =
     useTask();
   const { categories, fetchCategories } = useTaskCategory();
@@ -82,6 +84,7 @@ export const useTasksPage = () => {
         page: pageNum,
         limit: pageNum === 1 ? INITIAL_LIMIT : LOAD_MORE_LIMIT,
         statuses: WORKER_STATUSES,
+        assignedUserId: user?.id,
       };
 
       if (searchTerm.trim()) {
