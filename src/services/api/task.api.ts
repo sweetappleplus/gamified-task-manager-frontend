@@ -8,6 +8,8 @@ import {
   API_URL_TASKS_MARK_PAID,
   API_URL_TASKS_CANCEL,
   API_URL_TASKS_FILES,
+  API_URL_TASKS_BULK_CREATE,
+  API_URL_TASKS_BULK_ASSIGN,
 } from "consts";
 import {
   Task,
@@ -16,6 +18,9 @@ import {
   AssignTaskRequest,
   ReviewTaskRequest,
   TaskFilterParams,
+  BulkCreateTasksRequest,
+  BulkAssignTasksRequest,
+  BulkAssignTasksResponse,
   PaginatedApiResponse,
   ApiResponse,
 } from "types";
@@ -103,5 +108,21 @@ export const uploadTaskFilesApi = (
     .post<
       ApiResponse<Task>
     >(API_URL_TASKS_FILES.replace(":id", taskId), formData, { headers: { "Content-Type": "multipart/form-data" } })
+    .then((res) => res.data);
+};
+
+export const bulkCreateTasksApi = (
+  data: BulkCreateTasksRequest
+): Promise<ApiResponse<Task[]>> => {
+  return api
+    .post<ApiResponse<Task[]>>(API_URL_TASKS_BULK_CREATE, data)
+    .then((res) => res.data);
+};
+
+export const bulkAssignTasksApi = (
+  data: BulkAssignTasksRequest
+): Promise<ApiResponse<BulkAssignTasksResponse>> => {
+  return api
+    .post<ApiResponse<BulkAssignTasksResponse>>(API_URL_TASKS_BULK_ASSIGN, data)
     .then((res) => res.data);
 };
