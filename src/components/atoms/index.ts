@@ -5,6 +5,7 @@ export * from "./DigitCard";
 export * from "./Icon";
 export * from "./Input";
 export * from "./Leaf";
+export * from "./Modal";
 export * from "./SocialOauthButton";
 export * from "./Tag";
 export * from "./Tag2";
