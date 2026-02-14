@@ -10,7 +10,7 @@ export const taskDetailStyles: Record<string, SxProps<Theme>> = {
   content: {
     display: "flex",
     gap: "24px",
-    flexDirection: { xs: "column", lg: "row" },
+    flexDirection: { xs: "column", smd: "row" },
     mt: { xs: "32px", md: "0px" },
   },
   mainSection: {
@@ -18,7 +18,7 @@ export const taskDetailStyles: Record<string, SxProps<Theme>> = {
     minWidth: 0,
   },
   rightSection: {
-    width: { xs: "100%", lg: 343 },
+    width: { xs: "100%", smd: 343 },
     flexShrink: 0,
   },
   rewardsEconomics: {
