@@ -1,249 +1,252 @@
-import { Box, Typography, Chip, Link, Divider } from "@mui/material";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import LinkIcon from "@mui/icons-material/Link";
+import React from "react";
+import { Box, styled } from "@mui/material";
+import { Icon } from "components";
 import { TaskSubmission } from "types";
 import { BACKEND_URL } from "consts";
 import { formatDateTime } from "utils";
+import { SubmissionHistoryProps } from "./SubmissionHistory.types";
 
-if (!BACKEND_URL) {
-  throw new Error("REACT_APP_API_URL is not defined");
-}
+const Wrapper = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+});
 
-type SubmissionHistoryProps = {
-  submissions: TaskSubmission[];
-  compact?: boolean;
-};
+const Title = styled(Box)(({ theme }) => ({
+  fontSize: 18,
+  lineHeight: "24px",
+  fontWeight: 600,
+  color: theme.palette.grayscale[950],
+  marginBottom: 12,
+}));
+
+const EntryWrapper = styled(Box)({
+  position: "relative",
+  paddingLeft: 24,
+});
+
+const TimelineDot = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isLatest",
+})<{ isLatest?: boolean }>(({ theme, isLatest }) => ({
+  position: "absolute",
+  left: 0,
+  top: 6,
+  width: 12,
+  height: 12,
+  borderRadius: "50%",
+  backgroundColor: isLatest
+    ? theme.palette.primary.main
+    : theme.palette.grayscale[300],
+  border: "2px solid",
+  borderColor: isLatest
+    ? theme.palette.primary.light
+    : theme.palette.grayscale[200],
+}));
+
+const TimelineLine = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  left: 5,
+  top: 18,
+  bottom: -16,
+  width: 2,
+  backgroundColor: theme.palette.grayscale[100],
+}));
+
+const EntryHeader = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+  marginBottom: 8,
+  flexWrap: "wrap",
+});
+
+const EntryLabel = styled(Box)(({ theme }) => ({
+  fontSize: 14,
+  lineHeight: "20px",
+  fontWeight: 600,
+  color: theme.palette.grayscale[950],
+}));
+
+const EntryDate = styled(Box)(({ theme }) => ({
+  fontSize: 13,
+  lineHeight: "16px",
+  fontWeight: 400,
+  color: theme.palette.grayscale[500],
+}));
+
+const LateBadge = styled(Box)(({ theme }) => ({
+  fontSize: 11,
+  lineHeight: "14px",
+  fontWeight: 600,
+  color: theme.palette.error.main,
+  backgroundColor: theme.palette.error.light,
+  padding: "2px 8px",
+  borderRadius: 32,
+}));
+
+const CommentBox = styled(Box)(({ theme }) => ({
+  fontSize: 14,
+  lineHeight: "20px",
+  fontWeight: 400,
+  color: theme.palette.grayscale[700],
+  whiteSpace: "pre-wrap" as const,
+  padding: 12,
+  borderRadius: 12,
+  border: "1px solid",
+  borderColor: theme.palette.grayscale[50],
+  backgroundColor: theme.palette.grayscale[0],
+  marginBottom: 8,
+}));
+
+const LinkRow = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  gap: 6,
+  marginBottom: 4,
+});
+
+const LinkText = styled("a")(({ theme }) => ({
+  fontSize: 13,
+  lineHeight: "16px",
+  fontWeight: 400,
+  color: theme.palette.primary.main,
+  textDecoration: "none",
+  "&:hover": {
+    textDecoration: "underline",
+  },
+}));
+
+const SectionLabel = styled(Box)(({ theme }) => ({
+  fontSize: 13,
+  lineHeight: "16px",
+  fontWeight: 500,
+  color: theme.palette.grayscale[500],
+  marginBottom: 6,
+  display: "flex",
+  alignItems: "center",
+  gap: 4,
+}));
+
+const FeedbackBox = styled(Box)(({ theme }) => ({
+  fontSize: 14,
+  lineHeight: "20px",
+  fontWeight: 400,
+  color: theme.palette.warning.dark,
+  whiteSpace: "pre-wrap" as const,
+  padding: 12,
+  borderRadius: 12,
+  border: "1px solid",
+  borderColor: theme.palette.warning.main,
+  backgroundColor: theme.palette.warning.light,
+  marginBottom: 8,
+}));
+
+const FeedbackDate = styled("span")(({ theme }) => ({
+  fontSize: 12,
+  fontWeight: 400,
+  color: theme.palette.grayscale[400],
+  marginLeft: 4,
+}));
+
+const Divider = styled(Box)(({ theme }) => ({
+  height: 1,
+  backgroundColor: theme.palette.grayscale[50],
+  marginTop: 12,
+  marginBottom: 12,
+}));
 
 const SubmissionEntry = ({
   submission,
   index,
   total,
-  compact,
 }: {
   submission: TaskSubmission;
   index: number;
   total: number;
-  compact?: boolean;
 }) => {
   const isLatest = index === total - 1;
   const label = total === 1 ? "Submission" : `Submission #${index + 1}`;
 
   return (
-    <Box sx={{ position: "relative", pl: 3, pb: isLatest ? 0 : 3 }}>
-      {/* Timeline line */}
-      {!isLatest && (
-        <Box
-          sx={{
-            position: "absolute",
-            left: 7,
-            top: 12,
-            bottom: 0,
-            width: 2,
-            bgcolor: "grayscale.200",
-          }}
-        />
-      )}
+    <EntryWrapper sx={{ pb: isLatest ? 0 : 2 }}>
+      {!isLatest && <TimelineLine />}
+      <TimelineDot isLatest={isLatest} />
 
-      {/* Timeline dot */}
-      <Box
-        sx={{
-          position: "absolute",
-          left: 2,
-          top: 6,
-          width: 12,
-          height: 12,
-          borderRadius: "50%",
-          bgcolor: isLatest ? "primary.main" : "grayscale.300",
-          border: "2px solid",
-          borderColor: isLatest ? "primary.light" : "grayscale.200",
-        }}
-      />
+      <EntryHeader>
+        <EntryLabel>{label}</EntryLabel>
+        <EntryDate>{formatDateTime(submission.createdAt)}</EntryDate>
+        {submission.isLate && <LateBadge>LATE</LateBadge>}
+      </EntryHeader>
 
-      {/* Submission header */}
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          mb: 1,
-          flexWrap: "wrap",
-        }}
-      >
-        <Typography
-          variant="subtitle2"
-          sx={{ color: "grayscale.900", fontWeight: 600 }}
-        >
-          {label}
-        </Typography>
-        <Typography variant="caption" sx={{ color: "grayscale.500" }}>
-          {formatDateTime(submission.createdAt)}
-        </Typography>
-        {submission.isLate && (
-          <Chip
-            label="LATE"
-            size="small"
-            color="error"
-            sx={{ height: 20, fontSize: "0.7rem" }}
-          />
-        )}
-      </Box>
+      <CommentBox>{submission.comment}</CommentBox>
 
-      {/* Comment */}
-      <Box sx={{ mb: 1.5 }}>
-        <Typography
-          variant="body2"
-          sx={{
-            color: "grayscale.800",
-            whiteSpace: "pre-wrap",
-            bgcolor: "grayscale.0",
-            p: compact ? 1 : 1.5,
-            borderRadius: 1,
-            border: "1px solid",
-            borderColor: "grayscale.100",
-            fontSize: compact ? "0.8125rem" : undefined,
-          }}
-        >
-          {submission.comment}
-        </Typography>
-      </Box>
-
-      {/* Proof URLs */}
       {submission.proofUrls && submission.proofUrls.length > 0 && (
-        <Box sx={{ mb: 1.5 }}>
-          <Typography
-            variant="caption"
-            sx={{
-              color: "grayscale.500",
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              mb: 0.5,
-            }}
-          >
-            <LinkIcon sx={{ fontSize: 14 }} />
-            Proof Links ({submission.proofUrls.length})
-          </Typography>
+        <Box sx={{ mb: 1 }}>
+          <SectionLabel>Proof Links</SectionLabel>
           {submission.proofUrls.map((url, i) => (
-            <Box key={i} sx={{ ml: 1, mb: 0.25 }}>
-              <Link
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: "primary.main", fontSize: "0.8125rem" }}
-              >
+            <LinkRow key={i}>
+              <Icon name="link" size={14} color="grayscale.400" />
+              <LinkText href={url} target="_blank" rel="noopener noreferrer">
                 {url}
-              </Link>
-            </Box>
+              </LinkText>
+            </LinkRow>
           ))}
         </Box>
       )}
 
-      {/* Files */}
       {submission.files && submission.files.length > 0 && (
-        <Box sx={{ mb: 1.5 }}>
-          <Typography
-            variant="caption"
-            sx={{
-              color: "grayscale.500",
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              mb: 0.5,
-            }}
-          >
-            <AttachFileIcon sx={{ fontSize: 14 }} />
-            Files ({submission.files.length})
-          </Typography>
+        <Box sx={{ mb: 1 }}>
+          <SectionLabel>Files</SectionLabel>
           {submission.files.map((file) => (
-            <Box key={file.id} sx={{ ml: 1, mb: 0.25 }}>
-              <Link
+            <LinkRow key={file.id}>
+              <Icon name="document-text" size={14} color="grayscale.400" />
+              <LinkText
                 href={`${BACKEND_URL}${file.url}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ color: "primary.main", fontSize: "0.8125rem" }}
               >
                 {file.fileName}
-              </Link>
-              <Typography
-                variant="caption"
-                sx={{ color: "grayscale.400", ml: 1 }}
-              >
-                ({(file.fileSize / 1024).toFixed(1)} KB)
-              </Typography>
-            </Box>
+              </LinkText>
+            </LinkRow>
           ))}
         </Box>
       )}
 
-      {/* Admin Feedback */}
       {submission.adminFeedback && (
         <Box sx={{ mb: 1 }}>
-          <Typography
-            variant="caption"
-            sx={{ color: "grayscale.500", mb: 0.5, display: "block" }}
-          >
+          <SectionLabel>
             Admin Feedback
             {submission.reviewedAt && (
-              <Typography
-                component="span"
-                variant="caption"
-                sx={{ color: "grayscale.400", ml: 1 }}
-              >
+              <FeedbackDate>
                 ({formatDateTime(submission.reviewedAt)})
-              </Typography>
+              </FeedbackDate>
             )}
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              whiteSpace: "pre-wrap",
-              bgcolor: "warning.50",
-              p: compact ? 1 : 1.5,
-              borderRadius: 1,
-              border: "1px solid",
-              borderColor: "warning.200",
-              color: "warning.900",
-              fontSize: compact ? "0.8125rem" : undefined,
-            }}
-          >
-            {submission.adminFeedback}
-          </Typography>
+          </SectionLabel>
+          <FeedbackBox>{submission.adminFeedback}</FeedbackBox>
         </Box>
       )}
-    </Box>
+
+      {!isLatest && <Divider />}
+    </EntryWrapper>
   );
 };
 
-const SubmissionHistory = ({
+export const SubmissionHistory: React.FC<SubmissionHistoryProps> = ({
   submissions,
-  compact = false,
-}: SubmissionHistoryProps) => {
+  sx,
+}) => {
   if (submissions.length === 0) return null;
 
   return (
-    <Box>
-      {!compact && <Divider sx={{ borderColor: "grayscale.100", mb: 2 }} />}
-      <Typography
-        variant="subtitle2"
-        sx={{
-          color: compact ? "grayscale.900" : "grayscale.500",
-          fontWeight: 600,
-          mb: 2,
-        }}
-      >
-        Submission History ({submissions.length})
-      </Typography>
+    <Wrapper sx={sx}>
+      <Title>Submission History</Title>
       {submissions.map((submission, i) => (
         <SubmissionEntry
           key={submission.id}
           submission={submission}
           index={i}
           total={submissions.length}
-          compact={compact}
         />
       ))}
-    </Box>
+    </Wrapper>
   );
 };
-
-export default SubmissionHistory;

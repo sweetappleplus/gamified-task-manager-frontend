@@ -1,1 +1,2 @@
-export { default as SubmissionHistory } from "./SubmissionHistory";
+export { SubmissionHistory } from "./SubmissionHistory";
+export type { SubmissionHistoryProps } from "./SubmissionHistory.types";
