@@ -37,7 +37,7 @@ const SubmissionEntry = ({
             position: "absolute",
             left: 7,
             top: 12,
-            bottom: 0,
+            bottom: -16,
             width: 2,
             bgcolor: "grayscale.200",
           }}
