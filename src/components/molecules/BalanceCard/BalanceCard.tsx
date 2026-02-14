@@ -63,6 +63,8 @@ const formatAmount = (value: number): string =>
   });
 
 export const BalanceCard: React.FC<BalanceCardProps> = ({
+  label = "Balance After Completion",
+  amountPrefix = "$",
   amount,
   additionalAmount,
   sx,
@@ -71,13 +73,18 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({
     <PatternPanel variant="star" color="blue" padding={20}>
       <Content>
         <Left>
-          <Label>Balance After Completion</Label>
+          <Label>{label}</Label>
           <AmountRow>
-            <Amount>${formatAmount(amount)}</Amount>
-            <AdditionalBadge>
-              <Icon name="plus" size={14} color="grayscale.0" />${" "}
-              {formatAmount(additionalAmount)}
-            </AdditionalBadge>
+            <Amount>
+              {amountPrefix}
+              {formatAmount(amount)}
+            </Amount>
+            {additionalAmount !== undefined && (
+              <AdditionalBadge>
+                <Icon name="plus" size={14} color="grayscale.0" />${" "}
+                {formatAmount(additionalAmount)}
+              </AdditionalBadge>
+            )}
           </AmountRow>
         </Left>
         <WalletIcon>
