@@ -1,0 +1,1 @@
+export { useAdminTaskDetailPage } from "./useAdminTaskDetailPage";

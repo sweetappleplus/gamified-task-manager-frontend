@@ -8,6 +8,7 @@ import TaskCategoriesPage from "pages/admin/TaskCategories";
 import SystemSettingsPage from "pages/admin/SystemSettings";
 import LevelConfigsPage from "pages/admin/LevelConfigs";
 import AdminTasksPage from "pages/admin/Tasks";
+import AdminTaskDetailPage from "pages/admin/TaskDetail";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
 import StartWorkPage from "pages/StartWork";
@@ -92,6 +93,12 @@ export const ROUTES: Record<string, RouteConfig> = {
   ADMIN_TASKS: {
     path: "/admin/tasks",
     component: AdminTasksPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
+  ADMIN_TASK_DETAIL: {
+    path: "/admin/tasks/:id",
+    component: AdminTaskDetailPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },

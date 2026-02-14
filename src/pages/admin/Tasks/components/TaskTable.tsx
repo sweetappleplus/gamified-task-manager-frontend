@@ -15,6 +15,7 @@ import {
   Box,
   Typography,
   CircularProgress,
+  Link as MuiLink,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -23,6 +24,7 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import PaidIcon from "@mui/icons-material/Paid";
 import CancelIcon from "@mui/icons-material/Cancel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Link as RouterLink } from "react-router-dom";
 import { Task, TaskSortBy, TaskSortOrder, TASK_STATUSES } from "types";
 import {
   tasksStyles,
@@ -305,7 +307,17 @@ const TaskTable = ({
               hover
               sx={{ "&:hover": { bgcolor: "grayscale.50" } }}
             >
-              <TableCell sx={tasksStyles.truncatedCell}>{task.title}</TableCell>
+              <TableCell sx={tasksStyles.truncatedCell}>
+                <MuiLink
+                  component={RouterLink}
+                  to={`/admin/tasks/${task.id}`}
+                  underline="hover"
+                  color="inherit"
+                  sx={{ fontWeight: 500 }}
+                >
+                  {task.title}
+                </MuiLink>
+              </TableCell>
               <TableCell sx={tasksStyles.tableCell}>
                 <Chip
                   label={task.status.replace(/_/g, " ")}
