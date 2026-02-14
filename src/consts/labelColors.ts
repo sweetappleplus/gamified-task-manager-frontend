@@ -10,34 +10,37 @@ import {
 export const STATUS_COLORS: Record<TaskStatus, { bg: string; text: string }> = {
   [TASK_STATUSES.NEW]: { bg: "primary.50", text: "primary.600" },
   [TASK_STATUSES.PENDING]: {
-    bg: "additional.yellow.200",
-    text: "additional.yellow.main",
+    bg: "grayscale.0",
+    text: "grayscale.950",
   },
   [TASK_STATUSES.IN_ACTION]: {
-    bg: "additional.blue.200",
-    text: "primary.main",
+    bg: "primary.main",
+    text: "grayscale.0",
   },
   [TASK_STATUSES.IN_REVIEW]: {
-    bg: "additional.pink.200",
-    text: "additional.pink.main",
+    bg: "additional.pink.main",
+    text: "grayscale.0",
   },
   [TASK_STATUSES.COMPLETED]: {
-    bg: "additional.green.200",
-    text: "additional.green.main",
+    bg: "additional.green.main",
+    text: "grayscale.0",
   },
   [TASK_STATUSES.LATE]: {
-    bg: "additional.red.200",
-    text: "additional.red.main",
+    bg: "additional.orange.main",
+    text: "grayscale.0",
   },
   [TASK_STATUSES.PAID]: {
-    bg: "additional.green.100",
-    text: "additional.green.main",
+    bg: "additional.green.main",
+    text: "grayscale.0",
   },
   [TASK_STATUSES.FAILED]: {
-    bg: "additional.red.200",
-    text: "additional.red.main",
+    bg: "additional.yellow.main",
+    text: "grayscale.0",
   },
-  [TASK_STATUSES.CANCELLED]: { bg: "grayscale.50", text: "grayscale.600" },
+  [TASK_STATUSES.CANCELLED]: {
+    bg: "additional.red.main",
+    text: "grayscale.0",
+  },
 };
 
 export const PRIORITY_COLORS: Record<
