@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import {
   Button,
   Spinner,
@@ -14,6 +14,8 @@ import { ROUTES } from "consts";
 import { TASK_STATUSES, TaskStatus } from "types";
 import { useTaskDetailPage } from "./hooks";
 import { taskDetailStyles } from "./TaskDetail.styles";
+import { CompleteTaskModal } from "./components/CompleteTaskModal";
+import { SuccessStep } from "./components/CompleteTaskModal/SuccessStep";
 
 const HIDE_REMAINING_TIME_STATUSES: TaskStatus[] = [
   TASK_STATUSES.NEW,
@@ -47,10 +49,15 @@ const TaskDetail = () => {
     assigneeLeafText,
     reward,
     balanceAfterCompletion,
+    userLevel,
+    completeTask,
     handleBack,
     handleCompleteTask,
     handleDownloadFiles,
   } = useTaskDetailPage();
+
+  const isDesktop = useMediaQuery("(min-width:768px)");
+  const showDesktopSuccess = completeTask.step === "success" && isDesktop;
 
   if (isLoading) {
     return (
@@ -79,6 +86,29 @@ const TaskDetail = () => {
     task.status
   );
   const showEconomics = !HIDE_ECONOMICS_STATUSES.includes(task.status);
+
+  if (showDesktopSuccess) {
+    return (
+      <WorkerLayout activeRoute={ROUTES.TASKS.path}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "calc(100dvh - 68px)",
+          }}
+        >
+          <Box sx={{ width: 348 }}>
+            <SuccessStep
+              reward={reward}
+              onGoHome={completeTask.handleGoHome}
+              onNextTask={completeTask.handleNextTask}
+            />
+          </Box>
+        </Box>
+      </WorkerLayout>
+    );
+  }
 
   return (
     <WorkerLayout activeRoute={ROUTES.TASKS.path}>
@@ -145,6 +175,14 @@ const TaskDetail = () => {
           )}
         </Box>
       </Box>
+
+      <CompleteTaskModal
+        task={task}
+        reward={reward}
+        balanceAfterCompletion={balanceAfterCompletion}
+        userLevel={userLevel}
+        completeTask={completeTask}
+      />
     </WorkerLayout>
   );
 };
