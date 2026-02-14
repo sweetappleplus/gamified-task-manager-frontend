@@ -11,8 +11,33 @@ import {
   Text,
 } from "components";
 import { ROUTES } from "consts";
+import { TASK_STATUSES, TaskStatus } from "types";
 import { useTaskDetailPage } from "./hooks";
 import { taskDetailStyles } from "./TaskDetail.styles";
+
+const HIDE_REMAINING_TIME_STATUSES: TaskStatus[] = [
+  TASK_STATUSES.NEW,
+  TASK_STATUSES.PENDING,
+  TASK_STATUSES.COMPLETED,
+  TASK_STATUSES.PAID,
+  TASK_STATUSES.CANCELLED,
+];
+
+const HIDE_COMPLETE_BUTTON_STATUSES: TaskStatus[] = [
+  TASK_STATUSES.NEW,
+  TASK_STATUSES.PENDING,
+  TASK_STATUSES.IN_REVIEW,
+  TASK_STATUSES.LATE,
+  TASK_STATUSES.COMPLETED,
+  TASK_STATUSES.PAID,
+  TASK_STATUSES.CANCELLED,
+];
+
+const HIDE_ECONOMICS_STATUSES: TaskStatus[] = [
+  TASK_STATUSES.COMPLETED,
+  TASK_STATUSES.PAID,
+  TASK_STATUSES.CANCELLED,
+];
 
 const TaskDetail = () => {
   const {
@@ -46,6 +71,15 @@ const TaskDetail = () => {
   const budget = parseFloat(task.budget);
   const commissionPercent = parseFloat(task.commissionPercent);
 
+  const showRemainingTime =
+    !HIDE_REMAINING_TIME_STATUSES.includes(task.status) &&
+    task.startedAt &&
+    task.deadline;
+  const showCompleteButton = !HIDE_COMPLETE_BUTTON_STATUSES.includes(
+    task.status
+  );
+  const showEconomics = !HIDE_ECONOMICS_STATUSES.includes(task.status);
+
   return (
     <WorkerLayout activeRoute={ROUTES.TASKS.path}>
       <Box sx={taskDetailStyles.content}>
@@ -68,23 +102,27 @@ const TaskDetail = () => {
             onAttachmentsClick={handleDownloadFiles}
           />
 
-          <RewardsEconomics
-            budget={budget}
-            commissionPercent={commissionPercent}
-            sx={taskDetailStyles.rewardsEconomics}
-          />
+          {showEconomics && (
+            <>
+              <RewardsEconomics
+                budget={budget}
+                commissionPercent={commissionPercent}
+                sx={taskDetailStyles.rewardsEconomics}
+              />
 
-          <BalanceCard
-            amount={balanceAfterCompletion}
-            additionalAmount={reward}
-            sx={taskDetailStyles.balanceCard}
-          />
+              <BalanceCard
+                amount={balanceAfterCompletion}
+                additionalAmount={reward}
+                sx={taskDetailStyles.balanceCard}
+              />
+            </>
+          )}
         </Box>
 
         <Box sx={taskDetailStyles.rightSection}>
-          {task.startedAt && task.deadline && (
+          {showRemainingTime && (
             <RemainingTime
-              startDateTime={task.startedAt}
+              startDateTime={task.startedAt!}
               deadlineDateTime={task.deadline}
               sx={taskDetailStyles.remainingTime}
             />
@@ -97,12 +135,14 @@ const TaskDetail = () => {
             />
           )}
 
-          <Button
-            variant="primary"
-            text="Complete Task"
-            onClick={handleCompleteTask}
-            sx={taskDetailStyles.completeButton}
-          />
+          {showCompleteButton && (
+            <Button
+              variant="primary"
+              text="Complete Task"
+              onClick={handleCompleteTask}
+              sx={taskDetailStyles.completeButton}
+            />
+          )}
         </Box>
       </Box>
     </WorkerLayout>
