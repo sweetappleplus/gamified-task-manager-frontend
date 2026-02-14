@@ -105,6 +105,12 @@ export type AssignTaskRequest = {
   assignedUserId: string;
 };
 
+export type SubmitTaskRequest = {
+  comment: string;
+  proofUrls: string[];
+  files: File[];
+};
+
 export type ReviewTaskRequest = {
   isApproved: boolean;
   feedback?: string;

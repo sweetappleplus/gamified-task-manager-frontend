@@ -4,6 +4,7 @@ import {
   API_URL_TASKS_BY_ID,
   API_URL_TASKS_ASSIGN,
   API_URL_TASKS_START,
+  API_URL_TASKS_SUBMIT,
   API_URL_TASKS_REVIEW,
   API_URL_TASKS_MARK_PAID,
   API_URL_TASKS_CANCEL,
@@ -17,6 +18,7 @@ import {
   CreateTaskRequest,
   UpdateTaskRequest,
   AssignTaskRequest,
+  SubmitTaskRequest,
   ReviewTaskRequest,
   TaskFilterParams,
   BulkCreateTasksRequest,
@@ -90,6 +92,21 @@ export const markTaskPaidApi = (id: string): Promise<ApiResponse<Task>> => {
 export const startTaskApi = (id: string): Promise<ApiResponse<Task>> => {
   return api
     .post<ApiResponse<Task>>(API_URL_TASKS_START.replace(":id", id))
+    .then((res) => res.data);
+};
+
+export const submitTaskApi = (
+  id: string,
+  data: SubmitTaskRequest
+): Promise<ApiResponse<Task>> => {
+  const formData = new FormData();
+  formData.append("comment", data.comment);
+  data.proofUrls.forEach((url) => formData.append("proofUrls", url));
+  data.files.forEach((file) => formData.append("files", file));
+  return api
+    .post<
+      ApiResponse<Task>
+    >(API_URL_TASKS_SUBMIT.replace(":id", id), formData, { headers: { "Content-Type": "multipart/form-data" } })
     .then((res) => res.data);
 };
 
