@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getTaskByIdApi } from "services";
-import { Task } from "types";
+import { Task, UserLevel } from "types";
 import { PAYOUT_XP_RATE_KEY } from "consts";
 import { getLeafVariant } from "utils";
 import { useAppSelector } from "app/hooks";
 import { useLevelConfig } from "features/level-config";
 import { useSystemSetting } from "features/system-setting";
 import { LeafVariant } from "components";
+import { useCompleteTask } from "../components/CompleteTaskModal";
 
 export const useTaskDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +19,8 @@ export const useTaskDetailPage = () => {
 
   const [task, setTask] = useState<Task | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const completeTask = useCompleteTask(id ?? "");
 
   useEffect(() => {
     fetchLevelConfigs();
@@ -46,8 +49,8 @@ export const useTaskDetailPage = () => {
   }, [navigate]);
 
   const handleCompleteTask = useCallback(() => {
-    // TODO: Implement complete task logic
-  }, []);
+    completeTask.open();
+  }, [completeTask]);
 
   const handleDownloadFiles = useCallback(() => {
     if (!task?.files?.length) return;
@@ -95,6 +98,8 @@ export const useTaskDetailPage = () => {
     return currentBalance + reward;
   }, [user?.balance, reward]);
 
+  const userLevel: UserLevel | undefined = user?.level;
+
   return {
     task,
     isLoading,
@@ -102,6 +107,8 @@ export const useTaskDetailPage = () => {
     assigneeLeafText,
     reward,
     balanceAfterCompletion,
+    userLevel,
+    completeTask,
     handleBack,
     handleCompleteTask,
     handleDownloadFiles,
