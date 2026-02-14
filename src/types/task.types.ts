@@ -110,6 +110,9 @@ export type ReviewTaskRequest = {
   feedback?: string;
 };
 
+export type TaskSortBy = "createdAt" | "deadline";
+export type TaskSortOrder = "asc" | "desc";
+
 export type TaskFilterParams = {
   page?: number;
   limit?: number;
@@ -120,4 +123,30 @@ export type TaskFilterParams = {
   type?: TaskType;
   categoryId?: string;
   assignedUserId?: string;
+  sortBy?: TaskSortBy;
+  sortOrder?: TaskSortOrder;
+};
+
+export type BulkCreateTasksRequest = {
+  numberOfTasks: number;
+  title: string;
+  description: string;
+  steps?: string[];
+  priority: TaskPriority;
+  type: TaskType;
+  timeToCompleteMin: number;
+  maxSubmissionDelayMin: number;
+  deadline: string;
+  budget: string;
+  commissionPercent: string;
+  categoryId: string;
+};
+
+export type BulkAssignTasksRequest = {
+  taskIds: string[];
+  workerIds: string[];
+};
+
+export type BulkAssignTasksResponse = {
+  assignedCount: number;
 };
