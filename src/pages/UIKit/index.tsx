@@ -1,6 +1,7 @@
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
 import {
+  AddButton,
   Avatar,
   Badge,
   Button,
@@ -589,6 +590,21 @@ const UIKit = () => {
                 }
               />
               <Typography sx={uikitStyles.caseLabel}>no footer</Typography>
+            </Box>
+          </Box>
+
+          {/* AddButton */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            AddButton
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <AddButton />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <AddButton text="Add Link" />
+              <Typography sx={uikitStyles.caseLabel}>custom text</Typography>
             </Box>
           </Box>
 
