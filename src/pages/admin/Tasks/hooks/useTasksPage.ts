@@ -4,7 +4,7 @@ import { useTask } from "features/task";
 import { useTaskCategory } from "features/task-category";
 import { useToast } from "hooks";
 import { getErrorMessage } from "utils";
-import { getUsersApi, uploadTaskFilesApi } from "services";
+import { getUsersApi, uploadTaskFilesApi, deleteTaskFileApi } from "services";
 import {
   Task,
   CreateTaskRequest,
@@ -275,12 +275,33 @@ export const useTasksPage = () => {
   );
 
   const handleEdit = useCallback(
-    async (data: UpdateTaskRequest) => {
+    async (
+      data: UpdateTaskRequest,
+      newFiles: File[],
+      deletedFileIds: string[]
+    ) => {
       if (!selectedTask) return;
       setIsSubmitting(true);
       try {
-        const response = await updateTask(selectedTask.id, data);
-        showToast({ variant: "success", message: response.message });
+        await updateTask(selectedTask.id, data);
+
+        if (deletedFileIds.length > 0) {
+          await Promise.all(
+            deletedFileIds.map((fileId) =>
+              deleteTaskFileApi(selectedTask.id, fileId)
+            )
+          );
+        }
+
+        if (newFiles.length > 0) {
+          await uploadTaskFilesApi(selectedTask.id, newFiles);
+        }
+
+        if (deletedFileIds.length > 0 || newFiles.length > 0) {
+          await fetchTasks();
+        }
+
+        showToast({ variant: "success", message: "Task updated successfully" });
         closeDialog();
       } catch (error: unknown) {
         showToast({
@@ -291,7 +312,7 @@ export const useTasksPage = () => {
         setIsSubmitting(false);
       }
     },
-    [selectedTask, updateTask, showToast, closeDialog]
+    [selectedTask, updateTask, fetchTasks, showToast, closeDialog]
   );
 
   const handleDelete = useCallback(async () => {

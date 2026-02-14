@@ -8,6 +8,7 @@ import {
   API_URL_TASKS_MARK_PAID,
   API_URL_TASKS_CANCEL,
   API_URL_TASKS_FILES,
+  API_URL_TASKS_FILE_BY_ID,
   API_URL_TASKS_BULK_CREATE,
   API_URL_TASKS_BULK_ASSIGN,
 } from "consts";
@@ -108,6 +109,17 @@ export const uploadTaskFilesApi = (
     .post<
       ApiResponse<Task>
     >(API_URL_TASKS_FILES.replace(":id", taskId), formData, { headers: { "Content-Type": "multipart/form-data" } })
+    .then((res) => res.data);
+};
+
+export const deleteTaskFileApi = (
+  taskId: string,
+  fileId: string
+): Promise<ApiResponse<Task>> => {
+  return api
+    .delete<
+      ApiResponse<Task>
+    >(API_URL_TASKS_FILE_BY_ID.replace(":id", taskId).replace(":fileId", fileId))
     .then((res) => res.data);
 };
 

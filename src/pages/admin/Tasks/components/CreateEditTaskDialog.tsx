@@ -25,6 +25,7 @@ import {
   UpdateTaskRequest,
   TaskCategory,
   User,
+  BackendFile,
   TASK_PRIORITIES,
   TASK_TYPES,
   TaskPriority,
@@ -41,7 +42,11 @@ type CreateEditTaskDialogProps = {
   isSubmitting: boolean;
   onClose: () => void;
   onCreate: (data: CreateTaskRequest, files: File[]) => void;
-  onEdit: (data: UpdateTaskRequest) => void;
+  onEdit: (
+    data: UpdateTaskRequest,
+    newFiles: File[],
+    deletedFileIds: string[]
+  ) => void;
 };
 
 const CreateEditTaskDialog = ({
@@ -74,6 +79,8 @@ const CreateEditTaskDialog = ({
   const [categoryId, setCategoryId] = useState<string>("");
   const [assignedUserId, setAssignedUserId] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
+  const [existingFiles, setExistingFiles] = useState<BackendFile[]>([]);
+  const [deletedFileIds, setDeletedFileIds] = useState<string[]>([]);
 
   useEffect(() => {
     if (open) {
@@ -91,6 +98,8 @@ const CreateEditTaskDialog = ({
         setCategoryId(task.categoryId);
         setAssignedUserId(task.assignedUserId ?? "");
         setFiles([]);
+        setExistingFiles(task.files ?? []);
+        setDeletedFileIds([]);
       } else {
         setTitle("");
         setDescription("");
@@ -105,6 +114,8 @@ const CreateEditTaskDialog = ({
         setCategoryId("");
         setAssignedUserId("");
         setFiles([]);
+        setExistingFiles([]);
+        setDeletedFileIds([]);
       }
     }
   }, [open, mode, task]);
@@ -127,16 +138,26 @@ const CreateEditTaskDialog = ({
     setSteps(updated);
   };
 
+  const remainingExistingFiles = existingFiles.filter(
+    (f) => !deletedFileIds.includes(f.id)
+  );
+  const totalFileCount = remainingExistingFiles.length + files.length;
+
   const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
-      setFiles((prev) => [...prev, ...newFiles].slice(0, 10));
+      const maxNew = 10 - remainingExistingFiles.length;
+      setFiles((prev) => [...prev, ...newFiles].slice(0, maxNew));
     }
     e.target.value = "";
   };
 
   const handleRemoveFile = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleRemoveExistingFile = (fileId: string) => {
+    setDeletedFileIds((prev) => [...prev, fileId]);
   };
 
   const isFormValid =
@@ -186,7 +207,7 @@ const CreateEditTaskDialog = ({
         maxSubmissionDelayMin: maxSubmissionDelayMin ?? 0,
         categoryId,
       };
-      onEdit(data);
+      onEdit(data, files, deletedFileIds);
     }
   };
 
@@ -390,46 +411,60 @@ const CreateEditTaskDialog = ({
           </FormControl>
         )}
 
-        {mode === "create" && (
-          <Box sx={{ mt: 2 }}>
-            <Typography
-              variant="subtitle2"
-              sx={{ color: "grayscale.600", mb: 1 }}
-            >
-              Attachments (max 10 files, 10MB each)
-            </Typography>
-            <Button
-              component="label"
-              variant="outlined"
-              size="small"
-              startIcon={<AttachFileIcon />}
-              disabled={files.length >= 10}
-            >
-              Choose Files
-              <input type="file" hidden multiple onChange={handleFilesChange} />
-            </Button>
-            {files.length > 0 && (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 1 }}>
-                {files.map((file, index) => (
-                  <Chip
-                    key={index}
-                    label={`${file.name} (${(file.size / 1024).toFixed(1)} KB)`}
-                    onDelete={() => handleRemoveFile(index)}
-                    size="small"
-                    sx={{
-                      color: "grayscale.700",
-                      bgcolor: "grayscale.100",
-                      "& .MuiChip-deleteIcon": {
-                        color: "grayscale.400",
-                        "&:hover": { color: "additional.red.main" },
-                      },
-                    }}
-                  />
-                ))}
-              </Box>
-            )}
-          </Box>
-        )}
+        <Box sx={{ mt: 2 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{ color: "grayscale.600", mb: 1 }}
+          >
+            Attachments (max 10 files, 10MB each)
+          </Typography>
+          <Button
+            component="label"
+            variant="outlined"
+            size="small"
+            startIcon={<AttachFileIcon />}
+            disabled={totalFileCount >= 10}
+          >
+            Choose Files
+            <input type="file" hidden multiple onChange={handleFilesChange} />
+          </Button>
+          {(remainingExistingFiles.length > 0 || files.length > 0) && (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 1 }}>
+              {remainingExistingFiles.map((file) => (
+                <Chip
+                  key={file.id}
+                  label={`${file.fileName} (${(file.fileSize / 1024).toFixed(1)} KB)`}
+                  onDelete={() => handleRemoveExistingFile(file.id)}
+                  size="small"
+                  sx={{
+                    color: "grayscale.700",
+                    bgcolor: "grayscale.100",
+                    "& .MuiChip-deleteIcon": {
+                      color: "grayscale.400",
+                      "&:hover": { color: "additional.red.main" },
+                    },
+                  }}
+                />
+              ))}
+              {files.map((file, index) => (
+                <Chip
+                  key={`new-${index}`}
+                  label={`${file.name} (${(file.size / 1024).toFixed(1)} KB)`}
+                  onDelete={() => handleRemoveFile(index)}
+                  size="small"
+                  sx={{
+                    color: "grayscale.700",
+                    bgcolor: "grayscale.100",
+                    "& .MuiChip-deleteIcon": {
+                      color: "grayscale.400",
+                      "&:hover": { color: "additional.red.main" },
+                    },
+                  }}
+                />
+              ))}
+            </Box>
+          )}
+        </Box>
       </DialogContent>
       <DialogActions sx={tasksStyles.dialogActions}>
         <Button onClick={onClose} color="inherit">
