@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import { AdminLayout } from "components";
 import { useTasksPage } from "./hooks";
 import { tasksStyles } from "./Tasks.styles";
@@ -12,6 +13,7 @@ import {
   ReviewTaskDialog,
   TaskDetailDialog,
   ConfirmDialog,
+  BulkGenerateTasksDialog,
 } from "./components";
 
 const Tasks = () => {
@@ -32,6 +34,7 @@ const Tasks = () => {
     cancelTarget,
     deleteTarget,
     markPaidTarget,
+    bulkGenerateOpen,
     openCreateDialog,
     openEditDialog,
     closeDialog,
@@ -47,6 +50,8 @@ const Tasks = () => {
     closeDeleteDialog,
     openMarkPaidDialog,
     closeMarkPaidDialog,
+    openBulkGenerateDialog,
+    closeBulkGenerateDialog,
     handleCreate,
     handleEdit,
     handleDelete,
@@ -54,9 +59,11 @@ const Tasks = () => {
     handleReview,
     handleCancel,
     handleMarkPaid,
+    handleBulkGenerate,
     handleFilterChange,
     handlePageChange,
     handleRowsPerPageChange,
+    handleSortChange,
   } = useTasksPage();
 
   return (
@@ -66,18 +73,28 @@ const Tasks = () => {
           <Typography variant="h5" sx={tasksStyles.title}>
             Task Management
           </Typography>
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={openCreateDialog}
-          >
-            Create Task
-          </Button>
+          <Box sx={{ display: "flex", gap: 1.5 }}>
+            <Button
+              variant="outlined"
+              startIcon={<DynamicFeedIcon />}
+              onClick={openBulkGenerateDialog}
+            >
+              Generate Tasks
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={openCreateDialog}
+            >
+              Create Task
+            </Button>
+          </Box>
         </Box>
 
         <TaskFilters
           filters={filters}
           categories={categories}
+          workers={workers}
           onFilterChange={handleFilterChange}
         />
 
@@ -87,8 +104,11 @@ const Tasks = () => {
           page={filters.page ?? 1}
           rowsPerPage={filters.limit ?? 10}
           isLoading={isLoading}
+          sortBy={filters.sortBy}
+          sortOrder={filters.sortOrder}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleRowsPerPageChange}
+          onSortChange={handleSortChange}
           onEdit={openEditDialog}
           onDelete={openDeleteDialog}
           onAssign={openAssignDialog}
@@ -164,6 +184,15 @@ const Tasks = () => {
           isSubmitting={isSubmitting}
           onClose={closeMarkPaidDialog}
           onConfirm={handleMarkPaid}
+        />
+
+        <BulkGenerateTasksDialog
+          open={bulkGenerateOpen}
+          categories={categories}
+          workers={workers}
+          isSubmitting={isSubmitting}
+          onClose={closeBulkGenerateDialog}
+          onGenerate={handleBulkGenerate}
         />
       </Box>
     </AdminLayout>
