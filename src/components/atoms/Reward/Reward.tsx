@@ -17,7 +17,7 @@ const TextOverlay = styled("span")(({ theme }) => ({
   fontSize: 20,
   lineHeight: "20px",
   fontWeight: 400,
-  color: "#FFFFFF",
+  color: theme.palette.grayscale[0],
   textShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)",
   transform: "rotate(5deg)",
   userSelect: "none",
