@@ -97,7 +97,7 @@ export const useCompleteTask = (taskId: string) => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [taskId, comment, externalLinks, files, isSubmitting]);
+  }, [taskId, comment, externalLinks, files, isSubmitting, showToast]);
 
   const handleGoHome = useCallback(() => {
     navigate(ROUTES.DASHBOARD.path);
