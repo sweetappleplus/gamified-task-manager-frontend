@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "features/auth";
 import { useTask } from "features/task";
 import { useTaskCategory } from "features/task-category";
+import { useTaskListParams } from "hooks";
 import {
   TASK_STATUSES,
   TASK_PRIORITIES,
@@ -34,13 +35,21 @@ export const useStartWorkPage = () => {
     useTask();
   const { categories, fetchCategories } = useTaskCategory();
 
-  const [search, setSearch] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [page, setPage] = useState(1);
+  const {
+    search,
+    activeFilter,
+    page,
+    setPage,
+    initialPage,
+    handleSearchChange: urlSearchChange,
+    handleFilterChange: urlFilterChange,
+    handlePageChange,
+  } = useTaskListParams();
+
   const [hasMore, setHasMore] = useState(true);
   const [isStarting, setIsStarting] = useState<string | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isInitialLoadDone = useRef(false);
 
   const filterTags = useMemo((): FilterTag[] => {
     const tags: FilterTag[] = [
@@ -123,6 +132,25 @@ export const useStartWorkPage = () => {
         setHasMore(false);
       }
     },
+    [buildParams, fetchTasks, setPage]
+  );
+
+  const loadUpToPage = useCallback(
+    async (targetPage: number, searchTerm: string, filterId: string) => {
+      setHasMore(true);
+      try {
+        const params = buildParams(1, searchTerm, filterId);
+        params.limit = INITIAL_LIMIT + LOAD_MORE_LIMIT * (targetPage - 1);
+        const response = await fetchTasks(params);
+        if (response?.pagination) {
+          setHasMore(targetPage < response.pagination.totalPages);
+        } else {
+          setHasMore(false);
+        }
+      } catch {
+        setHasMore(false);
+      }
+    },
     [buildParams, fetchTasks]
   );
 
@@ -133,7 +161,7 @@ export const useStartWorkPage = () => {
       const params = buildParams(nextPage, search, activeFilter);
       const response = await fetchMoreTasks(params);
       if (response?.pagination) {
-        setPage(nextPage);
+        handlePageChange(nextPage, search, activeFilter);
         setHasMore(nextPage < response.pagination.totalPages);
       } else {
         setHasMore(false);
@@ -149,6 +177,7 @@ export const useStartWorkPage = () => {
     search,
     activeFilter,
     fetchMoreTasks,
+    handlePageChange,
   ]);
 
   const sentinelRef = useCallback(
@@ -176,28 +205,43 @@ export const useStartWorkPage = () => {
   }, [fetchCategories]);
 
   useEffect(() => {
-    loadInitial(search, activeFilter);
-  }, [activeFilter, loadInitial, search]);
+    if (isInitialLoadDone.current) {
+      loadInitial(search, activeFilter);
+      return;
+    }
+
+    if (filterTags.length <= 3 && activeFilter.startsWith("category_")) {
+      return;
+    }
+
+    isInitialLoadDone.current = true;
+    if (initialPage > 1) {
+      loadUpToPage(initialPage, search, activeFilter);
+    } else {
+      loadInitial(search, activeFilter);
+    }
+  }, [
+    activeFilter,
+    loadInitial,
+    search,
+    filterTags.length,
+    initialPage,
+    loadUpToPage,
+  ]);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const value = e.target.value;
-      setSearch(value);
-
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-
-      searchTimeoutRef.current = setTimeout(() => {
-        loadInitial(value, activeFilter);
-      }, 400);
+      urlSearchChange(e.target.value, activeFilter, loadInitial);
     },
-    [activeFilter, loadInitial]
+    [activeFilter, loadInitial, urlSearchChange]
   );
 
-  const handleFilterChange = useCallback((filterId: string) => {
-    setActiveFilter((prev) => (prev === filterId ? "all" : filterId));
-  }, []);
+  const handleFilterChange = useCallback(
+    (filterId: string) => {
+      urlFilterChange(filterId, search);
+    },
+    [urlFilterChange, search]
+  );
 
   const handleTicketClick = useCallback(
     (taskId: string) => {

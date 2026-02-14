@@ -73,6 +73,7 @@ export const FooterNavButton: React.FC<FooterNavButtonProps> = ({
   const theme = useTheme();
 
   const handleClick = () => {
+    if (isActive) return;
     navigate(route);
   };
 

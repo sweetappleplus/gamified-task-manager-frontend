@@ -48,6 +48,7 @@ export const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
   const navigate = useNavigate();
 
   const handleClick = () => {
+    if (isActive) return;
     navigate(route);
   };
 
