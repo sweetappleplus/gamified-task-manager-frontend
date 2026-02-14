@@ -177,7 +177,6 @@ export const useTasksPage = () => {
 
   useEffect(() => {
     loadInitial(search, activeFilter);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFilter]);
 
   const handleSearchChange = useCallback(

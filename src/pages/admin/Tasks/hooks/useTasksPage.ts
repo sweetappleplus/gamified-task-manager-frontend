@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useTask } from "features/task";
 import { useTaskCategory } from "features/task-category";
 import { useToast } from "hooks";
@@ -9,11 +10,78 @@ import {
   CreateTaskRequest,
   UpdateTaskRequest,
   TaskFilterParams,
+  BulkCreateTasksRequest,
+  TaskStatus,
+  TaskPriority,
+  TaskType,
+  TaskSortBy,
+  TaskSortOrder,
   User,
   USER_ROLES,
 } from "types";
 
 type DialogMode = "create" | "edit" | null;
+
+const DEFAULT_SORT_BY: TaskSortBy = "createdAt";
+const DEFAULT_SORT_ORDER: TaskSortOrder = "desc";
+
+const parseUrlFilters = (searchParams: URLSearchParams): TaskFilterParams => {
+  const params: TaskFilterParams = {};
+
+  const page = searchParams.get("page");
+  if (page) params.page = Number(page);
+
+  const limit = searchParams.get("limit");
+  if (limit) params.limit = Number(limit);
+
+  const search = searchParams.get("search");
+  if (search) params.search = search;
+
+  const status = searchParams.get("status");
+  if (status) params.status = status as TaskStatus;
+
+  const priority = searchParams.get("priority");
+  if (priority) params.priority = priority as TaskPriority;
+
+  const type = searchParams.get("type");
+  if (type) params.type = type as TaskType;
+
+  const categoryId = searchParams.get("categoryId");
+  if (categoryId) params.categoryId = categoryId;
+
+  const assignedUserId = searchParams.get("assignedUserId");
+  if (assignedUserId) params.assignedUserId = assignedUserId;
+
+  const sortBy = searchParams.get("sortBy");
+  if (sortBy) params.sortBy = sortBy as TaskSortBy;
+
+  const sortOrder = searchParams.get("sortOrder");
+  if (sortOrder) params.sortOrder = sortOrder as TaskSortOrder;
+
+  return params;
+};
+
+const buildSearchParams = (filters: TaskFilterParams): URLSearchParams => {
+  const params = new URLSearchParams();
+
+  if (filters.page && filters.page !== 1)
+    params.set("page", String(filters.page));
+  if (filters.limit && filters.limit !== 10)
+    params.set("limit", String(filters.limit));
+  if (filters.search) params.set("search", filters.search);
+  if (filters.status) params.set("status", filters.status);
+  if (filters.priority) params.set("priority", filters.priority);
+  if (filters.type) params.set("type", filters.type);
+  if (filters.categoryId) params.set("categoryId", filters.categoryId);
+  if (filters.assignedUserId)
+    params.set("assignedUserId", filters.assignedUserId);
+  if (filters.sortBy && filters.sortBy !== DEFAULT_SORT_BY)
+    params.set("sortBy", filters.sortBy);
+  if (filters.sortOrder && filters.sortOrder !== DEFAULT_SORT_ORDER)
+    params.set("sortOrder", filters.sortOrder);
+
+  return params;
+};
 
 export const useTasksPage = () => {
   const {
@@ -29,11 +97,14 @@ export const useTasksPage = () => {
     reviewTask,
     markTaskPaid,
     cancelTask,
+    bulkCreateTasks,
+    bulkAssignTasks,
     changeFilters,
   } = useTask();
 
   const { categories, fetchCategories } = useTaskCategory();
   const { showToast } = useToast();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [dialogMode, setDialogMode] = useState<DialogMode>(null);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
@@ -45,15 +116,45 @@ export const useTasksPage = () => {
   const [markPaidTarget, setMarkPaidTarget] = useState<Task | null>(null);
   const [workers, setWorkers] = useState<User[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bulkGenerateOpen, setBulkGenerateOpen] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+
+  // Initialize filters from URL on mount, fall back to Redux saved filters
+  const initialFilters = useMemo(() => {
+    const hasUrlFilters = searchParams.toString().length > 0;
+    const defaults = {
+      page: 1,
+      limit: 10,
+      sortBy: DEFAULT_SORT_BY,
+      sortOrder: DEFAULT_SORT_ORDER,
+    };
+    if (hasUrlFilters) {
+      const urlFilters = parseUrlFilters(searchParams);
+      return { ...defaults, ...urlFilters };
+    }
+    return { ...defaults, ...filters };
+  }, []);
 
   useEffect(() => {
-    fetchTasks().catch((error: unknown) => {
-      showToast({
-        variant: "error",
-        message: getErrorMessage(error, "Failed to load tasks"),
+    if (!initialized) {
+      changeFilters(initialFilters);
+      setSearchParams(buildSearchParams(initialFilters), { replace: true });
+      fetchTasks(initialFilters).catch((error: unknown) => {
+        showToast({
+          variant: "error",
+          message: getErrorMessage(error, "Failed to load tasks"),
+        });
       });
-    });
-  }, [fetchTasks, showToast]);
+      setInitialized(true);
+    }
+  }, [
+    initialized,
+    initialFilters,
+    changeFilters,
+    setSearchParams,
+    fetchTasks,
+    showToast,
+  ]);
 
   useEffect(() => {
     fetchCategories().catch((error: unknown) => {
@@ -139,6 +240,14 @@ export const useTasksPage = () => {
 
   const closeMarkPaidDialog = useCallback(() => {
     setMarkPaidTarget(null);
+  }, []);
+
+  const openBulkGenerateDialog = useCallback(() => {
+    setBulkGenerateOpen(true);
+  }, []);
+
+  const closeBulkGenerateDialog = useCallback(() => {
+    setBulkGenerateOpen(false);
   }, []);
 
   // Handlers
@@ -279,9 +388,49 @@ export const useTasksPage = () => {
     }
   }, [markPaidTarget, markTaskPaid, showToast, closeMarkPaidDialog]);
 
+  const handleBulkGenerate = useCallback(
+    async (
+      data: BulkCreateTasksRequest,
+      workerIds: string[],
+      files: File[]
+    ) => {
+      setIsSubmitting(true);
+      try {
+        const response = await bulkCreateTasks(data);
+        showToast({ variant: "success", message: response.message });
+
+        if (files.length > 0 && response.data) {
+          await Promise.all(
+            response.data.map((task) => uploadTaskFilesApi(task.id, files))
+          );
+        }
+
+        if (workerIds.length > 0 && response.data) {
+          const taskIds = response.data.map((task) => task.id);
+          const assignResponse = await bulkAssignTasks({
+            taskIds,
+            workerIds,
+          });
+          showToast({ variant: "success", message: assignResponse.message });
+        }
+
+        closeBulkGenerateDialog();
+      } catch (error: unknown) {
+        showToast({
+          variant: "error",
+          message: getErrorMessage(error, "Failed to generate tasks"),
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [bulkCreateTasks, bulkAssignTasks, showToast, closeBulkGenerateDialog]
+  );
+
   const handleFilterChange = useCallback(
     (newFilters: TaskFilterParams) => {
       changeFilters(newFilters);
+      setSearchParams(buildSearchParams(newFilters), { replace: true });
       fetchTasks(newFilters).catch((error: unknown) => {
         showToast({
           variant: "error",
@@ -289,7 +438,7 @@ export const useTasksPage = () => {
         });
       });
     },
-    [changeFilters, fetchTasks, showToast]
+    [changeFilters, setSearchParams, fetchTasks, showToast]
   );
 
   const handlePageChange = useCallback(
@@ -302,6 +451,21 @@ export const useTasksPage = () => {
   const handleRowsPerPageChange = useCallback(
     (rowsPerPage: number) => {
       handleFilterChange({ ...filters, limit: rowsPerPage, page: 1 });
+    },
+    [filters, handleFilterChange]
+  );
+
+  const handleSortChange = useCallback(
+    (field: TaskSortBy) => {
+      const isCurrentField = filters.sortBy === field;
+      const newOrder: TaskSortOrder =
+        isCurrentField && filters.sortOrder === "asc" ? "desc" : "asc";
+      handleFilterChange({
+        ...filters,
+        sortBy: field,
+        sortOrder: newOrder,
+        page: 1,
+      });
     },
     [filters, handleFilterChange]
   );
@@ -325,6 +489,7 @@ export const useTasksPage = () => {
     cancelTarget,
     deleteTarget,
     markPaidTarget,
+    bulkGenerateOpen,
 
     // Dialog controls
     openCreateDialog,
@@ -342,6 +507,8 @@ export const useTasksPage = () => {
     closeDeleteDialog,
     openMarkPaidDialog,
     closeMarkPaidDialog,
+    openBulkGenerateDialog,
+    closeBulkGenerateDialog,
 
     // Handlers
     handleCreate,
@@ -351,8 +518,10 @@ export const useTasksPage = () => {
     handleReview,
     handleCancel,
     handleMarkPaid,
+    handleBulkGenerate,
     handleFilterChange,
     handlePageChange,
     handleRowsPerPageChange,
+    handleSortChange,
   };
 };
