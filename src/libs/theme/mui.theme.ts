@@ -8,6 +8,11 @@ declare module "@mui/material/styles/createTypography" {
 }
 
 declare module "@mui/material/styles" {
+  interface BreakpointOverrides {
+    ssm: true;
+    smd: true;
+  }
+
   interface GradientColors {
     start: string;
     end: string;
@@ -95,7 +100,9 @@ export const theme = createTheme({
     values: {
       xs: 0,
       sm: 600,
+      ssm: 664,
       md: 768,
+      smd: 1024,
       lg: 1441,
       xl: 1536,
     },
