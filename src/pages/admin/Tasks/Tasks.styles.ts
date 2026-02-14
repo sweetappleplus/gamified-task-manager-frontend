@@ -49,6 +49,29 @@ export const tasksStyles: Record<string, SxProps<Theme>> = {
     borderColor: "grayscale.100",
     whiteSpace: "nowrap",
   },
+  sortableHeadCell: {
+    color: "grayscale.600",
+    fontWeight: 600,
+    borderBottom: "1px solid",
+    borderColor: "grayscale.100",
+    whiteSpace: "nowrap",
+    "& .MuiTableSortLabel-root": {
+      color: "grayscale.600",
+      "&:hover": {
+        color: "grayscale.900",
+      },
+    },
+    "& .MuiTableSortLabel-icon": {
+      opacity: 0.4,
+    },
+    "& .MuiTableSortLabel-root.Mui-active": {
+      color: "grayscale.900",
+      "& .MuiTableSortLabel-icon": {
+        opacity: 1,
+        color: "primary.main",
+      },
+    },
+  },
   tableCell: {
     color: "grayscale.900",
     borderBottom: "1px solid",

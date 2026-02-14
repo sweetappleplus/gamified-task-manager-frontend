@@ -270,7 +270,7 @@ const TaskTable = ({
             <TableCell sx={tasksStyles.tableHeadCell}>Category</TableCell>
             <TableCell sx={tasksStyles.tableHeadCell}>Assigned To</TableCell>
             <TableCell
-              sx={tasksStyles.tableHeadCell}
+              sx={tasksStyles.sortableHeadCell}
               sortDirection={sortBy === "createdAt" ? sortOrder : false}
             >
               <TableSortLabel
@@ -282,7 +282,7 @@ const TaskTable = ({
               </TableSortLabel>
             </TableCell>
             <TableCell
-              sx={tasksStyles.tableHeadCell}
+              sx={tasksStyles.sortableHeadCell}
               sortDirection={sortBy === "deadline" ? sortOrder : false}
             >
               <TableSortLabel
