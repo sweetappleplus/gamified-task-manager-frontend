@@ -11,6 +11,8 @@ const Container = styled(Box)({
   paddingLeft: 4,
   paddingRight: 4,
   backgroundColor: "rgba(0, 0, 0, 0.04)",
+  backdropFilter: "blur(1px)",
+  WebkitBackdropFilter: "blur(1px)",
   borderRadius: 20,
   width: "fit-content",
   overflow: "visible",
