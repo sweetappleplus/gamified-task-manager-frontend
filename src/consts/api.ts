@@ -26,6 +26,8 @@ export const API_URL_TASKS_MARK_PAID = "/tasks/:id/mark-paid";
 export const API_URL_TASKS_START = "/tasks/:id/start";
 export const API_URL_TASKS_CANCEL = "/tasks/:id/cancel";
 export const API_URL_TASKS_FILES = "/tasks/:id/files";
+export const API_URL_TASKS_BULK_CREATE = "/tasks/bulk-create";
+export const API_URL_TASKS_BULK_ASSIGN = "/tasks/bulk-assign";
 
 export const API_URL_USERS = "/users";
 export const API_URL_USERS_ME = "/users/me";

@@ -12,7 +12,7 @@ const initialState: TaskState = {
   tasks: [],
   total: 0,
   isLoading: false,
-  filters: { page: 1, limit: 10 },
+  filters: { page: 1, limit: 10, sortBy: "createdAt", sortOrder: "desc" },
 };
 
 const taskSlice = createSlice({

@@ -20,6 +20,8 @@ import {
   reviewTaskApi,
   markTaskPaidApi,
   cancelTaskApi,
+  bulkCreateTasksApi,
+  bulkAssignTasksApi,
 } from "services";
 import {
   TaskFilterParams,
@@ -27,6 +29,8 @@ import {
   UpdateTaskRequest,
   AssignTaskRequest,
   ReviewTaskRequest,
+  BulkCreateTasksRequest,
+  BulkAssignTasksRequest,
 } from "types";
 
 export const useTask = () => {
@@ -159,6 +163,24 @@ export const useTask = () => {
     [dispatch]
   );
 
+  const bulkCreateTasks = useCallback(
+    async (data: BulkCreateTasksRequest) => {
+      const response = await bulkCreateTasksApi(data);
+      await fetchTasks();
+      return response;
+    },
+    [fetchTasks]
+  );
+
+  const bulkAssignTasks = useCallback(
+    async (data: BulkAssignTasksRequest) => {
+      const response = await bulkAssignTasksApi(data);
+      await fetchTasks();
+      return response;
+    },
+    [fetchTasks]
+  );
+
   const changeFilters = useCallback(
     (newFilters: TaskFilterParams) => {
       dispatch(setFilters(newFilters));
@@ -181,6 +203,8 @@ export const useTask = () => {
     reviewTask,
     markTaskPaid,
     cancelTask,
+    bulkCreateTasks,
+    bulkAssignTasks,
     changeFilters,
   };
 };
