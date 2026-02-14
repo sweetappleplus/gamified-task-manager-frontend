@@ -85,6 +85,7 @@ export type Task = {
   createdBy?: TaskUser;
   files?: BackendFile[];
   latestSubmission?: TaskSubmission | null;
+  submissions?: TaskSubmission[];
 };
 
 export type CreateTaskRequest = {

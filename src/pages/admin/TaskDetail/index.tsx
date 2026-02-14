@@ -7,9 +7,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import LinkIcon from "@mui/icons-material/Link";
-import { AdminLayout } from "components";
+import { AdminLayout, SubmissionHistory } from "components";
 import { ROUTES, BACKEND_URL } from "consts";
 import { TASK_STATUSES } from "types";
 import { formatDateTime } from "utils";
@@ -374,136 +372,10 @@ const AdminTaskDetail = () => {
           </Box>
         )}
 
-        {/* Submission */}
-        {task.latestSubmission && (
+        {/* Submission History */}
+        {task.submissions && task.submissions.length > 0 && (
           <Box sx={styles.section}>
-            <Typography variant="subtitle2" sx={styles.sectionTitle}>
-              Worker Submission
-            </Typography>
-
-            <Box sx={{ display: "flex", gap: 2, mb: 2, flexWrap: "wrap" }}>
-              <DetailRow label="Submitted At">
-                <Typography variant="body2">
-                  {formatDateTime(task.latestSubmission.createdAt)}
-                </Typography>
-              </DetailRow>
-              {task.latestSubmission.isLate && (
-                <Box sx={{ mb: 2 }}>
-                  <Chip
-                    label="LATE"
-                    size="small"
-                    color="error"
-                    sx={{ fontWeight: 600 }}
-                  />
-                </Box>
-              )}
-              {task.latestSubmission.reviewedAt && (
-                <DetailRow label="Reviewed At">
-                  <Typography variant="body2">
-                    {formatDateTime(task.latestSubmission.reviewedAt)}
-                  </Typography>
-                </DetailRow>
-              )}
-            </Box>
-
-            <DetailRow label="Comment">
-              <Typography
-                variant="body2"
-                sx={{
-                  whiteSpace: "pre-wrap",
-                  bgcolor: "grayscale.50",
-                  p: 1.5,
-                  borderRadius: 1,
-                  border: "1px solid",
-                  borderColor: "grayscale.100",
-                }}
-              >
-                {task.latestSubmission.comment}
-              </Typography>
-            </DetailRow>
-
-            {task.latestSubmission.proofUrls &&
-              task.latestSubmission.proofUrls.length > 0 && (
-                <Box sx={{ mb: 2 }}>
-                  <Typography
-                    sx={{
-                      ...styles.detailLabel,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    <LinkIcon sx={{ fontSize: 14 }} />
-                    Proof Links ({task.latestSubmission.proofUrls.length})
-                  </Typography>
-                  {task.latestSubmission.proofUrls.map((url, i) => (
-                    <Box key={i} sx={{ ml: 1, mb: 0.5 }}>
-                      <Link
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{ color: "primary.main" }}
-                      >
-                        {url}
-                      </Link>
-                    </Box>
-                  ))}
-                </Box>
-              )}
-
-            {task.latestSubmission.files &&
-              task.latestSubmission.files.length > 0 && (
-                <Box sx={{ mb: 2 }}>
-                  <Typography
-                    sx={{
-                      ...styles.detailLabel,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    <AttachFileIcon sx={{ fontSize: 14 }} />
-                    Submission Files ({task.latestSubmission.files.length})
-                  </Typography>
-                  {task.latestSubmission.files.map((file) => (
-                    <Box key={file.id} sx={{ ml: 1, mb: 0.5 }}>
-                      <Link
-                        href={`${BACKEND_URL}${file.url}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{ color: "primary.main" }}
-                      >
-                        {file.fileName}
-                      </Link>
-                      <Typography
-                        variant="caption"
-                        sx={{ color: "grayscale.400", ml: 1 }}
-                      >
-                        ({(file.fileSize / 1024).toFixed(1)} KB)
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-              )}
-
-            {task.latestSubmission.adminFeedback && (
-              <DetailRow label="Admin Feedback">
-                <Typography
-                  variant="body2"
-                  sx={{
-                    whiteSpace: "pre-wrap",
-                    bgcolor: "warning.50",
-                    p: 1.5,
-                    borderRadius: 1,
-                    border: "1px solid",
-                    borderColor: "warning.200",
-                    color: "warning.900",
-                  }}
-                >
-                  {task.latestSubmission.adminFeedback}
-                </Typography>
-              </DetailRow>
-            )}
+            <SubmissionHistory submissions={task.submissions} />
           </Box>
         )}
       </Box>

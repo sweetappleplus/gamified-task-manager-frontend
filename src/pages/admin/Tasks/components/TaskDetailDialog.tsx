@@ -12,9 +12,8 @@ import {
   Link,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import LinkIcon from "@mui/icons-material/Link";
 import { Task } from "types";
+import { SubmissionHistory } from "components";
 import { BACKEND_URL } from "consts";
 import {
   tasksStyles,
@@ -236,167 +235,10 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           </>
         )}
 
-        {task.latestSubmission && (
+        {task.submissions && task.submissions.length > 0 && (
           <>
             <Divider sx={{ borderColor: "grayscale.100", my: 2 }} />
-            <Box
-              sx={{
-                bgcolor: "grayscale.50",
-                borderRadius: 2,
-                p: 2,
-                border: "1px solid",
-                borderColor: "grayscale.100",
-              }}
-            >
-              <Typography
-                variant="subtitle2"
-                sx={{ color: "grayscale.900", fontWeight: 600, mb: 1.5 }}
-              >
-                Worker Submission
-              </Typography>
-
-              <Box sx={{ display: "flex", gap: 2, mb: 1.5, flexWrap: "wrap" }}>
-                <Typography variant="caption" sx={{ color: "grayscale.500" }}>
-                  Submitted: {formatDateTime(task.latestSubmission.createdAt)}
-                </Typography>
-                {task.latestSubmission.isLate && (
-                  <Chip
-                    label="LATE"
-                    size="small"
-                    color="error"
-                    sx={{ height: 20, fontSize: "0.7rem" }}
-                  />
-                )}
-              </Box>
-
-              <Box sx={{ mb: 1.5 }}>
-                <Typography
-                  variant="subtitle2"
-                  sx={{ color: "grayscale.500", fontSize: "0.75rem", mb: 0.5 }}
-                >
-                  Comment
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: "grayscale.800",
-                    whiteSpace: "pre-wrap",
-                    bgcolor: "grayscale.0",
-                    p: 1.5,
-                    borderRadius: 1,
-                    border: "1px solid",
-                    borderColor: "grayscale.100",
-                  }}
-                >
-                  {task.latestSubmission.comment}
-                </Typography>
-              </Box>
-
-              {task.latestSubmission.proofUrls &&
-                task.latestSubmission.proofUrls.length > 0 && (
-                  <Box sx={{ mb: 1.5 }}>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: "grayscale.500",
-                        fontSize: "0.75rem",
-                        mb: 0.5,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 0.5,
-                      }}
-                    >
-                      <LinkIcon sx={{ fontSize: 14 }} />
-                      Proof Links ({task.latestSubmission.proofUrls.length})
-                    </Typography>
-                    {task.latestSubmission.proofUrls.map((url, i) => (
-                      <Box key={i} sx={{ ml: 1, mb: 0.5 }}>
-                        <Link
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          sx={{
-                            color: "primary.main",
-                            fontSize: "0.875rem",
-                          }}
-                        >
-                          {url}
-                        </Link>
-                      </Box>
-                    ))}
-                  </Box>
-                )}
-
-              {task.latestSubmission.files &&
-                task.latestSubmission.files.length > 0 && (
-                  <Box sx={{ mb: 1.5 }}>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: "grayscale.500",
-                        fontSize: "0.75rem",
-                        mb: 0.5,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 0.5,
-                      }}
-                    >
-                      <AttachFileIcon sx={{ fontSize: 14 }} />
-                      Submission Files ({task.latestSubmission.files.length})
-                    </Typography>
-                    {task.latestSubmission.files.map((file) => (
-                      <Box key={file.id} sx={{ ml: 1, mb: 0.5 }}>
-                        <Link
-                          href={`${BACKEND_URL}${file.url}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          sx={{
-                            color: "primary.main",
-                            fontSize: "0.875rem",
-                          }}
-                        >
-                          {file.fileName}
-                        </Link>
-                        <Typography
-                          variant="caption"
-                          sx={{ color: "grayscale.400", ml: 1 }}
-                        >
-                          ({(file.fileSize / 1024).toFixed(1)} KB)
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
-                )}
-
-              {task.latestSubmission.adminFeedback && (
-                <Box>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      color: "grayscale.500",
-                      fontSize: "0.75rem",
-                      mb: 0.5,
-                    }}
-                  >
-                    Admin Feedback
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      whiteSpace: "pre-wrap",
-                      bgcolor: "warning.50",
-                      p: 1.5,
-                      borderRadius: 1,
-                      border: "1px solid",
-                      borderColor: "warning.200",
-                      color: "warning.900",
-                    }}
-                  >
-                    {task.latestSubmission.adminFeedback}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
+            <SubmissionHistory submissions={task.submissions} compact />
           </>
         )}
       </DialogContent>
