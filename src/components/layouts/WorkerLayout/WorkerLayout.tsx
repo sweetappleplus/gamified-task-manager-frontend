@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo } from "react";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { WorkerSidebar, WorkerFooter } from "components";
-import { useAppSelector } from "app/hooks";
 import { useNotifications } from "features/notification";
 import { useLevelConfig } from "features/level-config";
 import { getLeafVariant } from "utils";
 import { WorkerLayoutProps } from "./WorkerLayout.types";
+import { useAuth } from "features/auth";
 
 export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
   children,
@@ -14,7 +14,7 @@ export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
 }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  const user = useAppSelector((state) => state.auth.user);
+  const { user } = useAuth();
   const { unreadCount: notificationCount } = useNotifications();
   const { levelConfigs, fetchLevelConfigs } = useLevelConfig();
 
