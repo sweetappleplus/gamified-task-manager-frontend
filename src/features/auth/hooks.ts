@@ -38,6 +38,17 @@ export const useAuth = () => {
     }
   }, []);
 
+  const fetchProfile = useCallback(async () => {
+    try {
+      const response = await getMeApi();
+      if (response.data) {
+        dispatch(setUser(response.data));
+      }
+    } catch {
+      // Profile fetch failed silently; basic user data from token is still available
+    }
+  }, [dispatch]);
+
   const scheduleTokenRefresh = useCallback(
     (accessToken: string) => {
       clearRefreshTimer();
@@ -58,25 +69,15 @@ export const useAuth = () => {
             setTokens(response.data.accessToken, response.data.refreshToken);
             dispatch(setUser(response.data.user));
             scheduleTokenRefresh(response.data.accessToken);
+            fetchProfile();
           }
         } catch {
           // Refresh failed silently; interceptor will handle on next request
         }
       }, timeUntilRefresh);
     },
-    [clearRefreshTimer, dispatch]
+    [clearRefreshTimer, dispatch, fetchProfile]
   );
-
-  const fetchProfile = useCallback(async () => {
-    try {
-      const response = await getMeApi();
-      if (response.data) {
-        dispatch(setUser(response.data));
-      }
-    } catch {
-      // Profile fetch failed silently; basic user data from token is still available
-    }
-  }, [dispatch]);
 
   const handleAuthSuccess = useCallback(
     (data: AuthResponse) => {
