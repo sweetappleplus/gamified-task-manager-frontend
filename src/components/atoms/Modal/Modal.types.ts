@@ -21,4 +21,9 @@ export interface ModalProps {
    * Optional content rendered in the sticky footer
    */
   footer?: React.ReactNode;
+  /**
+   * Max width of the modal on desktop
+   * @default 480
+   */
+  maxWidth?: number;
 }

@@ -9,6 +9,7 @@ export const Modal: React.FC<ModalProps> = ({
   title,
   body,
   footer,
+  maxWidth = 480,
 }) => {
   const theme = useTheme();
   return (
@@ -38,7 +39,7 @@ export const Modal: React.FC<ModalProps> = ({
           borderRadius: 0,
           "@media (min-width: 768px)": {
             m: "auto",
-            maxWidth: 480,
+            maxWidth,
             height: "auto",
             maxHeight: 812,
             borderRadius: "16px",
