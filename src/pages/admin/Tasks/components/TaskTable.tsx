@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
   TableCell,
+  TextField,
   TableContainer,
   TableHead,
   TableRow,
   TablePagination,
+  TableSortLabel,
   IconButton,
   Tooltip,
   Chip,
@@ -21,7 +23,7 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import PaidIcon from "@mui/icons-material/Paid";
 import CancelIcon from "@mui/icons-material/Cancel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Task, TASK_STATUSES } from "types";
+import { Task, TaskSortBy, TaskSortOrder, TASK_STATUSES } from "types";
 import {
   tasksStyles,
   getStatusChipSx,
@@ -35,8 +37,11 @@ type TaskTableProps = {
   page: number;
   rowsPerPage: number;
   isLoading: boolean;
+  sortBy?: TaskSortBy;
+  sortOrder?: TaskSortOrder;
   onPageChange: (page: number) => void;
   onRowsPerPageChange: (rowsPerPage: number) => void;
+  onSortChange: (sortBy: TaskSortBy) => void;
   onEdit: (task: Task) => void;
   onDelete: (task: Task) => void;
   onAssign: (task: Task) => void;
@@ -52,8 +57,11 @@ const TaskTable = ({
   page,
   rowsPerPage,
   isLoading,
+  sortBy,
+  sortOrder,
   onPageChange,
   onRowsPerPageChange,
+  onSortChange,
   onEdit,
   onDelete,
   onAssign,
@@ -62,6 +70,32 @@ const TaskTable = ({
   onCancel,
   onViewDetail,
 }: TaskTableProps) => {
+  const totalPages = Math.ceil(total / rowsPerPage) || 1;
+  const [pageInput, setPageInput] = useState(String(page));
+
+  useEffect(() => {
+    setPageInput(String(page));
+  }, [page]);
+
+  const handlePageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPageInput(e.target.value);
+  };
+
+  const handlePageInputSubmit = () => {
+    const parsed = parseInt(pageInput, 10);
+    if (parsed >= 1 && parsed <= totalPages && parsed !== page) {
+      onPageChange(parsed);
+    } else {
+      setPageInput(String(page));
+    }
+  };
+
+  const handlePageInputKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handlePageInputSubmit();
+    }
+  };
+
   if (isLoading) {
     return (
       <Box sx={tasksStyles.loadingContainer}>
@@ -235,7 +269,30 @@ const TaskTable = ({
             <TableCell sx={tasksStyles.tableHeadCell}>Type</TableCell>
             <TableCell sx={tasksStyles.tableHeadCell}>Category</TableCell>
             <TableCell sx={tasksStyles.tableHeadCell}>Assigned To</TableCell>
-            <TableCell sx={tasksStyles.tableHeadCell}>Deadline</TableCell>
+            <TableCell
+              sx={tasksStyles.tableHeadCell}
+              sortDirection={sortBy === "createdAt" ? sortOrder : false}
+            >
+              <TableSortLabel
+                active={sortBy === "createdAt"}
+                direction={sortBy === "createdAt" ? sortOrder : "asc"}
+                onClick={() => onSortChange("createdAt")}
+              >
+                Created
+              </TableSortLabel>
+            </TableCell>
+            <TableCell
+              sx={tasksStyles.tableHeadCell}
+              sortDirection={sortBy === "deadline" ? sortOrder : false}
+            >
+              <TableSortLabel
+                active={sortBy === "deadline"}
+                direction={sortBy === "deadline" ? sortOrder : "asc"}
+                onClick={() => onSortChange("deadline")}
+              >
+                Deadline
+              </TableSortLabel>
+            </TableCell>
             <TableCell sx={tasksStyles.tableHeadCell} align="right">
               Actions
             </TableCell>
@@ -273,6 +330,9 @@ const TaskTable = ({
                 {task.assignedTo?.name || task.assignedTo?.email || "—"}
               </TableCell>
               <TableCell sx={tasksStyles.tableCell}>
+                {formatDate(task.createdAt)}
+              </TableCell>
+              <TableCell sx={tasksStyles.tableCell}>
                 {formatDate(task.deadline)}
               </TableCell>
               <TableCell sx={tasksStyles.tableCell} align="right">
@@ -287,17 +347,46 @@ const TaskTable = ({
         </TableBody>
       </Table>
       <Box sx={tasksStyles.paginationContainer}>
-        <TablePagination
-          component="div"
-          count={total}
-          page={page - 1}
-          onPageChange={(_, newPage) => onPageChange(newPage + 1)}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={(e) =>
-            onRowsPerPageChange(parseInt(e.target.value, 10))
-          }
-          rowsPerPageOptions={[5, 10, 25, 50]}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, pl: 2 }}>
+            <Typography variant="body2" sx={{ color: "grayscale.500" }}>
+              Page
+            </Typography>
+            <TextField
+              size="small"
+              type="number"
+              value={pageInput}
+              onChange={handlePageInputChange}
+              onBlur={handlePageInputSubmit}
+              onKeyDown={handlePageInputKeyDown}
+              inputProps={{ min: 1, max: totalPages }}
+              sx={{ width: 64, "& input": { textAlign: "center", py: 0.5 } }}
+            />
+            <Typography variant="body2" sx={{ color: "grayscale.500" }}>
+              of {totalPages}
+            </Typography>
+          </Box>
+          <TablePagination
+            component="div"
+            count={total}
+            page={page - 1}
+            onPageChange={(_, newPage) => {
+              onPageChange(newPage + 1);
+              setPageInput(String(newPage + 1));
+            }}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={(e) =>
+              onRowsPerPageChange(parseInt(e.target.value, 10))
+            }
+            rowsPerPageOptions={[5, 10, 25, 50]}
+          />
+        </Box>
       </Box>
     </TableContainer>
   );
