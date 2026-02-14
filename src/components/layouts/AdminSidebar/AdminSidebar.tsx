@@ -96,20 +96,24 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activeRoute }) => {
                 >
                   <Icon name={item.icon} size={20} />
                 </ListItemIcon>
-                {isExpanded && (
-                  <ListItemText
-                    primary={item.label}
-                    slotProps={{
-                      primary: {
-                        sx: {
-                          fontSize: 14,
-                          fontWeight: isActive ? 600 : 500,
-                          lineHeight: "20px",
-                        },
+                <ListItemText
+                  primary={item.label}
+                  sx={{
+                    opacity: isExpanded ? 1 : 0,
+                    transition: "opacity 0.2s ease",
+                    transitionDelay: isExpanded ? "0.1s" : "0s",
+                    whiteSpace: "nowrap",
+                  }}
+                  slotProps={{
+                    primary: {
+                      sx: {
+                        fontSize: 14,
+                        fontWeight: isActive ? 600 : 500,
+                        lineHeight: "20px",
                       },
-                    }}
-                  />
-                )}
+                    },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           );
