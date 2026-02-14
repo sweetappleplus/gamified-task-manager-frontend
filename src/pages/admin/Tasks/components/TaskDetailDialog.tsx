@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Task } from "types";
-import { SubmissionHistory } from "components";
 import { BACKEND_URL } from "consts";
+import SubmissionHistory from "./SubmissionHistory";
 import {
   tasksStyles,
   getStatusChipSx,

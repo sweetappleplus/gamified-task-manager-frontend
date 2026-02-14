@@ -7,7 +7,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { AdminLayout, SubmissionHistory } from "components";
+import { AdminLayout } from "components";
 import { ROUTES, BACKEND_URL } from "consts";
 import { TASK_STATUSES } from "types";
 import { formatDateTime } from "utils";
@@ -16,6 +16,7 @@ import {
   ReviewTaskDialog,
   AssignTaskDialog,
   ConfirmDialog,
+  SubmissionHistory,
 } from "../Tasks/components";
 import { useAdminTaskDetailPage } from "./hooks";
 import { adminTaskDetailStyles as styles } from "./TaskDetail.styles";

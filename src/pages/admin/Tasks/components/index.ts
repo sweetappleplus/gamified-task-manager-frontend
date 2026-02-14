@@ -6,3 +6,4 @@ export { default as ReviewTaskDialog } from "./ReviewTaskDialog";
 export { default as TaskDetailDialog } from "./TaskDetailDialog";
 export { default as ConfirmDialog } from "./ConfirmDialog";
 export { default as BulkGenerateTasksDialog } from "./BulkGenerateTasksDialog";
+export { default as SubmissionHistory } from "./SubmissionHistory";
