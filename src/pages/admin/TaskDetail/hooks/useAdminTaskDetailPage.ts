@@ -215,7 +215,11 @@ export const useAdminTaskDetailPage = () => {
   }, [task, markTaskPaidAction, showToast, closeMarkPaidDialog, fetchTask]);
 
   const handleBack = useCallback(() => {
-    navigate(-1);
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/admin/tasks");
+    }
   }, [navigate]);
 
   return {

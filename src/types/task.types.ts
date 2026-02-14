@@ -43,6 +43,19 @@ export type TaskCategoryInfo = {
   name: string;
 };
 
+export type TaskSubmission = {
+  id: string;
+  comment: string;
+  proofUrls: string[];
+  isLate: boolean;
+  adminFeedback?: string | null;
+  createdAt: string;
+  reviewedAt?: string | null;
+  files?: BackendFile[];
+  submittedBy?: TaskUser;
+  reviewedBy?: TaskUser | null;
+};
+
 export type Task = {
   id: string;
   title: string;
@@ -71,6 +84,7 @@ export type Task = {
   assignedTo?: TaskUser | null;
   createdBy?: TaskUser;
   files?: BackendFile[];
+  latestSubmission?: TaskSubmission | null;
 };
 
 export type CreateTaskRequest = {
