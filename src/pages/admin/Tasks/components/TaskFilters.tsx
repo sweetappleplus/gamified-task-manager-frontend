@@ -57,7 +57,12 @@ const TaskFilters = ({
 
   const handleClear = () => {
     setSearchValue("");
-    onFilterChange({ page: 1, limit: filters.limit });
+    onFilterChange({
+      page: 1,
+      limit: filters.limit,
+      sortBy: filters.sortBy,
+      sortOrder: filters.sortOrder,
+    });
   };
 
   const hasActiveFilters =
