@@ -1,14 +1,31 @@
 import React, { useMemo } from "react";
 import { Box, styled } from "@mui/material";
 import { Text, Tag, ProgressIndicator, Button } from "components";
-import { TASK_STATUSES, TASK_PRIORITIES, TaskPriority } from "types";
-import { PRIORITY_COLORS } from "consts";
+import {
+  TASK_STATUSES,
+  TASK_PRIORITIES,
+  TaskPriority,
+  TaskStatus,
+} from "types";
+import { PRIORITY_COLORS, STATUS_COLORS } from "consts";
 import { TaskTicketProps } from "./TaskTicket.types";
 
 const PRIORITY_LABELS: Record<TaskPriority, string> = {
   [TASK_PRIORITIES.LOW]: "Less Priority",
   [TASK_PRIORITIES.MEDIUM]: "Mid Priority",
   [TASK_PRIORITIES.HIGH]: "High Priority",
+};
+
+const STATUS_LABELS: Record<TaskStatus, string> = {
+  [TASK_STATUSES.NEW]: "New",
+  [TASK_STATUSES.PENDING]: "Waiting",
+  [TASK_STATUSES.IN_ACTION]: "In Progress",
+  [TASK_STATUSES.FAILED]: "Rejected",
+  [TASK_STATUSES.IN_REVIEW]: "In Review",
+  [TASK_STATUSES.LATE]: "Late",
+  [TASK_STATUSES.COMPLETED]: "Completed",
+  [TASK_STATUSES.PAID]: "Paid",
+  [TASK_STATUSES.CANCELLED]: "Cancelled",
 };
 
 const Wrapper = styled(Box)(({ theme }) => ({
@@ -110,19 +127,11 @@ export const TaskTicket: React.FC<TaskTicketProps> = ({
             <Text variant="bodyStrong">${task.budget}</Text>
           </RewardRow>
 
-          {isPending ? (
-            <Tag
-              text="Waiting"
-              bgColor="grayscale.0"
-              textColor="grayscale.950"
-            />
-          ) : (
-            <Tag
-              text="In Progress"
-              bgColor="primary.main"
-              textColor="grayscale.0"
-            />
-          )}
+          <Tag
+            text={STATUS_LABELS[task.status]}
+            bgColor={STATUS_COLORS[task.status].bg}
+            textColor={STATUS_COLORS[task.status].text}
+          />
         </InfoRow>
 
         {isPending && (
