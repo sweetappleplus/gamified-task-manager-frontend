@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { submitTaskApi } from "services";
 import { FileUploaderItem } from "components";
 import { ROUTES } from "consts";
+import { useToast } from "hooks";
+import { getErrorMessage } from "utils";
 
 type CompleteTaskStep = "submission" | "award" | "success";
 
 export const useCompleteTask = (taskId: string) => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<CompleteTaskStep>("submission");
@@ -86,8 +89,11 @@ export const useCompleteTask = (taskId: string) => {
         files,
       });
       setStep("success");
-    } catch {
-      // Error is handled by axios interceptor (toast)
+    } catch (error: unknown) {
+      showToast({
+        variant: "error",
+        message: getErrorMessage(error, "Failed to submit task"),
+      });
     } finally {
       setIsSubmitting(false);
     }
