@@ -60,6 +60,8 @@ export type Task = {
   startedAt?: string | null;
   submittedAt?: string | null;
   completedAt?: string | null;
+  cancelledAt?: string | null;
+  paidAt?: string | null;
   createdById: string;
   assignedUserId?: string | null;
   categoryId: string;

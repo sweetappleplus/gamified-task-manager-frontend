@@ -162,6 +162,11 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           Timeline
         </Typography>
         <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+          <DetailRow label="Created At">
+            <Typography variant="body2">
+              {formatDateTime(task.createdAt)}
+            </Typography>
+          </DetailRow>
           <DetailRow label="Deadline">
             <Typography variant="body2">
               {formatDateTime(task.deadline)}
@@ -185,6 +190,16 @@ const TaskDetailDialog = ({ open, task, onClose }: TaskDetailDialogProps) => {
           <DetailRow label="Completed At">
             <Typography variant="body2">
               {formatDateTime(task.completedAt)}
+            </Typography>
+          </DetailRow>
+          <DetailRow label="Cancelled At">
+            <Typography variant="body2">
+              {formatDateTime(task.cancelledAt)}
+            </Typography>
+          </DetailRow>
+          <DetailRow label="Paid At">
+            <Typography variant="body2">
+              {formatDateTime(task.paidAt)}
             </Typography>
           </DetailRow>
         </Box>
