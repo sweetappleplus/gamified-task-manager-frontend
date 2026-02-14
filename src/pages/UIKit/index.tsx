@@ -54,11 +54,13 @@ import {
   TaskDescription,
   FileUploader,
   FileUploaderItem,
+  SubmissionHistory,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
 import {
   Task,
+  TaskSubmission,
   TASK_STATUSES,
   TASK_PRIORITIES,
   TASK_TYPES,
@@ -124,6 +126,55 @@ const mockAdminUser: User = {
   name: "Anna Smith",
   role: USER_ROLES.SUPER_ADMIN,
 };
+
+const mockSubmissions: TaskSubmission[] = [
+  {
+    id: "s1",
+    comment:
+      "Here is my first submission. I completed all the required steps and attached the screenshots.",
+    proofUrls: ["https://example.com/proof-1.png"],
+    isLate: false,
+    adminFeedback:
+      "The screenshots are blurry. Please resubmit with clearer images.",
+    createdAt: new Date(Date.now() - 172800000).toISOString(),
+    reviewedAt: new Date(Date.now() - 86400000).toISOString(),
+    files: [
+      {
+        id: "f1",
+        url: "/uploads/screenshot1.png",
+        fileName: "screenshot1.png",
+        fileSize: 102400,
+        mimeType: "image/png",
+      },
+    ],
+  },
+  {
+    id: "s2",
+    comment: "Resubmitting with updated screenshots. All steps verified.",
+    proofUrls: [
+      "https://example.com/proof-2.png",
+      "https://example.com/proof-3.png",
+    ],
+    isLate: true,
+    createdAt: new Date(Date.now() - 43200000).toISOString(),
+    files: [
+      {
+        id: "f2",
+        url: "/uploads/screenshot2.png",
+        fileName: "screenshot2.png",
+        fileSize: 204800,
+        mimeType: "image/png",
+      },
+      {
+        id: "f3",
+        url: "/uploads/review.pdf",
+        fileName: "review.pdf",
+        fileSize: 51200,
+        mimeType: "application/pdf",
+      },
+    ],
+  },
+];
 
 const mockTasks: Task[] = [
   mockTaskBase,
@@ -932,6 +983,14 @@ const UIKit = () => {
                 "Submit screenshot as proof",
               ]}
             />
+          </Box>
+
+          {/* SubmissionHistory */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            SubmissionHistory
+          </Typography>
+          <Box sx={{ width: 500, mb: 2 }}>
+            <SubmissionHistory submissions={mockSubmissions} />
           </Box>
 
           {/* TimeCounter */}
