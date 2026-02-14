@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import { uikitStyles } from "./UIKit.styles";
 import {
@@ -51,6 +52,8 @@ import {
   HorizontalScroll,
   UserInfo,
   TaskDescription,
+  FileUploader,
+  FileUploaderItem,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -147,6 +150,10 @@ const mockTasks: Task[] = [
 const UIKit = () => {
   const { showToast } = useToast();
   const { openModal } = useModal();
+  const [uploaderFiles, setUploaderFiles] = useState<FileUploaderItem[]>([
+    { id: "1", name: "IMG_6912.MOV", size: 2516582 },
+    { id: "2", name: "IMG_6912.PNG", size: 1153434 },
+  ]);
 
   return (
     <Box sx={uikitStyles.container}>
@@ -835,6 +842,29 @@ const UIKit = () => {
           <Typography variant="h5" sx={uikitStyles.sectionTitle}>
             Molecules
           </Typography>
+          {/* FileUploader */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            FileUploader
+          </Typography>
+          <Box sx={{ maxWidth: 400, mb: 2 }}>
+            <FileUploader
+              files={uploaderFiles}
+              onAddFiles={(newFiles) => {
+                const items: FileUploaderItem[] = newFiles.map((f, i) => ({
+                  id: `${Date.now()}-${i}`,
+                  name: f.name,
+                  size: f.size,
+                }));
+                setUploaderFiles((prev) => [...prev, ...items]);
+              }}
+              onRemoveFile={(id) =>
+                setUploaderFiles((prev) => prev.filter((f) => f.id !== id))
+              }
+              accept=".png,.jpg,.mov,.pdf,.txt"
+              helpText="PNG, JPG, MOV, PDF, TXT"
+            />
+          </Box>
+
           {/* HorizontalScroll */}
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             HorizontalScroll

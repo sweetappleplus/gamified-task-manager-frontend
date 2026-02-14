@@ -1,4 +1,5 @@
 export * from "./BalanceCard";
+export * from "./FileUploader";
 export * from "./OTPInput";
 export * from "./NotificationItem";
 export * from "./SidebarNavItem";
