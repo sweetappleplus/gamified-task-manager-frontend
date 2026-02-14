@@ -21,6 +21,9 @@ export const taskDetailStyles: Record<string, SxProps<Theme>> = {
     width: { xs: "100%", smd: 343 },
     flexShrink: 0,
   },
+  submissionHistory: {
+    mt: { xs: "32px", lg: "24px" },
+  },
   rewardsEconomics: {
     mt: { xs: "32px", lg: "24px" },
   },

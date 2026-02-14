@@ -9,6 +9,7 @@ import {
   RemainingTime,
   StepsDescription,
   Text,
+  SubmissionHistory,
 } from "components";
 import { ROUTES } from "consts";
 import { TASK_STATUSES, TaskStatus } from "types";
@@ -131,6 +132,13 @@ const TaskDetail = () => {
             assigneeLeafText={assigneeLeafText}
             onAttachmentsClick={handleDownloadFiles}
           />
+
+          {task.submissions && task.submissions.length > 0 && (
+            <SubmissionHistory
+              submissions={task.submissions}
+              sx={taskDetailStyles.submissionHistory}
+            />
+          )}
 
           {showEconomics && (
             <>
