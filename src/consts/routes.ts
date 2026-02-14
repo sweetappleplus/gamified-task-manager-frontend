@@ -10,6 +10,7 @@ import LevelConfigsPage from "pages/admin/LevelConfigs";
 import AdminTasksPage from "pages/admin/Tasks";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
+import StartWorkPage from "pages/StartWork";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -60,7 +61,7 @@ export const ROUTES: Record<string, RouteConfig> = {
   },
   START_WORK: {
     path: "/start-work",
-    component: PlaceholderPage,
+    component: StartWorkPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN, USER_ROLES.WORKER],
   },
