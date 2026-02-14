@@ -133,7 +133,7 @@ const SystemSettings = () => {
                     Description
                   </TableCell>
                   <TableCell sx={systemSettingsStyles.tableHeadCell}>
-                    Created
+                    Updated
                   </TableCell>
                   <TableCell
                     sx={systemSettingsStyles.tableHeadCell}
@@ -156,7 +156,7 @@ const SystemSettings = () => {
                       {setting.description || "—"}
                     </TableCell>
                     <TableCell sx={systemSettingsStyles.tableCell}>
-                      {formatDate(setting.createdAt)}
+                      {formatDate(setting.updatedAt)}
                     </TableCell>
                     <TableCell
                       sx={systemSettingsStyles.tableCell}
