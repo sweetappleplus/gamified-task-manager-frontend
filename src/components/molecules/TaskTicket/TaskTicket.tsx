@@ -83,10 +83,15 @@ const RewardRow = styled(Box)({
 const getProgress = (task: TaskTicketProps["task"]): number => {
   if (task.status === TASK_STATUSES.PENDING) return 0;
 
-  if (!task.startedAt || task.timeToCompleteMin <= 0) return 0;
+  if (!task.startedAt || !task.deadline) return 0;
 
-  const elapsed = Date.now() - new Date(task.startedAt).getTime();
-  const totalMs = task.timeToCompleteMin * 60 * 1000;
+  const startMs = new Date(task.startedAt).getTime();
+  const deadlineMs = new Date(task.deadline).getTime();
+  const totalMs = deadlineMs - startMs;
+
+  if (totalMs <= 0) return 100;
+
+  const elapsed = Date.now() - startMs;
   return Math.min(100, Math.round((elapsed / totalMs) * 100));
 };
 
