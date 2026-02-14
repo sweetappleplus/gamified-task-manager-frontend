@@ -52,7 +52,7 @@ import {
   TaskDescription,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
-import { useToast } from "hooks";
+import { useToast, useModal } from "hooks";
 import {
   Task,
   TASK_STATUSES,
@@ -145,6 +145,7 @@ const mockTasks: Task[] = [
 
 const UIKit = () => {
   const { showToast } = useToast();
+  const { openModal } = useModal();
 
   return (
     <Box sx={uikitStyles.container}>
@@ -527,6 +528,70 @@ const UIKit = () => {
               </Box>
             ))}
           </Box>
+          {/* Modal */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Modal
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <Button
+                variant="primary"
+                size="small"
+                text="Open Modal"
+                onClick={() =>
+                  openModal({
+                    title: "Complete Task",
+                    body: (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 2,
+                        }}
+                      >
+                        <Typography sx={{ fontWeight: 600, fontSize: 14 }}>
+                          Upload the File
+                        </Typography>
+                        <Typography
+                          sx={{ color: "grayscale.500", fontSize: 14 }}
+                        >
+                          This is the modal body content. You can place any
+                          component here.
+                        </Typography>
+                      </Box>
+                    ),
+                    footer: (
+                      <Button
+                        variant="primary"
+                        text="Complete Task"
+                        fullWidth
+                      />
+                    ),
+                  })
+                }
+              />
+              <Typography sx={uikitStyles.caseLabel}>with footer</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <Button
+                variant="gray"
+                size="small"
+                text="No Footer"
+                onClick={() =>
+                  openModal({
+                    title: "Information",
+                    body: (
+                      <Typography sx={{ color: "grayscale.500", fontSize: 14 }}>
+                        This modal has no footer section.
+                      </Typography>
+                    ),
+                  })
+                }
+              />
+              <Typography sx={uikitStyles.caseLabel}>no footer</Typography>
+            </Box>
+          </Box>
+
           {/* Text */}
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             Text
