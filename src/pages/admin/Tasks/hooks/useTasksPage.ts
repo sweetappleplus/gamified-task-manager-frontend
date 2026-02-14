@@ -95,7 +95,6 @@ export const useTasksPage = () => {
     deleteTask,
     assignTask,
     reviewTask,
-    markTaskPaid,
     cancelTask,
     bulkCreateTasks,
     bulkAssignTasks,
@@ -113,7 +112,6 @@ export const useTasksPage = () => {
   const [detailTarget, setDetailTarget] = useState<Task | null>(null);
   const [cancelTarget, setCancelTarget] = useState<Task | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Task | null>(null);
-  const [markPaidTarget, setMarkPaidTarget] = useState<Task | null>(null);
   const [workers, setWorkers] = useState<User[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bulkGenerateOpen, setBulkGenerateOpen] = useState(false);
@@ -232,14 +230,6 @@ export const useTasksPage = () => {
 
   const closeDeleteDialog = useCallback(() => {
     setDeleteTarget(null);
-  }, []);
-
-  const openMarkPaidDialog = useCallback((task: Task) => {
-    setMarkPaidTarget(task);
-  }, []);
-
-  const closeMarkPaidDialog = useCallback(() => {
-    setMarkPaidTarget(null);
   }, []);
 
   const openBulkGenerateDialog = useCallback(() => {
@@ -392,23 +382,6 @@ export const useTasksPage = () => {
     }
   }, [cancelTarget, cancelTask, showToast, closeCancelDialog]);
 
-  const handleMarkPaid = useCallback(async () => {
-    if (!markPaidTarget) return;
-    setIsSubmitting(true);
-    try {
-      const response = await markTaskPaid(markPaidTarget.id);
-      showToast({ variant: "success", message: response.message });
-      closeMarkPaidDialog();
-    } catch (error: unknown) {
-      showToast({
-        variant: "error",
-        message: getErrorMessage(error, "Failed to mark task as paid"),
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [markPaidTarget, markTaskPaid, showToast, closeMarkPaidDialog]);
-
   const handleBulkGenerate = useCallback(
     async (
       data: BulkCreateTasksRequest,
@@ -509,7 +482,6 @@ export const useTasksPage = () => {
     detailTarget,
     cancelTarget,
     deleteTarget,
-    markPaidTarget,
     bulkGenerateOpen,
 
     // Dialog controls
@@ -526,8 +498,6 @@ export const useTasksPage = () => {
     closeCancelDialog,
     openDeleteDialog,
     closeDeleteDialog,
-    openMarkPaidDialog,
-    closeMarkPaidDialog,
     openBulkGenerateDialog,
     closeBulkGenerateDialog,
 
@@ -538,7 +508,6 @@ export const useTasksPage = () => {
     handleAssign,
     handleReview,
     handleCancel,
-    handleMarkPaid,
     handleBulkGenerate,
     handleFilterChange,
     handlePageChange,

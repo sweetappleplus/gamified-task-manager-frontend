@@ -21,7 +21,6 @@ export const useAdminTaskDetailPage = () => {
     assignTask: assignTaskAction,
     cancelTask: cancelTaskAction,
     deleteTask: deleteTaskAction,
-    markTaskPaid: markTaskPaidAction,
   } = useTask();
 
   const [task, setTask] = useState<Task | null>(null);
@@ -34,7 +33,6 @@ export const useAdminTaskDetailPage = () => {
   const [assignTarget, setAssignTarget] = useState<Task | null>(null);
   const [cancelTarget, setCancelTarget] = useState<Task | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Task | null>(null);
-  const [markPaidTarget, setMarkPaidTarget] = useState<Task | null>(null);
 
   const fetchTask = useCallback(async () => {
     if (!id) return;
@@ -102,14 +100,6 @@ export const useAdminTaskDetailPage = () => {
 
   const closeDeleteDialog = useCallback(() => {
     setDeleteTarget(null);
-  }, []);
-
-  const openMarkPaidDialog = useCallback(() => {
-    if (task) setMarkPaidTarget(task);
-  }, [task]);
-
-  const closeMarkPaidDialog = useCallback(() => {
-    setMarkPaidTarget(null);
   }, []);
 
   // Action handlers
@@ -196,24 +186,6 @@ export const useAdminTaskDetailPage = () => {
     }
   }, [task, deleteTaskAction, showToast, closeDeleteDialog, navigate]);
 
-  const handleMarkPaid = useCallback(async () => {
-    if (!task) return;
-    setIsSubmitting(true);
-    try {
-      const response = await markTaskPaidAction(task.id);
-      showToast({ variant: "success", message: response.message });
-      closeMarkPaidDialog();
-      await fetchTask();
-    } catch (error: unknown) {
-      showToast({
-        variant: "error",
-        message: getErrorMessage(error, "Failed to mark task as paid"),
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [task, markTaskPaidAction, showToast, closeMarkPaidDialog, fetchTask]);
-
   const handleBack = useCallback(() => {
     if (window.history.length > 1) {
       navigate(-1);
@@ -233,7 +205,6 @@ export const useAdminTaskDetailPage = () => {
     assignTarget,
     cancelTarget,
     deleteTarget,
-    markPaidTarget,
 
     // Dialog controls
     openReviewDialog,
@@ -244,15 +215,12 @@ export const useAdminTaskDetailPage = () => {
     closeCancelDialog,
     openDeleteDialog,
     closeDeleteDialog,
-    openMarkPaidDialog,
-    closeMarkPaidDialog,
 
     // Handlers
     handleReview,
     handleAssign,
     handleCancel,
     handleDelete,
-    handleMarkPaid,
     handleBack,
   };
 };

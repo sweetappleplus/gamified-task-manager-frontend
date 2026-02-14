@@ -45,7 +45,6 @@ const AdminTaskDetail = () => {
     assignTarget,
     cancelTarget,
     deleteTarget,
-    markPaidTarget,
     openReviewDialog,
     closeReviewDialog,
     openAssignDialog,
@@ -54,13 +53,10 @@ const AdminTaskDetail = () => {
     closeCancelDialog,
     openDeleteDialog,
     closeDeleteDialog,
-    openMarkPaidDialog,
-    closeMarkPaidDialog,
     handleReview,
     handleAssign,
     handleCancel,
     handleDelete,
-    handleMarkPaid,
     handleBack,
   } = useAdminTaskDetailPage();
 
@@ -154,19 +150,6 @@ const AdminTaskDetail = () => {
             onClick={openReviewDialog}
           >
             Review
-          </Button>
-        );
-        break;
-
-      case TASK_STATUSES.COMPLETED:
-        actions.push(
-          <Button
-            key="markPaid"
-            variant="contained"
-            color="success"
-            onClick={openMarkPaidDialog}
-          >
-            Mark Paid
           </Button>
         );
         break;
@@ -563,17 +546,6 @@ const AdminTaskDetail = () => {
         isSubmitting={isSubmitting}
         onClose={closeDeleteDialog}
         onConfirm={handleDelete}
-      />
-
-      <ConfirmDialog
-        open={markPaidTarget !== null}
-        title="Mark as Paid"
-        message={`Mark "${task.title}" as paid? This will finalize the task payment.`}
-        confirmLabel="Mark Paid"
-        confirmColor="primary"
-        isSubmitting={isSubmitting}
-        onClose={closeMarkPaidDialog}
-        onConfirm={handleMarkPaid}
       />
     </AdminLayout>
   );

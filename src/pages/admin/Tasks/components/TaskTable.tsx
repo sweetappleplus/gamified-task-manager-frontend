@@ -21,7 +21,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-import PaidIcon from "@mui/icons-material/Paid";
 import CancelIcon from "@mui/icons-material/Cancel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link as RouterLink } from "react-router-dom";
@@ -48,7 +47,6 @@ type TaskTableProps = {
   onDelete: (task: Task) => void;
   onAssign: (task: Task) => void;
   onReview: (task: Task) => void;
-  onMarkPaid: (task: Task) => void;
   onCancel: (task: Task) => void;
   onViewDetail: (task: Task) => void;
 };
@@ -68,7 +66,6 @@ const TaskTable = ({
   onDelete,
   onAssign,
   onReview,
-  onMarkPaid,
   onCancel,
   onViewDetail,
 }: TaskTableProps) => {
@@ -209,20 +206,6 @@ const TaskTable = ({
               sx={{ color: "primary.main" }}
             >
               <RateReviewIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-        );
-        break;
-
-      case TASK_STATUSES.COMPLETED:
-        actions.push(
-          <Tooltip title="Mark Paid" key="paid">
-            <IconButton
-              size="small"
-              onClick={() => onMarkPaid(task)}
-              sx={{ color: "additional.green.main" }}
-            >
-              <PaidIcon fontSize="small" />
             </IconButton>
           </Tooltip>
         );

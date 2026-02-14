@@ -33,7 +33,6 @@ const Tasks = () => {
     detailTarget,
     cancelTarget,
     deleteTarget,
-    markPaidTarget,
     bulkGenerateOpen,
     openCreateDialog,
     openEditDialog,
@@ -48,8 +47,6 @@ const Tasks = () => {
     closeCancelDialog,
     openDeleteDialog,
     closeDeleteDialog,
-    openMarkPaidDialog,
-    closeMarkPaidDialog,
     openBulkGenerateDialog,
     closeBulkGenerateDialog,
     handleCreate,
@@ -58,7 +55,6 @@ const Tasks = () => {
     handleAssign,
     handleReview,
     handleCancel,
-    handleMarkPaid,
     handleBulkGenerate,
     handleFilterChange,
     handlePageChange,
@@ -113,7 +109,6 @@ const Tasks = () => {
           onDelete={openDeleteDialog}
           onAssign={openAssignDialog}
           onReview={openReviewDialog}
-          onMarkPaid={openMarkPaidDialog}
           onCancel={openCancelDialog}
           onViewDetail={openDetailDialog}
         />
@@ -173,17 +168,6 @@ const Tasks = () => {
           isSubmitting={isSubmitting}
           onClose={closeDeleteDialog}
           onConfirm={handleDelete}
-        />
-
-        <ConfirmDialog
-          open={markPaidTarget !== null}
-          title="Mark as Paid"
-          message={`Mark "${markPaidTarget?.title}" as paid? This will finalize the task payment.`}
-          confirmLabel="Mark Paid"
-          confirmColor="primary"
-          isSubmitting={isSubmitting}
-          onClose={closeMarkPaidDialog}
-          onConfirm={handleMarkPaid}
         />
 
         <BulkGenerateTasksDialog
