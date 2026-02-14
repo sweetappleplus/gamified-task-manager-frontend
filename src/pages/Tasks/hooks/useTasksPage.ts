@@ -177,7 +177,7 @@ export const useTasksPage = () => {
 
   useEffect(() => {
     loadInitial(search, activeFilter);
-  }, [activeFilter]);
+  }, [activeFilter, loadInitial, search]);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

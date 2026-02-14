@@ -133,7 +133,7 @@ export const useTasksPage = () => {
       return { ...defaults, ...urlFilters };
     }
     return { ...defaults, ...filters };
-  }, []);
+  }, [filters, searchParams]);
 
   useEffect(() => {
     if (!initialized) {
