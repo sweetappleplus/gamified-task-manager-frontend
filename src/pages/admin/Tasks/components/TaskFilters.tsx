@@ -18,21 +18,29 @@ import {
   TaskStatus,
   TaskPriority,
   TaskType,
+  User,
 } from "types";
 import { tasksStyles } from "../Tasks.styles";
 
 type TaskFiltersProps = {
   filters: TaskFilterParams;
   categories: TaskCategory[];
+  workers: User[];
   onFilterChange: (filters: TaskFilterParams) => void;
 };
 
 const TaskFilters = ({
   filters,
   categories,
+  workers,
   onFilterChange,
 }: TaskFiltersProps) => {
   const [searchValue, setSearchValue] = useState(filters.search ?? "");
+
+  // Sync search input when filters change externally (e.g., URL init)
+  useEffect(() => {
+    setSearchValue(filters.search ?? "");
+  }, [filters.search]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -57,6 +65,7 @@ const TaskFilters = ({
     filters.priority ||
     filters.type ||
     filters.categoryId ||
+    filters.assignedUserId ||
     filters.search;
 
   return (
@@ -152,6 +161,28 @@ const TaskFilters = ({
           {categories.map((c) => (
             <MenuItem key={c.id} value={c.id}>
               {c.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl size="small" sx={tasksStyles.filterSelect}>
+        <InputLabel>Assigned To</InputLabel>
+        <Select
+          value={filters.assignedUserId ?? ""}
+          label="Assigned To"
+          onChange={(e) =>
+            onFilterChange({
+              ...filters,
+              assignedUserId: (e.target.value as string) || undefined,
+              page: 1,
+            })
+          }
+        >
+          <MenuItem value="">All</MenuItem>
+          {workers.map((w) => (
+            <MenuItem key={w.id} value={w.id}>
+              {w.name || w.email}
             </MenuItem>
           ))}
         </Select>
