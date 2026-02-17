@@ -34,6 +34,7 @@ import {
   PatternPanel,
   Spinner,
   SpinnerSize,
+  Skeleton,
   SidebarNavItem,
   SidebarLinks,
   FooterNavButton,
@@ -864,6 +865,17 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Spinner message="" />
               <Typography sx={uikitStyles.caseLabel}>no message</Typography>
+            </Box>
+          </Box>
+
+          {/* Skeleton */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Skeleton
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <Skeleton />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
           </Box>
 
