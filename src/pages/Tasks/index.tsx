@@ -7,6 +7,7 @@ import {
   Spinner,
   WorkerLayout,
   HorizontalScroll,
+  EmptyState,
 } from "components";
 import { ROUTES } from "consts";
 import { useTasksPage } from "./hooks";
@@ -73,9 +74,7 @@ const Tasks = () => {
         )}
 
         {!isLoading && tasks.length === 0 && (
-          <Box sx={tasksStyles.emptyState}>
-            <Text variant="bodyMuted">No tasks found</Text>
-          </Box>
+          <EmptyState sx={tasksStyles.emptyState} />
         )}
       </Box>
     </WorkerLayout>
