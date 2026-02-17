@@ -33,6 +33,7 @@ export const API_URL_TASKS_BULK_ASSIGN = "/tasks/bulk-assign";
 
 export const API_URL_USERS = "/users";
 export const API_URL_USERS_ME = "/users/me";
+export const API_URL_USERS_STATUS = "/users/:id/status";
 
 export const PUBLIC_ENDPOINTS = [
   API_URL_AUTH_SEND_OTP,
