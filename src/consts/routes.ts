@@ -9,6 +9,7 @@ import SystemSettingsPage from "pages/admin/SystemSettings";
 import LevelConfigsPage from "pages/admin/LevelConfigs";
 import AdminTasksPage from "pages/admin/Tasks";
 import AdminTaskDetailPage from "pages/admin/TaskDetail";
+import AdminWorkersPage from "pages/admin/Workers";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
 import StartWorkPage from "pages/StartWork";
@@ -99,6 +100,12 @@ export const ROUTES: Record<string, RouteConfig> = {
   ADMIN_TASK_DETAIL: {
     path: "/admin/tasks/:id",
     component: AdminTaskDetailPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
+  ADMIN_WORKERS: {
+    path: "/admin/workers",
+    component: AdminWorkersPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
@@ -194,6 +201,11 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
     icon: "file" as const,
     label: "Tasks",
     route: ROUTES.ADMIN_TASKS.path,
+  },
+  {
+    icon: "user-square" as const,
+    label: "Workers",
+    route: ROUTES.ADMIN_WORKERS.path,
   },
   {
     icon: "star" as const,
