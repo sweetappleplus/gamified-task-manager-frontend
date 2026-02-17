@@ -35,6 +35,7 @@ import {
   Spinner,
   SpinnerSize,
   Skeleton,
+  EmptyState,
   SidebarNavItem,
   SidebarLinks,
   FooterNavButton,
@@ -1003,6 +1004,14 @@ const UIKit = () => {
           </Typography>
           <Box sx={{ width: 500, mb: 2 }}>
             <SubmissionHistory submissions={mockSubmissions} />
+          </Box>
+
+          {/* EmptyState */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            EmptyState
+          </Typography>
+          <Box sx={{ mb: 2 }}>
+            <EmptyState />
           </Box>
 
           {/* TimeCounter */}
