@@ -142,9 +142,10 @@ export const useWorkersPage = () => {
 
   const handleFilterChange = useCallback(
     (newFilters: FilterUsersParams) => {
-      changeFilters(newFilters);
-      setSearchParams(buildSearchParams(newFilters), { replace: true });
-      fetchUsers(newFilters).catch((error: unknown) => {
+      const filtersWithRole = { ...newFilters, role: USER_ROLES.WORKER };
+      changeFilters(filtersWithRole);
+      setSearchParams(buildSearchParams(filtersWithRole), { replace: true });
+      fetchUsers(filtersWithRole).catch((error: unknown) => {
         showToast({
           variant: "error",
           message: getErrorMessage(error, "Failed to load workers"),
