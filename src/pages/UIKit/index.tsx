@@ -57,6 +57,7 @@ import {
   FileUploader,
   FileUploaderItem,
   SubmissionHistory,
+  UserSelectField,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -128,6 +129,39 @@ const mockAdminUser: User = {
   name: "Anna Smith",
   role: USER_ROLES.SUPER_ADMIN,
 };
+
+const mockUsers: User[] = [
+  {
+    id: "u1",
+    email: "konstantin@example.com",
+    name: "Konstantin Konstantinov",
+    role: USER_ROLES.WORKER,
+  },
+  {
+    id: "u2",
+    email: "admin@example.com",
+    name: "Anna Smith",
+    role: USER_ROLES.SUPER_ADMIN,
+  },
+  {
+    id: "u3",
+    email: "john.doe@example.com",
+    name: "John Doe",
+    role: USER_ROLES.WORKER,
+  },
+  {
+    id: "u4",
+    email: "jane.wilson@example.com",
+    name: "Jane Wilson",
+    role: USER_ROLES.WORKER,
+  },
+  {
+    id: "u5",
+    email: "mike.chen@example.com",
+    name: "Mike Chen",
+    role: USER_ROLES.WORKER,
+  },
+];
 
 const mockSubmissions: TaskSubmission[] = [
   {
@@ -207,6 +241,8 @@ const UIKit = () => {
     { id: "1", name: "IMG_6912.MOV", size: 2516582 },
     { id: "2", name: "IMG_6912.PNG", size: 1153434 },
   ]);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
 
   return (
     <Box sx={uikitStyles.container}>
@@ -1004,6 +1040,75 @@ const UIKit = () => {
           </Typography>
           <Box sx={{ width: 500, mb: 2 }}>
             <SubmissionHistory submissions={mockSubmissions} />
+          </Box>
+
+          {/* UserSelectField */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            UserSelectField
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={uikitStyles.caseItem}>
+              <UserSelectField
+                label="Assign To"
+                placeholder="Search user..."
+                width={400}
+                value={selectedUser}
+                onChange={setSelectedUser}
+                users={mockUsers}
+                isLoading={false}
+                hasMore={false}
+                onLoadMore={() => {}}
+                onSearch={() => {}}
+              />
+              <Typography sx={uikitStyles.caseLabel}>single select</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <UserSelectField
+                multiple
+                label="Workers"
+                placeholder="Search workers..."
+                width={400}
+                value={selectedUsers}
+                onChange={setSelectedUsers}
+                users={mockUsers}
+                isLoading={false}
+                hasMore={false}
+                onLoadMore={() => {}}
+                onSearch={() => {}}
+              />
+              <Typography sx={uikitStyles.caseLabel}>
+                multiple select
+              </Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <UserSelectField
+                label="Disabled"
+                width={400}
+                value={null}
+                onChange={() => {}}
+                users={mockUsers}
+                isLoading={false}
+                hasMore={false}
+                onLoadMore={() => {}}
+                onSearch={() => {}}
+                disabled
+              />
+              <Typography sx={uikitStyles.caseLabel}>disabled</Typography>
+            </Box>
+            <Box sx={uikitStyles.caseItem}>
+              <UserSelectField
+                label="Loading"
+                width={400}
+                value={null}
+                onChange={() => {}}
+                users={[]}
+                isLoading={true}
+                hasMore={true}
+                onLoadMore={() => {}}
+                onSearch={() => {}}
+              />
+              <Typography sx={uikitStyles.caseLabel}>loading</Typography>
+            </Box>
           </Box>
 
           {/* EmptyState */}
