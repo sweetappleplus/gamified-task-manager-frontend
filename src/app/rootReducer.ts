@@ -5,6 +5,7 @@ import { systemSettingReducer } from "features/system-setting";
 import { levelConfigReducer } from "features/level-config";
 import { taskReducer } from "features/task";
 import { notificationReducer } from "features/notification";
+import { userReducer } from "features/user";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   levelConfig: levelConfigReducer,
   task: taskReducer,
   notification: notificationReducer,
+  user: userReducer,
 });
 
 export default rootReducer;
