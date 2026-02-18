@@ -24,7 +24,6 @@ const Tasks = () => {
     isLoading,
     filters,
     categories,
-    workers,
     isSubmitting,
     dialogMode,
     selectedTask,
@@ -90,7 +89,6 @@ const Tasks = () => {
         <TaskFilters
           filters={filters}
           categories={categories}
-          workers={workers}
           onFilterChange={handleFilterChange}
         />
 
@@ -118,7 +116,6 @@ const Tasks = () => {
           mode={dialogMode === "edit" ? "edit" : "create"}
           task={selectedTask}
           categories={categories}
-          workers={workers}
           isSubmitting={isSubmitting}
           onClose={closeDialog}
           onCreate={handleCreate}
@@ -128,7 +125,6 @@ const Tasks = () => {
         <AssignTaskDialog
           open={assignTarget !== null}
           task={assignTarget}
-          workers={workers}
           isSubmitting={isSubmitting}
           onClose={closeAssignDialog}
           onAssign={handleAssign}
@@ -173,7 +169,6 @@ const Tasks = () => {
         <BulkGenerateTasksDialog
           open={bulkGenerateOpen}
           categories={categories}
-          workers={workers}
           isSubmitting={isSubmitting}
           onClose={closeBulkGenerateDialog}
           onGenerate={handleBulkGenerate}

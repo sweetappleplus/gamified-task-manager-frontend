@@ -1,16 +1,10 @@
 import { useState, useCallback, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getTaskByIdApi, getUsersApi } from "services";
+import { getTaskByIdApi } from "services";
 import { useTask } from "features/task";
 import { useToast } from "hooks";
 import { getErrorMessage } from "utils";
-import {
-  Task,
-  User,
-  USER_ROLES,
-  ReviewTaskRequest,
-  AssignTaskRequest,
-} from "types";
+import { Task, ReviewTaskRequest, AssignTaskRequest } from "types";
 
 export const useAdminTaskDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +19,6 @@ export const useAdminTaskDetailPage = () => {
 
   const [task, setTask] = useState<Task | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [workers, setWorkers] = useState<User[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Dialog targets
@@ -55,19 +48,6 @@ export const useAdminTaskDetailPage = () => {
   useEffect(() => {
     fetchTask();
   }, [fetchTask]);
-
-  useEffect(() => {
-    getUsersApi({ role: USER_ROLES.WORKER })
-      .then((res) => {
-        if (res.data) setWorkers(res.data);
-      })
-      .catch((error: unknown) => {
-        showToast({
-          variant: "error",
-          message: getErrorMessage(error, "Failed to load workers"),
-        });
-      });
-  }, [showToast]);
 
   // Dialog openers/closers
   const openReviewDialog = useCallback(() => {
@@ -197,7 +177,6 @@ export const useAdminTaskDetailPage = () => {
   return {
     task,
     isLoading,
-    workers,
     isSubmitting,
 
     // Dialog targets

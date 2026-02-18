@@ -4,7 +4,7 @@ import { useTask } from "features/task";
 import { useTaskCategory } from "features/task-category";
 import { useToast } from "hooks";
 import { getErrorMessage } from "utils";
-import { getUsersApi, uploadTaskFilesApi, deleteTaskFileApi } from "services";
+import { uploadTaskFilesApi, deleteTaskFileApi } from "services";
 import {
   Task,
   CreateTaskRequest,
@@ -16,8 +16,6 @@ import {
   TaskType,
   TaskSortBy,
   TaskSortOrder,
-  User,
-  USER_ROLES,
 } from "types";
 
 type DialogMode = "create" | "edit" | null;
@@ -112,7 +110,6 @@ export const useTasksPage = () => {
   const [detailTarget, setDetailTarget] = useState<Task | null>(null);
   const [cancelTarget, setCancelTarget] = useState<Task | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Task | null>(null);
-  const [workers, setWorkers] = useState<User[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bulkGenerateOpen, setBulkGenerateOpen] = useState(false);
   const [initialized, setInitialized] = useState(false);
@@ -162,19 +159,6 @@ export const useTasksPage = () => {
       });
     });
   }, [fetchCategories, showToast]);
-
-  useEffect(() => {
-    getUsersApi({ role: USER_ROLES.WORKER })
-      .then((res) => {
-        if (res.data) setWorkers(res.data);
-      })
-      .catch((error: unknown) => {
-        showToast({
-          variant: "error",
-          message: getErrorMessage(error, "Failed to load workers"),
-        });
-      });
-  }, [showToast]);
 
   // Dialog openers
   const openCreateDialog = useCallback(() => {
@@ -471,7 +455,6 @@ export const useTasksPage = () => {
     isLoading,
     filters,
     categories,
-    workers,
     isSubmitting,
 
     // Dialog states

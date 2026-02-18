@@ -13,8 +13,6 @@ import {
   Select,
   MenuItem,
   Typography,
-  Checkbox,
-  ListItemText,
   Divider,
   Chip,
 } from "@mui/material";
@@ -30,13 +28,15 @@ import {
   TaskPriority,
   TaskType,
   BulkCreateTasksRequest,
+  USER_ROLES,
 } from "types";
+import { useUserSelect } from "hooks";
+import { UserSelectField } from "components";
 import { tasksStyles } from "../Tasks.styles";
 
 type BulkGenerateTasksDialogProps = {
   open: boolean;
   categories: TaskCategory[];
-  workers: User[];
   isSubmitting: boolean;
   onClose: () => void;
   onGenerate: (
@@ -49,7 +49,6 @@ type BulkGenerateTasksDialogProps = {
 const BulkGenerateTasksDialog = ({
   open,
   categories,
-  workers,
   isSubmitting,
   onClose,
   onGenerate,
@@ -74,7 +73,8 @@ const BulkGenerateTasksDialog = ({
     number | undefined
   >(undefined);
   const [categoryId, setCategoryId] = useState("");
-  const [selectedWorkerIds, setSelectedWorkerIds] = useState<string[]>([]);
+  const [selectedWorkers, setSelectedWorkers] = useState<User[]>([]);
+  const userSelect = useUserSelect({ role: USER_ROLES.WORKER });
   const [files, setFiles] = useState<File[]>([]);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const BulkGenerateTasksDialog = ({
       setDeadline("");
       setMaxSubmissionDelayMin(undefined);
       setCategoryId("");
-      setSelectedWorkerIds([]);
+      setSelectedWorkers([]);
       setFiles([]);
     }
   }, [open]);
@@ -160,7 +160,11 @@ const BulkGenerateTasksDialog = ({
       categoryId,
     };
 
-    onGenerate(data, selectedWorkerIds, files);
+    onGenerate(
+      data,
+      selectedWorkers.map((w) => w.id),
+      files
+    );
   };
 
   return (
@@ -406,43 +410,18 @@ const BulkGenerateTasksDialog = ({
           receive a copy of every task.
         </Typography>
 
-        <FormControl fullWidth sx={tasksStyles.selectField}>
-          <InputLabel>Workers</InputLabel>
-          <Select
-            multiple
-            value={selectedWorkerIds}
-            label="Workers"
-            onChange={(e) => {
-              const value = e.target.value;
-              setSelectedWorkerIds(
-                typeof value === "string" ? value.split(",") : value
-              );
-            }}
-            renderValue={(selected) => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {selected.map((id) => {
-                  const worker = workers.find((w) => w.id === id);
-                  return (
-                    <Chip
-                      key={id}
-                      label={worker?.name || worker?.email || id}
-                      size="small"
-                    />
-                  );
-                })}
-              </Box>
-            )}
-          >
-            {workers.map((w) => (
-              <MenuItem key={w.id} value={w.id}>
-                <Checkbox checked={selectedWorkerIds.includes(w.id)} />
-                <ListItemText
-                  primary={w.name ? `${w.name} (${w.email})` : w.email}
-                />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <UserSelectField
+          multiple
+          users={userSelect.users}
+          isLoading={userSelect.isLoading}
+          hasMore={userSelect.hasMore}
+          onLoadMore={userSelect.loadMore}
+          onSearch={userSelect.setSearch}
+          value={selectedWorkers}
+          onChange={setSelectedWorkers}
+          label="Workers"
+          size="medium"
+        />
       </DialogContent>
       <DialogActions sx={tasksStyles.dialogActions}>
         <Button onClick={onClose} color="inherit">

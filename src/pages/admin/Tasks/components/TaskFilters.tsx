@@ -19,23 +19,26 @@ import {
   TaskPriority,
   TaskType,
   User,
+  USER_ROLES,
 } from "types";
+import { useUserSelect } from "hooks";
+import { UserSelectField } from "components";
 import { tasksStyles } from "../Tasks.styles";
 
 type TaskFiltersProps = {
   filters: TaskFilterParams;
   categories: TaskCategory[];
-  workers: User[];
   onFilterChange: (filters: TaskFilterParams) => void;
 };
 
 const TaskFilters = ({
   filters,
   categories,
-  workers,
   onFilterChange,
 }: TaskFiltersProps) => {
   const [searchValue, setSearchValue] = useState(filters.search ?? "");
+  const [selectedWorker, setSelectedWorker] = useState<User | null>(null);
+  const userSelect = useUserSelect({ role: USER_ROLES.WORKER });
 
   // Sync search input when filters change externally (e.g., URL init)
   useEffect(() => {
@@ -55,8 +58,15 @@ const TaskFilters = ({
     return () => clearTimeout(timeout);
   }, [searchValue, filters, onFilterChange]);
 
+  useEffect(() => {
+    if (!filters.assignedUserId) {
+      setSelectedWorker(null);
+    }
+  }, [filters.assignedUserId]);
+
   const handleClear = () => {
     setSearchValue("");
+    setSelectedWorker(null);
     onFilterChange({
       page: 1,
       limit: filters.limit,
@@ -171,27 +181,25 @@ const TaskFilters = ({
         </Select>
       </FormControl>
 
-      <FormControl size="small" sx={tasksStyles.filterSelect}>
-        <InputLabel>Assigned To</InputLabel>
-        <Select
-          value={filters.assignedUserId ?? ""}
-          label="Assigned To"
-          onChange={(e) =>
+      <Box sx={{ minWidth: 200 }}>
+        <UserSelectField
+          users={userSelect.users}
+          isLoading={userSelect.isLoading}
+          hasMore={userSelect.hasMore}
+          onLoadMore={userSelect.loadMore}
+          onSearch={userSelect.setSearch}
+          value={selectedWorker}
+          onChange={(worker) => {
+            setSelectedWorker(worker);
             onFilterChange({
               ...filters,
-              assignedUserId: (e.target.value as string) || undefined,
+              assignedUserId: worker?.id || undefined,
               page: 1,
-            })
-          }
-        >
-          <MenuItem value="">All</MenuItem>
-          {workers.map((w) => (
-            <MenuItem key={w.id} value={w.id}>
-              {w.name || w.email}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+            });
+          }}
+          label="Assigned To"
+        />
+      </Box>
 
       {hasActiveFilters && (
         <Button

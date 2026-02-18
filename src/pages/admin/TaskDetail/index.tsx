@@ -38,7 +38,6 @@ const AdminTaskDetail = () => {
   const {
     task,
     isLoading,
-    workers,
     isSubmitting,
     reviewTarget,
     assignTarget,
@@ -393,7 +392,6 @@ const AdminTaskDetail = () => {
       <AssignTaskDialog
         open={assignTarget !== null}
         task={assignTarget}
-        workers={workers}
         isSubmitting={isSubmitting}
         onClose={closeAssignDialog}
         onAssign={handleAssign}

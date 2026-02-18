@@ -30,7 +30,10 @@ import {
   TASK_TYPES,
   TaskPriority,
   TaskType,
+  USER_ROLES,
 } from "types";
+import { useUserSelect } from "hooks";
+import { UserSelectField } from "components";
 import { tasksStyles } from "../Tasks.styles";
 
 type CreateEditTaskDialogProps = {
@@ -38,7 +41,6 @@ type CreateEditTaskDialogProps = {
   mode: "create" | "edit";
   task?: Task | null;
   categories: TaskCategory[];
-  workers: User[];
   isSubmitting: boolean;
   onClose: () => void;
   onCreate: (data: CreateTaskRequest, files: File[]) => void;
@@ -54,7 +56,6 @@ const CreateEditTaskDialog = ({
   mode,
   task,
   categories,
-  workers,
   isSubmitting,
   onClose,
   onCreate,
@@ -77,7 +78,8 @@ const CreateEditTaskDialog = ({
     number | undefined
   >(undefined);
   const [categoryId, setCategoryId] = useState<string>("");
-  const [assignedUserId, setAssignedUserId] = useState<string>("");
+  const [assignedWorker, setAssignedWorker] = useState<User | null>(null);
+  const userSelect = useUserSelect({ role: USER_ROLES.WORKER });
   const [files, setFiles] = useState<File[]>([]);
   const [existingFiles, setExistingFiles] = useState<BackendFile[]>([]);
   const [deletedFileIds, setDeletedFileIds] = useState<string[]>([]);
@@ -96,7 +98,7 @@ const CreateEditTaskDialog = ({
         setDeadline(task.deadline.slice(0, 16));
         setMaxSubmissionDelayMin(task.maxSubmissionDelayMin);
         setCategoryId(task.categoryId);
-        setAssignedUserId(task.assignedUserId ?? "");
+        setAssignedWorker(null);
         setFiles([]);
         setExistingFiles(task.files ?? []);
         setDeletedFileIds([]);
@@ -112,7 +114,7 @@ const CreateEditTaskDialog = ({
         setDeadline("");
         setMaxSubmissionDelayMin(undefined);
         setCategoryId("");
-        setAssignedUserId("");
+        setAssignedWorker(null);
         setFiles([]);
         setExistingFiles([]);
         setDeletedFileIds([]);
@@ -190,7 +192,7 @@ const CreateEditTaskDialog = ({
         deadline: new Date(deadline).toISOString(),
         maxSubmissionDelayMin: maxSubmissionDelayMin ?? 0,
         categoryId,
-        ...(assignedUserId ? { assignedUserId } : {}),
+        ...(assignedWorker ? { assignedUserId: assignedWorker.id } : {}),
       };
       onCreate(data, files);
     } else {
@@ -394,21 +396,19 @@ const CreateEditTaskDialog = ({
         </FormControl>
 
         {mode === "create" && (
-          <FormControl fullWidth sx={{ ...tasksStyles.selectField, mt: 2 }}>
-            <InputLabel>Assign to Worker (optional)</InputLabel>
-            <Select
-              value={assignedUserId}
+          <Box sx={{ mt: 2 }}>
+            <UserSelectField
+              users={userSelect.users}
+              isLoading={userSelect.isLoading}
+              hasMore={userSelect.hasMore}
+              onLoadMore={userSelect.loadMore}
+              onSearch={userSelect.setSearch}
+              value={assignedWorker}
+              onChange={setAssignedWorker}
               label="Assign to Worker (optional)"
-              onChange={(e) => setAssignedUserId(e.target.value)}
-            >
-              <MenuItem value="">None</MenuItem>
-              {workers.map((w) => (
-                <MenuItem key={w.id} value={w.id}>
-                  {w.name ? `${w.name} (${w.email})` : w.email}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              size="medium"
+            />
+          </Box>
         )}
 
         <Box sx={{ mt: 2 }}>

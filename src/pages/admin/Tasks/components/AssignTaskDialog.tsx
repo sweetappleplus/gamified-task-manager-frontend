@@ -7,20 +7,17 @@ import {
   Button,
   Box,
   IconButton,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Task, User } from "types";
+import { Task, User, USER_ROLES } from "types";
+import { useUserSelect } from "hooks";
+import { UserSelectField } from "components";
 import { tasksStyles } from "../Tasks.styles";
 
 type AssignTaskDialogProps = {
   open: boolean;
   task: Task | null;
-  workers: User[];
   isSubmitting: boolean;
   onClose: () => void;
   onAssign: (assignedUserId: string) => void;
@@ -29,22 +26,22 @@ type AssignTaskDialogProps = {
 const AssignTaskDialog = ({
   open,
   task,
-  workers,
   isSubmitting,
   onClose,
   onAssign,
 }: AssignTaskDialogProps) => {
-  const [selectedWorkerId, setSelectedWorkerId] = useState("");
+  const [selectedWorker, setSelectedWorker] = useState<User | null>(null);
+  const userSelect = useUserSelect({ role: USER_ROLES.WORKER });
 
   const handleClose = () => {
-    setSelectedWorkerId("");
+    setSelectedWorker(null);
     onClose();
   };
 
   const handleAssign = () => {
-    if (selectedWorkerId) {
-      onAssign(selectedWorkerId);
-      setSelectedWorkerId("");
+    if (selectedWorker) {
+      onAssign(selectedWorker.id);
+      setSelectedWorker(null);
     }
   };
 
@@ -68,20 +65,17 @@ const AssignTaskDialog = ({
         <Typography sx={{ color: "grayscale.600", mb: 2 }}>
           Assign &quot;{task?.title}&quot; to a worker
         </Typography>
-        <FormControl fullWidth sx={tasksStyles.selectField}>
-          <InputLabel>Worker *</InputLabel>
-          <Select
-            value={selectedWorkerId}
-            label="Worker *"
-            onChange={(e) => setSelectedWorkerId(e.target.value)}
-          >
-            {workers.map((w) => (
-              <MenuItem key={w.id} value={w.id}>
-                {w.name ? `${w.name} (${w.email})` : w.email}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <UserSelectField
+          users={userSelect.users}
+          isLoading={userSelect.isLoading}
+          hasMore={userSelect.hasMore}
+          onLoadMore={userSelect.loadMore}
+          onSearch={userSelect.setSearch}
+          value={selectedWorker}
+          onChange={setSelectedWorker}
+          label="Worker *"
+          size="medium"
+        />
       </DialogContent>
       <DialogActions sx={tasksStyles.dialogActions}>
         <Button onClick={handleClose} color="inherit">
@@ -90,7 +84,7 @@ const AssignTaskDialog = ({
         <Button
           onClick={handleAssign}
           variant="contained"
-          disabled={!selectedWorkerId || isSubmitting}
+          disabled={!selectedWorker || isSubmitting}
         >
           {isSubmitting ? "Assigning..." : "Assign"}
         </Button>
