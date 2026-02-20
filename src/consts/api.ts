@@ -31,6 +31,16 @@ export const API_URL_TASKS_FILE_BY_ID = "/tasks/:id/files/:fileId";
 export const API_URL_TASKS_BULK_CREATE = "/tasks/bulk-create";
 export const API_URL_TASKS_BULK_ASSIGN = "/tasks/bulk-assign";
 
+export const API_URL_LEDGER_ENTRIES_ADMIN = "/ledger-entries/admin";
+export const API_URL_LEDGER_ENTRIES_ADMIN_SUMMARY =
+  "/ledger-entries/admin/summary";
+export const API_URL_LEDGER_ENTRIES_ADMIN_MARK_PAID =
+  "/ledger-entries/admin/:id/mark-paid";
+export const API_URL_LEDGER_ENTRIES_ADMIN_MARK_UNPAID =
+  "/ledger-entries/admin/:id/mark-unpaid";
+export const API_URL_LEDGER_ENTRIES_ADMIN_BULK_MARK_PAID =
+  "/ledger-entries/admin/bulk-mark-paid";
+
 export const API_URL_USERS = "/users";
 export const API_URL_USERS_ME = "/users/me";
 export const API_URL_USERS_STATUS = "/users/:id/status";

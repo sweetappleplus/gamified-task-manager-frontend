@@ -10,6 +10,7 @@ import LevelConfigsPage from "pages/admin/LevelConfigs";
 import AdminTasksPage from "pages/admin/Tasks";
 import AdminTaskDetailPage from "pages/admin/TaskDetail";
 import AdminWorkersPage from "pages/admin/Workers";
+import AdminEarningsPaymentsPage from "pages/admin/EarningsPayments";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
 import StartWorkPage from "pages/StartWork";
@@ -106,6 +107,12 @@ export const ROUTES: Record<string, RouteConfig> = {
   ADMIN_WORKERS: {
     path: "/admin/workers",
     component: AdminWorkersPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
+  ADMIN_EARNINGS_PAYMENTS: {
+    path: "/admin/earnings-payments",
+    component: AdminEarningsPaymentsPage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
@@ -206,6 +213,11 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
     icon: "user-square" as const,
     label: "Workers",
     route: ROUTES.ADMIN_WORKERS.path,
+  },
+  {
+    icon: "cash" as const,
+    label: "Earnings & Payments",
+    route: ROUTES.ADMIN_EARNINGS_PAYMENTS.path,
   },
   {
     icon: "star" as const,
