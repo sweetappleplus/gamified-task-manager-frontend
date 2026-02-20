@@ -6,9 +6,11 @@ import { Avatar, Button, PatternPanel } from "components";
 const StatBlock = styled(Box)(({ theme }) => ({
   background: alpha(theme.palette.grayscale[0], 0.2),
   backdropFilter: "blur(32px)",
+  WebkitBackdropFilter: "blur(32px)",
   borderRadius: 16,
   padding: 8,
   textAlign: "center",
+  isolation: "isolate",
 }));
 
 const StatLabel = styled(Typography)(({ theme }) => ({
