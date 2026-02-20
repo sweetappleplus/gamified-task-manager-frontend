@@ -1149,7 +1149,7 @@ const UIKit = () => {
           <Typography variant="h6" sx={uikitStyles.componentLabel}>
             WorkerProfileCard
           </Typography>
-          <Box sx={{ ...uikitStyles.caseItem, width: 362 }}>
+          <Box sx={{ ...uikitStyles.caseItem, width: 362, mb: 2 }}>
             <WorkerProfileCard
               user={mockWorkerUser}
               taskCompleted={40}
