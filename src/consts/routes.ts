@@ -11,6 +11,7 @@ import AdminTasksPage from "pages/admin/Tasks";
 import AdminTaskDetailPage from "pages/admin/TaskDetail";
 import AdminWorkersPage from "pages/admin/Workers";
 import AdminFinancePage from "pages/admin/Finance";
+import AdminNotificationsPage from "pages/admin/Notifications";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
 import StartWorkPage from "pages/StartWork";
@@ -116,6 +117,12 @@ export const ROUTES: Record<string, RouteConfig> = {
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
+  ADMIN_NOTIFICATIONS: {
+    path: "/admin/notifications",
+    component: AdminNotificationsPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
 } as const;
 
 export const getWorkerSidebarNavItems = (
@@ -218,6 +225,11 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
     icon: "cash" as const,
     label: "Finance",
     route: ROUTES.ADMIN_FINANCE.path,
+  },
+  {
+    icon: "bell" as const,
+    label: "Notifications",
+    route: ROUTES.ADMIN_NOTIFICATIONS.path,
   },
   {
     icon: "star" as const,

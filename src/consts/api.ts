@@ -8,6 +8,11 @@ export const API_URL_AUTH_LOGOUT = "/auth/logout";
 
 export const API_URL_NOTIFICATIONS_MARK_AS_READ = "/notifications/:id/read";
 export const API_URL_NOTIFICATIONS_UNREAD_COUNT = "/notifications/unread-count";
+export const API_URL_NOTIFICATIONS_CREATE = "/notifications";
+export const API_URL_NOTIFICATIONS_ADMIN = "/notifications/admin";
+export const API_URL_NOTIFICATIONS_ADMIN_BY_ID = "/notifications/admin/:id";
+export const API_URL_NOTIFICATIONS_ADMIN_BULK_DELETE =
+  "/notifications/admin/bulk-delete";
 
 export const API_URL_TASK_CATEGORIES = "/task-categories";
 export const API_URL_TASK_CATEGORIES_BY_ID = "/task-categories/:id";
