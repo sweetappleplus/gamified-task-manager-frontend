@@ -6,15 +6,28 @@ import {
   AdminNotification,
   AdminNotificationFilterParams,
   CreateNotificationPayload,
+  WorkerNotificationFilterParams,
 } from "types";
 import {
+  API_URL_NOTIFICATIONS,
   API_URL_NOTIFICATIONS_MARK_AS_READ,
+  API_URL_NOTIFICATIONS_MARK_ALL_READ,
   API_URL_NOTIFICATIONS_UNREAD_COUNT,
   API_URL_NOTIFICATIONS_CREATE,
   API_URL_NOTIFICATIONS_ADMIN,
   API_URL_NOTIFICATIONS_ADMIN_BY_ID,
   API_URL_NOTIFICATIONS_ADMIN_BULK_DELETE,
 } from "consts";
+
+export const getWorkerNotificationsApi = (
+  params?: WorkerNotificationFilterParams
+): Promise<PaginatedApiResponse<Notification[]>> => {
+  return api
+    .get<PaginatedApiResponse<Notification[]>>(API_URL_NOTIFICATIONS, {
+      params,
+    })
+    .then((res) => res.data);
+};
 
 export const markNotificationAsReadApi = (
   id: string
@@ -23,6 +36,16 @@ export const markNotificationAsReadApi = (
     .patch<
       ApiResponse<Notification>
     >(`${API_URL_NOTIFICATIONS_MARK_AS_READ.replace(":id", id)}`)
+    .then((res) => res.data);
+};
+
+export const markAllNotificationsAsReadApi = (): Promise<
+  ApiResponse<{ updatedCount: number }>
+> => {
+  return api
+    .patch<
+      ApiResponse<{ updatedCount: number }>
+    >(API_URL_NOTIFICATIONS_MARK_ALL_READ)
     .then((res) => res.data);
 };
 

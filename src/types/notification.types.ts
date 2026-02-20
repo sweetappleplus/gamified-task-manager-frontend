@@ -58,3 +58,8 @@ export type CreateNotificationPayload = {
   message: string;
   relatedTaskId?: string;
 };
+
+export type WorkerNotificationFilterParams = {
+  page?: number;
+  limit?: number;
+};
