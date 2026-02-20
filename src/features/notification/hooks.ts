@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { RootState } from "app/store";
 import {
@@ -8,7 +8,6 @@ import {
   setWorkerTotal,
   setWorkerPage,
   setWorkerLoading,
-  setWorkerHasMore,
   resetWorkerNotifications,
   markWorkerNotificationAsRead,
   setAdminNotifications,
@@ -66,11 +65,12 @@ export const useWorkerNotifications = () => {
   const isLoading = useAppSelector(
     (state: RootState) => state.notification.workerIsLoading
   );
-  const hasMore = useAppSelector(
-    (state: RootState) => state.notification.workerHasMore
-  );
+  const hasMore = total > 0 && notifications.length < total;
+  const fetchingRef = useRef(false);
 
   const fetchInitial = useCallback(async () => {
+    if (fetchingRef.current) return;
+    fetchingRef.current = true;
     dispatch(resetWorkerNotifications());
     dispatch(setWorkerLoading(true));
     try {
@@ -84,20 +84,17 @@ export const useWorkerNotifications = () => {
       if (response.pagination) {
         dispatch(setWorkerTotal(response.pagination.total));
         dispatch(setWorkerPage(1));
-        dispatch(
-          setWorkerHasMore(
-            response.pagination.page < response.pagination.totalPages
-          )
-        );
       }
       return response;
     } finally {
       dispatch(setWorkerLoading(false));
+      fetchingRef.current = false;
     }
   }, [dispatch]);
 
   const fetchMore = useCallback(async () => {
-    if (isLoading || !hasMore) return;
+    if (fetchingRef.current) return;
+    fetchingRef.current = true;
 
     const nextPage = page + 1;
     dispatch(setWorkerLoading(true));
@@ -112,17 +109,13 @@ export const useWorkerNotifications = () => {
       if (response.pagination) {
         dispatch(setWorkerTotal(response.pagination.total));
         dispatch(setWorkerPage(nextPage));
-        dispatch(
-          setWorkerHasMore(
-            response.pagination.page < response.pagination.totalPages
-          )
-        );
       }
       return response;
     } finally {
       dispatch(setWorkerLoading(false));
+      fetchingRef.current = false;
     }
-  }, [dispatch, page, isLoading, hasMore]);
+  }, [dispatch, page]);
 
   const markAsRead = useCallback(
     async (id: string) => {
