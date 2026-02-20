@@ -23,3 +23,38 @@ export type Notification = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type NotificationUser = {
+  id: string;
+  email: string;
+  name?: string | null;
+};
+
+export type AdminNotification = Notification & {
+  user?: NotificationUser;
+};
+
+export type NotificationSortBy = "createdAt" | "title";
+export type NotificationSortOrder = "asc" | "desc";
+
+export type AdminNotificationFilterParams = {
+  page?: number;
+  limit?: number;
+  type?: NotificationType;
+  isRead?: boolean;
+  isDelivered?: boolean;
+  userId?: string;
+  search?: string;
+  createdFrom?: string;
+  createdTo?: string;
+  sortBy?: NotificationSortBy;
+  sortOrder?: NotificationSortOrder;
+};
+
+export type CreateNotificationPayload = {
+  userId: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  relatedTaskId?: string;
+};
