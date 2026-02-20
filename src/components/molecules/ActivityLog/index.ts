@@ -1,2 +1,2 @@
 export { ActivityLog } from "./ActivityLog";
-export type { ActivityLogProps, ActivityLogType } from "./ActivityLog.types";
+export type { ActivityLogProps, ActivityLogConfig } from "./ActivityLog.types";
