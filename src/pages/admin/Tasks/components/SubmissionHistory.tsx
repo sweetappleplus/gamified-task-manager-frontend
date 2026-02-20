@@ -2,10 +2,10 @@ import { Box, Typography, Chip, Link, Divider } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import LinkIcon from "@mui/icons-material/Link";
 import { TaskSubmission } from "types";
-import { BACKEND_URL } from "consts";
+import { API_URL, BACKEND_URL } from "consts";
 import { formatDateTime } from "utils";
 
-if (!BACKEND_URL) {
+if (!API_URL) {
   throw new Error("REACT_APP_API_URL is not defined");
 }
 
