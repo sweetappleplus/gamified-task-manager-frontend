@@ -6,6 +6,7 @@ import { useNotificationSocket } from "hooks/useNotificationSocket";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 import { ROUTE_ACCESS } from "types";
+import { ModalProvider, ToastProvider } from "hooks";
 
 const AppRoutes = () => {
   const { isAuthenticated, isInitialized, initializeAuth } = useAuth();
@@ -78,7 +79,11 @@ const AppRoutes = () => {
 
 const AppRouter = () => (
   <BrowserRouter>
-    <AppRoutes />
+    <ModalProvider>
+      <ToastProvider>
+        <AppRoutes />
+      </ToastProvider>
+    </ModalProvider>
   </BrowserRouter>
 );
 
