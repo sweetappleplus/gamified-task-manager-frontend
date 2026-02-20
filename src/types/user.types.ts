@@ -7,6 +7,11 @@ export const USER_ROLES = {
 
 export type UserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
 
+export const USER_ROLE_LABELS: Record<UserRole, string> = {
+  [USER_ROLES.WORKER]: "Worker",
+  [USER_ROLES.SUPER_ADMIN]: "Admin",
+};
+
 export type User = {
   id: string;
   email: string;

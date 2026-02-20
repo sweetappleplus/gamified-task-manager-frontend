@@ -2,6 +2,7 @@ import React from "react";
 import { Box, styled, Typography, alpha } from "@mui/material";
 import { WorkerProfileCardProps } from "./WorkerProfileCard.types";
 import { Avatar, Button, PatternPanel } from "components";
+import { USER_ROLE_LABELS } from "types";
 
 const StatBlock = styled(Box)(({ theme }) => ({
   background: alpha(theme.palette.grayscale[0], 0.2),
@@ -69,7 +70,7 @@ export const WorkerProfileCard: React.FC<WorkerProfileCardProps> = ({
               color: "grayscale.0",
             }}
           >
-            {user.role}
+            {USER_ROLE_LABELS[user.role]}
           </Typography>
         </Box>
         <Button

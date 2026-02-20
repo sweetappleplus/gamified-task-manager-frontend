@@ -1,13 +1,8 @@
 import React from "react";
 import { Box, styled } from "@mui/material";
 import { Avatar, Leaf } from "components";
-import { USER_ROLES, UserRole } from "types";
+import { USER_ROLE_LABELS } from "types";
 import { UserInfoProps } from "./UserInfo.types";
-
-const ROLE_LABELS: Record<UserRole, string> = {
-  [USER_ROLES.WORKER]: "Worker",
-  [USER_ROLES.SUPER_ADMIN]: "Admin",
-};
 
 const Wrapper = styled(Box)({
   display: "flex",
@@ -55,7 +50,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({
       <Name>{user.name || user.email}</Name>
       <LabelsRow>
         <Leaf variant={leafVariant} text={leafText} />
-        <RoleLabel>{ROLE_LABELS[user.role]}</RoleLabel>
+        <RoleLabel>{USER_ROLE_LABELS[user.role]}</RoleLabel>
       </LabelsRow>
     </InfoColumn>
   </Wrapper>
