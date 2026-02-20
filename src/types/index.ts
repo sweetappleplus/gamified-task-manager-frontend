@@ -9,3 +9,4 @@ export * from "./task.types";
 export * from "./file.types";
 export * from "./pagination.types";
 export * from "./ledger-entry.types";
+export * from "./activity-log.types";
