@@ -5,6 +5,11 @@ interface ModalOptions {
   title: string;
   body: React.ReactNode;
   footer?: React.ReactNode;
+  maxWidth?: number;
+  maxHeight?: number;
+  bgcolor?: string;
+  desktopBodyPadding?: string;
+  mobileBodyPadding?: string;
 }
 
 interface ModalContextValue {
@@ -36,6 +41,11 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
         title={modalState?.title ?? ""}
         body={modalState?.body}
         footer={modalState?.footer}
+        maxWidth={modalState?.maxWidth}
+        maxHeight={modalState?.maxHeight}
+        bgcolor={modalState?.bgcolor}
+        desktopBodyPadding={modalState?.desktopBodyPadding}
+        mobileBodyPadding={modalState?.mobileBodyPadding}
       />
     </ModalContext.Provider>
   );

@@ -26,4 +26,24 @@ export interface ModalProps {
    * @default 480
    */
   maxWidth?: number;
+  /**
+   * Max height of the modal on desktop
+   * @default 812
+   */
+  maxHeight?: number;
+  /**
+   * Background color of the modal
+   * @default "grayscale.0"
+   */
+  bgcolor?: string;
+  /**
+   * Padding for the modal body of desktop version
+   * @default "16px"
+   */
+  desktopBodyPadding?: string;
+  /**
+   * Padding for the modal body of mobile version
+   * @default "8px 16px"
+   */
+  mobileBodyPadding?: string;
 }

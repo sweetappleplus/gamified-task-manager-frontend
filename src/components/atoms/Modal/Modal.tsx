@@ -10,6 +10,10 @@ export const Modal: React.FC<ModalProps> = ({
   body,
   footer,
   maxWidth = 480,
+  maxHeight = 812,
+  bgcolor = "grayscale.0",
+  desktopBodyPadding = "16px",
+  mobileBodyPadding = "8px 16px",
 }) => {
   const theme = useTheme();
   return (
@@ -28,7 +32,7 @@ export const Modal: React.FC<ModalProps> = ({
       }}
       sx={{
         "& .MuiDialog-paper": {
-          bgcolor: "grayscale.0",
+          bgcolor,
           display: "flex",
           flexDirection: "column",
           m: 0,
@@ -41,7 +45,7 @@ export const Modal: React.FC<ModalProps> = ({
             m: "auto",
             maxWidth,
             height: "auto",
-            maxHeight: 812,
+            maxHeight,
             borderRadius: "16px",
           },
         },
@@ -53,7 +57,7 @@ export const Modal: React.FC<ModalProps> = ({
           position: "sticky",
           top: 0,
           zIndex: 1,
-          bgcolor: "grayscale.0",
+          bgcolor,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -113,9 +117,9 @@ export const Modal: React.FC<ModalProps> = ({
         sx={{
           flex: 1,
           overflowY: "auto",
-          p: "8px 16px",
+          p: mobileBodyPadding,
           "@media (min-width: 768px)": {
-            p: "16px",
+            p: desktopBodyPadding,
           },
         }}
       >
@@ -129,7 +133,7 @@ export const Modal: React.FC<ModalProps> = ({
             position: "sticky",
             bottom: 0,
             zIndex: 1,
-            bgcolor: "grayscale.0",
+            bgcolor,
             p: "16px",
             flexShrink: 0,
           }}
