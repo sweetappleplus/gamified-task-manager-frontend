@@ -8,7 +8,7 @@ env:
   IMAGE_NAME: ghcr.io/sweetappleplus/gamified-task-manager-frontend
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     permissions:
@@ -37,12 +37,32 @@ jobs:
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Deploy to VPS
+  deploy-own:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to own VPS
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/work/gamified-task-manager
+            docker compose pull frontend
+            docker compose up -d frontend nginx
+            docker image prune -f
+
+  deploy-client:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to client VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.CLIENT_VPS_HOST }}
+          username: ${{ secrets.CLIENT_VPS_USER }}
+          key: ${{ secrets.CLIENT_VPS_SSH_KEY }}
           script: |
             cd ~/work/gamified-task-manager
             docker compose pull frontend
