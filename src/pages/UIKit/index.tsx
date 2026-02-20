@@ -58,6 +58,7 @@ import {
   FileUploaderItem,
   SubmissionHistory,
   UserSelectField,
+  ActivityLog,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -69,6 +70,8 @@ import {
   TASK_TYPES,
   User,
   USER_ROLES,
+  ActivityType,
+  ACTIVITY_TYPES,
 } from "types";
 
 const iconNames = Object.keys(ICONS) as IconName[];
@@ -95,6 +98,19 @@ const buttonSizes: ButtonSize[] = ["large", "normal", "small", "xs"];
 const leafVariants: LeafVariant[] = ["bronze", "silver", "gold", "diamond"];
 const toastVariants: ToastVariant[] = ["info", "success", "warning", "error"];
 const spinnerSizes: SpinnerSize[] = ["sm", "md", "lg"];
+const activityLogTypes: ActivityType[] = [
+  ACTIVITY_TYPES.COMPLETED_TASK,
+  ACTIVITY_TYPES.GET_PAID,
+  ACTIVITY_TYPES.WITHDRAWN,
+  ACTIVITY_TYPES.LEVEL_UP,
+];
+const activityLogMessages: Record<ActivityType, string> = {
+  [ACTIVITY_TYPES.COMPLETED_TASK]:
+    "You have completed the task Design Homepage",
+  [ACTIVITY_TYPES.GET_PAID]: "You have been paid for your completed task",
+  [ACTIVITY_TYPES.WITHDRAWN]: "You have withdrawn $150 to your bank account",
+  [ACTIVITY_TYPES.LEVEL_UP]: "Congratulations! You have reached Level 5",
+};
 
 const mockTaskBase: Task = {
   id: "1",
@@ -1109,6 +1125,23 @@ const UIKit = () => {
               />
               <Typography sx={uikitStyles.caseLabel}>loading</Typography>
             </Box>
+          </Box>
+
+          {/* ActivityLog */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            ActivityLog
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            {activityLogTypes.map((type) => (
+              <Box key={type} sx={{ ...uikitStyles.caseItem, width: "500px" }}>
+                <ActivityLog
+                  type={type}
+                  message={activityLogMessages[type]}
+                  date="Feb 20, 2026"
+                />
+                <Typography sx={uikitStyles.caseLabel}>{type}</Typography>
+              </Box>
+            ))}
           </Box>
 
           {/* EmptyState */}
