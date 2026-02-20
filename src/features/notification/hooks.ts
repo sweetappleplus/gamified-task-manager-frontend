@@ -3,6 +3,14 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { RootState } from "app/store";
 import {
   setUnreadCount,
+  setWorkerNotifications,
+  appendWorkerNotifications,
+  setWorkerTotal,
+  setWorkerPage,
+  setWorkerLoading,
+  setWorkerHasMore,
+  resetWorkerNotifications,
+  markWorkerNotificationAsRead,
   setAdminNotifications,
   setAdminTotal,
   setAdminLoading,
@@ -10,6 +18,9 @@ import {
   removeNotificationFromList,
 } from "./slice";
 import {
+  getWorkerNotificationsApi,
+  markNotificationAsReadApi,
+  markAllNotificationsAsReadApi,
   getAdminNotificationsApi,
   deleteAdminNotificationApi,
   bulkDeleteAdminNotificationsApi,
@@ -19,6 +30,8 @@ import {
   AdminNotificationFilterParams,
   CreateNotificationPayload,
 } from "types";
+
+const WORKER_NOTIFICATION_LIMIT = 10;
 
 export const useNotifications = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +49,118 @@ export const useNotifications = () => {
   return {
     unreadCount,
     updateUnreadCount,
+  };
+};
+
+export const useWorkerNotifications = () => {
+  const dispatch = useAppDispatch();
+  const notifications = useAppSelector(
+    (state: RootState) => state.notification.workerNotifications
+  );
+  const total = useAppSelector(
+    (state: RootState) => state.notification.workerTotal
+  );
+  const page = useAppSelector(
+    (state: RootState) => state.notification.workerPage
+  );
+  const isLoading = useAppSelector(
+    (state: RootState) => state.notification.workerIsLoading
+  );
+  const hasMore = useAppSelector(
+    (state: RootState) => state.notification.workerHasMore
+  );
+
+  const fetchInitial = useCallback(async () => {
+    dispatch(resetWorkerNotifications());
+    dispatch(setWorkerLoading(true));
+    try {
+      const response = await getWorkerNotificationsApi({
+        page: 1,
+        limit: WORKER_NOTIFICATION_LIMIT,
+      });
+      if (response.data) {
+        dispatch(setWorkerNotifications(response.data));
+      }
+      if (response.pagination) {
+        dispatch(setWorkerTotal(response.pagination.total));
+        dispatch(setWorkerPage(1));
+        dispatch(
+          setWorkerHasMore(
+            response.pagination.page < response.pagination.totalPages
+          )
+        );
+      }
+      return response;
+    } finally {
+      dispatch(setWorkerLoading(false));
+    }
+  }, [dispatch]);
+
+  const fetchMore = useCallback(async () => {
+    if (isLoading || !hasMore) return;
+
+    const nextPage = page + 1;
+    dispatch(setWorkerLoading(true));
+    try {
+      const response = await getWorkerNotificationsApi({
+        page: nextPage,
+        limit: WORKER_NOTIFICATION_LIMIT,
+      });
+      if (response.data) {
+        dispatch(appendWorkerNotifications(response.data));
+      }
+      if (response.pagination) {
+        dispatch(setWorkerTotal(response.pagination.total));
+        dispatch(setWorkerPage(nextPage));
+        dispatch(
+          setWorkerHasMore(
+            response.pagination.page < response.pagination.totalPages
+          )
+        );
+      }
+      return response;
+    } finally {
+      dispatch(setWorkerLoading(false));
+    }
+  }, [dispatch, page, isLoading, hasMore]);
+
+  const markAsRead = useCallback(
+    async (id: string) => {
+      dispatch(markWorkerNotificationAsRead(id));
+      try {
+        await markNotificationAsReadApi(id);
+      } catch {
+        // Revert optimistic update on failure by refetching
+      }
+    },
+    [dispatch]
+  );
+
+  const markAllAsRead = useCallback(async () => {
+    try {
+      await markAllNotificationsAsReadApi();
+      // Refresh the list after marking all as read
+      await fetchInitial();
+    } catch {
+      // Silent fail
+    }
+  }, [fetchInitial]);
+
+  const reset = useCallback(() => {
+    dispatch(resetWorkerNotifications());
+  }, [dispatch]);
+
+  return {
+    notifications,
+    total,
+    page,
+    isLoading,
+    hasMore,
+    fetchInitial,
+    fetchMore,
+    markAsRead,
+    markAllAsRead,
+    reset,
   };
 };
 

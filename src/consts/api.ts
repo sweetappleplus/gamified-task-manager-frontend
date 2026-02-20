@@ -6,7 +6,10 @@ export const API_URL_AUTH_VERIFY_OTP = "/auth/verify-otp";
 export const API_URL_AUTH_REFRESH = "/auth/refresh";
 export const API_URL_AUTH_LOGOUT = "/auth/logout";
 
+export const API_URL_NOTIFICATIONS = "/notifications";
 export const API_URL_NOTIFICATIONS_MARK_AS_READ = "/notifications/:id/read";
+export const API_URL_NOTIFICATIONS_MARK_ALL_READ =
+  "/notifications/mark-all-read";
 export const API_URL_NOTIFICATIONS_UNREAD_COUNT = "/notifications/unread-count";
 export const API_URL_NOTIFICATIONS_CREATE = "/notifications";
 export const API_URL_NOTIFICATIONS_ADMIN = "/notifications/admin";

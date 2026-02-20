@@ -1,8 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AdminNotification, AdminNotificationFilterParams } from "types";
+import {
+  Notification,
+  AdminNotification,
+  AdminNotificationFilterParams,
+} from "types";
 
 type NotificationState = {
   unreadCount: number;
+  workerNotifications: Notification[];
+  workerTotal: number;
+  workerPage: number;
+  workerIsLoading: boolean;
+  workerHasMore: boolean;
   adminNotifications: AdminNotification[];
   adminTotal: number;
   adminIsLoading: boolean;
@@ -11,6 +20,11 @@ type NotificationState = {
 
 const initialState: NotificationState = {
   unreadCount: 0,
+  workerNotifications: [],
+  workerTotal: 0,
+  workerPage: 1,
+  workerIsLoading: false,
+  workerHasMore: true,
   adminNotifications: [],
   adminTotal: 0,
   adminIsLoading: false,
@@ -28,6 +42,45 @@ const notificationSlice = createSlice({
   reducers: {
     setUnreadCount: (state, action: PayloadAction<number>) => {
       state.unreadCount = action.payload;
+    },
+    setWorkerNotifications: (state, action: PayloadAction<Notification[]>) => {
+      state.workerNotifications = action.payload;
+    },
+    appendWorkerNotifications: (
+      state,
+      action: PayloadAction<Notification[]>
+    ) => {
+      state.workerNotifications = [
+        ...state.workerNotifications,
+        ...action.payload,
+      ];
+    },
+    setWorkerTotal: (state, action: PayloadAction<number>) => {
+      state.workerTotal = action.payload;
+    },
+    setWorkerPage: (state, action: PayloadAction<number>) => {
+      state.workerPage = action.payload;
+    },
+    setWorkerLoading: (state, action: PayloadAction<boolean>) => {
+      state.workerIsLoading = action.payload;
+    },
+    setWorkerHasMore: (state, action: PayloadAction<boolean>) => {
+      state.workerHasMore = action.payload;
+    },
+    resetWorkerNotifications: (state) => {
+      state.workerNotifications = [];
+      state.workerTotal = 0;
+      state.workerPage = 1;
+      state.workerHasMore = true;
+      state.workerIsLoading = false;
+    },
+    markWorkerNotificationAsRead: (state, action: PayloadAction<string>) => {
+      const notification = state.workerNotifications.find(
+        (n) => n.id === action.payload
+      );
+      if (notification) {
+        notification.isRead = true;
+      }
     },
     setAdminNotifications: (
       state,
@@ -58,6 +111,14 @@ const notificationSlice = createSlice({
 
 export const {
   setUnreadCount,
+  setWorkerNotifications,
+  appendWorkerNotifications,
+  setWorkerTotal,
+  setWorkerPage,
+  setWorkerLoading,
+  setWorkerHasMore,
+  resetWorkerNotifications,
+  markWorkerNotificationAsRead,
   setAdminNotifications,
   setAdminTotal,
   setAdminLoading,
