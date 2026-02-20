@@ -15,8 +15,6 @@ import { getLeafVariant } from "utils";
 import { WorkerLayoutProps } from "./WorkerLayout.types";
 import { useAuth } from "features/auth";
 import { useModal } from "hooks";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "consts";
 
 const NotificationModalBody: React.FC = () => {
   const {
@@ -28,8 +26,6 @@ const NotificationModalBody: React.FC = () => {
     markAsRead,
   } = useWorkerNotifications();
   const { updateUnreadCount, unreadCount } = useNotifications();
-  const { closeModal } = useModal();
-  const navigate = useNavigate();
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -64,20 +60,12 @@ const NotificationModalBody: React.FC = () => {
     };
   }, []);
 
-  const handleNotificationClick = (
-    notificationId: string,
-    isRead: boolean,
-    relatedTaskId: string | null
-  ) => {
+  const handleNotificationClick = (notificationId: string, isRead: boolean) => {
     if (!isRead) {
       markAsRead(notificationId);
       if (unreadCount > 0) {
         updateUnreadCount(unreadCount - 1);
       }
-    }
-    if (relatedTaskId) {
-      closeModal();
-      navigate(ROUTES.TASK_DETAIL.path.replace(":id", relatedTaskId));
     }
   };
 
@@ -86,11 +74,7 @@ const NotificationModalBody: React.FC = () => {
     content: notification.message,
     isRead: notification.isRead,
     onClick: () =>
-      handleNotificationClick(
-        notification.id,
-        notification.isRead,
-        notification.relatedTaskId
-      ),
+      handleNotificationClick(notification.id, notification.isRead),
   }));
 
   return (
