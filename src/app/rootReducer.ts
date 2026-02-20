@@ -6,6 +6,7 @@ import { levelConfigReducer } from "features/level-config";
 import { taskReducer } from "features/task";
 import { notificationReducer } from "features/notification";
 import { userReducer } from "features/user";
+import { ledgerEntryReducer } from "features/ledger-entry";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   task: taskReducer,
   notification: notificationReducer,
   user: userReducer,
+  ledgerEntry: ledgerEntryReducer,
 });
 
 export default rootReducer;

@@ -6,3 +6,4 @@ export * from "./system-setting.api";
 export * from "./level-config.api";
 export * from "./task.api";
 export * from "./user.api";
+export * from "./ledger-entry.api";
