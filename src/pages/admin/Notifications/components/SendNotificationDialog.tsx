@@ -16,7 +16,6 @@ import {
   NOTIFICATION_TYPES,
   NotificationType,
   User,
-  USER_ROLES,
   CreateNotificationPayload,
 } from "types";
 import { useUserSelect } from "hooks";
@@ -52,7 +51,7 @@ const SendNotificationDialog = ({
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [relatedTaskId, setRelatedTaskId] = useState("");
-  const userSelect = useUserSelect({ role: USER_ROLES.WORKER });
+  const userSelect = useUserSelect();
 
   const handleSend = () => {
     if (!selectedUser || !title.trim() || !message.trim()) return;

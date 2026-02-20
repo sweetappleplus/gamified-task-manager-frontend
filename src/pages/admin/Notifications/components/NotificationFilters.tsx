@@ -14,7 +14,6 @@ import {
   NOTIFICATION_TYPES,
   NotificationType,
   User,
-  USER_ROLES,
 } from "types";
 import { useUserSelect } from "hooks";
 import { UserSelectField } from "components";
@@ -41,7 +40,7 @@ const NotificationFilters = ({
 }: NotificationFiltersProps) => {
   const [searchValue, setSearchValue] = useState(filters.search ?? "");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const userSelect = useUserSelect({ role: USER_ROLES.WORKER });
+  const userSelect = useUserSelect();
 
   useEffect(() => {
     setSearchValue(filters.search ?? "");
