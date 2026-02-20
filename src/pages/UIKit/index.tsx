@@ -59,6 +59,7 @@ import {
   SubmissionHistory,
   UserSelectField,
   ActivityLog,
+  WorkerProfileCard,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -1142,6 +1143,18 @@ const UIKit = () => {
                 <Typography sx={uikitStyles.caseLabel}>{type}</Typography>
               </Box>
             ))}
+          </Box>
+
+          {/* WorkerProfileCard */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            WorkerProfileCard
+          </Typography>
+          <Box sx={{ ...uikitStyles.caseItem, width: 362 }}>
+            <WorkerProfileCard
+              user={mockWorkerUser}
+              taskCompleted={40}
+              totalEarnings={2450.5}
+            />
           </Box>
 
           {/* EmptyState */}
