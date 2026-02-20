@@ -111,7 +111,7 @@ const LedgerFilters = ({ filters, onFilterChange }: LedgerFiltersProps) => {
         </Select>
       </FormControl>
 
-      <FormControl size="small" sx={earningsStyles.filterSelect}>
+      <FormControl size="small" sx={{ minWidth: 180 }}>
         <InputLabel>Payment Status</InputLabel>
         <Select
           value={filters.isPaid === undefined ? "" : String(filters.isPaid)}
