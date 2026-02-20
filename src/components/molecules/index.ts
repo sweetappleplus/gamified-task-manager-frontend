@@ -15,3 +15,4 @@ export * from "./SubmissionHistory";
 export * from "./EmptyState";
 export * from "./UserSelectField";
 export * from "./ActivityLog";
+export * from "./WorkerProfileCard";
