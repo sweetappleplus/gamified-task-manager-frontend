@@ -76,7 +76,7 @@ const buildSearchParams = (
   return params;
 };
 
-export const useEarningsPaymentsPage = () => {
+export const useFinancePage = () => {
   const {
     entries,
     total,

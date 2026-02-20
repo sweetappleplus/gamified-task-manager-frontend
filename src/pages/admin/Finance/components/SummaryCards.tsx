@@ -1,6 +1,6 @@
 import { Box, Typography, Skeleton } from "@mui/material";
 import { AdminLedgerSummary } from "types";
-import { earningsStyles } from "../EarningsPayments.styles";
+import { financeStyles } from "../Finance.styles";
 
 type SummaryCardsProps = {
   summary: AdminLedgerSummary | null;
@@ -44,15 +44,15 @@ const cards: { label: string; key: keyof AdminLedgerSummary; color: string }[] =
 
 const SummaryCards = ({ summary, isLoading }: SummaryCardsProps) => {
   return (
-    <Box sx={earningsStyles.summaryContainer}>
+    <Box sx={financeStyles.summaryContainer}>
       {cards.map((card) => (
-        <Box key={card.key} sx={earningsStyles.summaryCard}>
-          <Typography sx={earningsStyles.summaryLabel}>{card.label}</Typography>
+        <Box key={card.key} sx={financeStyles.summaryCard}>
+          <Typography sx={financeStyles.summaryLabel}>{card.label}</Typography>
           {isLoading ? (
             <Skeleton width={100} height={32} />
           ) : (
             <Typography
-              sx={{ ...earningsStyles.summaryValue, color: card.color }}
+              sx={{ ...financeStyles.summaryValue, color: card.color }}
             >
               {formatAmount(summary?.[card.key])}
             </Typography>

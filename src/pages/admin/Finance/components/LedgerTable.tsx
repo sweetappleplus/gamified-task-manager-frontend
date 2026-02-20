@@ -29,10 +29,10 @@ import {
 } from "types";
 import { ROUTES } from "consts";
 import {
-  earningsStyles,
+  financeStyles,
   getLedgerTypeChipSx,
   getPaidChipSx,
-} from "../EarningsPayments.styles";
+} from "../Finance.styles";
 import { formatDateTime } from "utils";
 
 type LedgerTableProps = {
@@ -107,7 +107,7 @@ const LedgerTable = ({
 
   if (isLoading) {
     return (
-      <Box sx={earningsStyles.loadingContainer}>
+      <Box sx={financeStyles.loadingContainer}>
         <CircularProgress />
       </Box>
     );
@@ -115,7 +115,7 @@ const LedgerTable = ({
 
   if (entries.length === 0) {
     return (
-      <Box sx={earningsStyles.emptyState}>
+      <Box sx={financeStyles.emptyState}>
         <Typography variant="body1">No ledger entries found</Typography>
       </Box>
     );
@@ -127,12 +127,12 @@ const LedgerTable = ({
     unpaidEntries.every((e) => selectedIds.includes(e.id));
 
   return (
-    <Box sx={earningsStyles.tableContainer}>
+    <Box sx={financeStyles.tableContainer}>
       <TableContainer>
         <Table size="small">
           <TableHead>
-            <TableRow sx={earningsStyles.tableHead}>
-              <TableCell sx={earningsStyles.tableHeadCell} padding="checkbox">
+            <TableRow sx={financeStyles.tableHead}>
+              <TableCell sx={financeStyles.tableHeadCell} padding="checkbox">
                 <Checkbox
                   size="small"
                   checked={allUnpaidSelected}
@@ -142,7 +142,7 @@ const LedgerTable = ({
                 />
               </TableCell>
               <TableCell
-                sx={earningsStyles.sortableHeadCell}
+                sx={financeStyles.sortableHeadCell}
                 sortDirection={
                   sortBy === "createdAt" ? (sortOrder as "asc" | "desc") : false
                 }
@@ -159,10 +159,10 @@ const LedgerTable = ({
                   Date
                 </TableSortLabel>
               </TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>Worker</TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>Type</TableCell>
+              <TableCell sx={financeStyles.tableHeadCell}>Worker</TableCell>
+              <TableCell sx={financeStyles.tableHeadCell}>Type</TableCell>
               <TableCell
-                sx={earningsStyles.sortableHeadCell}
+                sx={financeStyles.sortableHeadCell}
                 sortDirection={
                   sortBy === "amount" ? (sortOrder as "asc" | "desc") : false
                 }
@@ -177,21 +177,21 @@ const LedgerTable = ({
                   Amount
                 </TableSortLabel>
               </TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>
+              <TableCell sx={financeStyles.tableHeadCell}>
                 Description
               </TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>
+              <TableCell sx={financeStyles.tableHeadCell}>
                 Related Task
               </TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>Status</TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>Paid At</TableCell>
-              <TableCell sx={earningsStyles.tableHeadCell}>Actions</TableCell>
+              <TableCell sx={financeStyles.tableHeadCell}>Status</TableCell>
+              <TableCell sx={financeStyles.tableHeadCell}>Paid At</TableCell>
+              <TableCell sx={financeStyles.tableHeadCell}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {entries.map((entry) => (
               <TableRow key={entry.id} hover>
-                <TableCell sx={earningsStyles.tableCell} padding="checkbox">
+                <TableCell sx={financeStyles.tableCell} padding="checkbox">
                   <Checkbox
                     size="small"
                     checked={selectedIds.includes(entry.id)}
@@ -199,13 +199,13 @@ const LedgerTable = ({
                     disabled={entry.isPaid}
                   />
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   {formatDateTime(entry.createdAt)}
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   {entry.user?.name || entry.user?.email || "-"}
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   <Chip
                     label={LEDGER_TYPE_LABELS[entry.type] ?? entry.type}
                     size="small"
@@ -213,7 +213,7 @@ const LedgerTable = ({
                     sx={getLedgerTypeChipSx(entry.type)}
                   />
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   <Typography
                     variant="body2"
                     sx={{
@@ -228,10 +228,10 @@ const LedgerTable = ({
                     {Number(entry.amount).toFixed(2)}
                   </Typography>
                 </TableCell>
-                <TableCell sx={earningsStyles.truncatedCell}>
+                <TableCell sx={financeStyles.truncatedCell}>
                   {entry.description || "-"}
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   {entry.relatedTask ? (
                     <MuiLink
                       component={RouterLink}
@@ -248,7 +248,7 @@ const LedgerTable = ({
                     "-"
                   )}
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   <Chip
                     label={entry.isPaid ? "Paid" : "Not Paid"}
                     size="small"
@@ -256,10 +256,10 @@ const LedgerTable = ({
                     sx={getPaidChipSx(entry.isPaid)}
                   />
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   {entry.paidAt ? formatDateTime(entry.paidAt) : "-"}
                 </TableCell>
-                <TableCell sx={earningsStyles.tableCell}>
+                <TableCell sx={financeStyles.tableCell}>
                   {entry.isPaid ? (
                     <Tooltip title="Mark as Unpaid">
                       <IconButton
@@ -292,7 +292,7 @@ const LedgerTable = ({
 
       <Box
         sx={{
-          ...earningsStyles.paginationContainer,
+          ...financeStyles.paginationContainer,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",

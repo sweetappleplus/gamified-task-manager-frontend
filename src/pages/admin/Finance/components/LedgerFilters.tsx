@@ -18,7 +18,7 @@ import {
 } from "types";
 import { useUserSelect } from "hooks";
 import { UserSelectField } from "components";
-import { earningsStyles } from "../EarningsPayments.styles";
+import { financeStyles } from "../Finance.styles";
 
 type LedgerFiltersProps = {
   filters: AdminLedgerFilterParams;
@@ -80,16 +80,16 @@ const LedgerFilters = ({ filters, onFilterChange }: LedgerFiltersProps) => {
     filters.createdTo;
 
   return (
-    <Box sx={earningsStyles.filterBar}>
+    <Box sx={financeStyles.filterBar}>
       <TextField
         size="small"
         label="Search description/task"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        sx={earningsStyles.searchField}
+        sx={financeStyles.searchField}
       />
 
-      <FormControl size="small" sx={earningsStyles.filterSelect}>
+      <FormControl size="small" sx={financeStyles.filterSelect}>
         <InputLabel>Type</InputLabel>
         <Select
           value={filters.type ?? ""}

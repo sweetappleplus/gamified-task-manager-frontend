@@ -1,7 +1,7 @@
 import { SxProps, Theme } from "@mui/material";
 import { LEDGER_TYPES, LedgerType } from "types";
 
-export const earningsStyles: Record<string, SxProps<Theme>> = {
+export const financeStyles: Record<string, SxProps<Theme>> = {
   header: {
     display: "flex",
     justifyContent: "space-between",

@@ -2,11 +2,11 @@ import { useLocation } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import PaymentIcon from "@mui/icons-material/Payment";
 import { AdminLayout } from "components";
-import { useEarningsPaymentsPage } from "./hooks";
-import { earningsStyles } from "./EarningsPayments.styles";
+import { useFinancePage } from "./hooks";
+import { financeStyles } from "./Finance.styles";
 import { SummaryCards, LedgerFilters, LedgerTable } from "./components";
 
-const EarningsPayments = () => {
+const Finance = () => {
   const location = useLocation();
   const {
     entries,
@@ -26,14 +26,14 @@ const EarningsPayments = () => {
     handleBulkMarkAsPaid,
     handleSelectEntry,
     handleSelectAll,
-  } = useEarningsPaymentsPage();
+  } = useFinancePage();
 
   return (
     <AdminLayout activeRoute={location.pathname}>
       <Box>
-        <Box sx={earningsStyles.header}>
-          <Typography variant="h5" sx={earningsStyles.title}>
-            Earnings & Payments
+        <Box sx={financeStyles.header}>
+          <Typography variant="h5" sx={financeStyles.title}>
+            Finance
           </Typography>
           {selectedIds.length > 0 && (
             <Button
@@ -74,4 +74,4 @@ const EarningsPayments = () => {
   );
 };
 
-export default EarningsPayments;
+export default Finance;
