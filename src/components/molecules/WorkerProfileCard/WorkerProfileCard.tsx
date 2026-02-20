@@ -75,6 +75,7 @@ export const WorkerProfileCard: React.FC<WorkerProfileCardProps> = ({
           leftIcon="edit"
           size="small"
           onClick={onEditClick}
+          sx={{ minWidth: 40, px: "10px" }}
         />
       </Box>
 
