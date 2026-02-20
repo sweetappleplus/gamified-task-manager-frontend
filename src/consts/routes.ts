@@ -15,6 +15,7 @@ import AdminNotificationsPage from "pages/admin/Notifications";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
 import StartWorkPage from "pages/StartWork";
+import ProfilePage from "pages/Profile";
 
 export const ROUTES: Record<string, RouteConfig> = {
   UI_KIT: {
@@ -59,7 +60,7 @@ export const ROUTES: Record<string, RouteConfig> = {
   },
   PROFILE: {
     path: "/profile",
-    component: PlaceholderPage,
+    component: ProfilePage,
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN, USER_ROLES.WORKER],
   },

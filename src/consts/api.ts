@@ -49,6 +49,8 @@ export const API_URL_LEDGER_ENTRIES_ADMIN_MARK_UNPAID =
 export const API_URL_LEDGER_ENTRIES_ADMIN_BULK_MARK_PAID =
   "/ledger-entries/admin/bulk-mark-paid";
 
+export const API_URL_ACTIVITY_LOGS = "/activity-logs";
+
 export const API_URL_USERS = "/users";
 export const API_URL_USERS_ME = "/users/me";
 export const API_URL_USERS_STATUS = "/users/:id/status";

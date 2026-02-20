@@ -16,3 +16,9 @@ export type ActivityLog = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type FilterActivityLogsParams = {
+  page?: number;
+  limit?: number;
+  activityType?: ActivityType;
+};
