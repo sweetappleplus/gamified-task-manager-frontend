@@ -1,0 +1,59 @@
+export const LEDGER_TYPES = {
+  TASK_REWARD: "TASK_REWARD",
+  BONUS: "BONUS",
+  ADJUSTMENT: "ADJUSTMENT",
+  WITHDRAWAL: "WITHDRAWAL",
+} as const;
+
+export type LedgerType = (typeof LEDGER_TYPES)[keyof typeof LEDGER_TYPES];
+
+export type LedgerEntryUser = {
+  id: string;
+  email: string;
+  name?: string | null;
+};
+
+export type LedgerEntryTask = {
+  id: string;
+  title: string;
+  status: string;
+};
+
+export type LedgerEntry = {
+  id: string;
+  userId: string;
+  type: LedgerType;
+  amount: string;
+  description?: string | null;
+  relatedTaskId?: string | null;
+  isPaid: boolean;
+  paidAt?: string | null;
+  createdAt: string;
+  user?: LedgerEntryUser;
+  relatedTask?: LedgerEntryTask | null;
+};
+
+export type AdminLedgerFilterParams = {
+  page?: number;
+  limit?: number;
+  type?: LedgerType;
+  isPaid?: boolean;
+  userId?: string;
+  search?: string;
+  createdFrom?: string;
+  createdTo?: string;
+  sortBy?: LedgerSortBy;
+  sortOrder?: LedgerSortOrder;
+};
+
+export type LedgerSortBy = "createdAt" | "amount";
+export type LedgerSortOrder = "asc" | "desc";
+
+export type AdminLedgerSummary = {
+  totalEarned: string;
+  totalBonuses: string;
+  totalAdjustments: string;
+  totalWithdrawals: string;
+  pendingPayout: string;
+  alreadyPaid: string;
+};

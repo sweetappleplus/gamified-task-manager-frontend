@@ -8,3 +8,4 @@ export * from "./level-config.types";
 export * from "./task.types";
 export * from "./file.types";
 export * from "./pagination.types";
+export * from "./ledger-entry.types";
