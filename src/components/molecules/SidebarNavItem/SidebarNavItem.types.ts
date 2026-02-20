@@ -29,4 +29,8 @@ export interface SidebarNavItemProps {
    * @default false
    */
   isActive?: boolean;
+  /**
+   * Optional click handler that overrides default navigation
+   */
+  onClick?: () => void;
 }

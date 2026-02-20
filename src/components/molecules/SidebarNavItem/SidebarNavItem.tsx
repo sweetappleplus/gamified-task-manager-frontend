@@ -44,10 +44,15 @@ export const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
   variant = "default",
   badge,
   isActive = false,
+  onClick,
 }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    if (onClick) {
+      onClick();
+      return;
+    }
     if (isActive) return;
     navigate(route);
   };
