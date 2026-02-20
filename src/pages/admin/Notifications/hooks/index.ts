@@ -1,0 +1,1 @@
+export { useNotificationsPage } from "./useNotificationsPage";
