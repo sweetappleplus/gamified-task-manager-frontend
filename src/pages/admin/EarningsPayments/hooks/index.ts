@@ -1,0 +1,1 @@
+export { useEarningsPaymentsPage } from "./useEarningsPaymentsPage";
