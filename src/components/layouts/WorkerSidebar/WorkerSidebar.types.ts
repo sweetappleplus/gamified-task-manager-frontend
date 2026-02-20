@@ -26,4 +26,8 @@ export interface WorkerSidebarProps {
    * Leaf text (level name)
    */
   leafText?: string;
+  /**
+   * Callback to open the notification modal
+   */
+  onNotificationClick?: () => void;
 }

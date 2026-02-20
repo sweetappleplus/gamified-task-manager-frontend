@@ -32,22 +32,33 @@ export const WorkerSidebar: React.FC<WorkerSidebarProps> = ({
   user,
   leafVariant,
   leafText,
+  onNotificationClick,
 }) => {
   const navItems = useMemo<SidebarNavItemProps[]>(() => {
     const baseItems = getWorkerSidebarNavItems(notificationCount, chatCount);
 
+    const itemsWithHandlers = baseItems.map((item) => {
+      if (item.label === "Notifications" && onNotificationClick) {
+        return {
+          ...item,
+          onClick: onNotificationClick,
+        };
+      }
+      return item;
+    });
+
     if (user?.role === USER_ROLES.SUPER_ADMIN) {
       return [
-        ...baseItems,
+        ...itemsWithHandlers,
         {
-          icon: "user-square",
+          icon: "user-square" as const,
           label: "Admin",
           route: ROUTES.ADMIN_DASHBOARD.path,
         },
       ];
     }
-    return baseItems;
-  }, [user?.role, notificationCount, chatCount]);
+    return itemsWithHandlers;
+  }, [user?.role, notificationCount, chatCount, onNotificationClick]);
 
   return (
     <Box
