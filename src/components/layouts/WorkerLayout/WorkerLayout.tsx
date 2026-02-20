@@ -94,7 +94,9 @@ const NotificationModalBody: React.FC = () => {
         </Box>
       )}
       {items.length > 0 && <NotificationList items={items} />}
-      {hasMore && <Box ref={handleSentinelRef} sx={{ minHeight: 1 }} />}
+      {items.length > 0 && hasMore && (
+        <Box ref={handleSentinelRef} sx={{ minHeight: 1 }} />
+      )}
       {isLoading && (
         <Box sx={{ display: "flex", justifyContent: "center", py: 2 }}>
           <CircularProgress size={24} />
