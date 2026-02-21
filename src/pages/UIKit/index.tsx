@@ -35,6 +35,7 @@ import {
   Spinner,
   SpinnerSize,
   Skeleton,
+  Tab,
   EmptyState,
   SidebarNavItem,
   SidebarLinks,
@@ -260,6 +261,7 @@ const UIKit = () => {
   ]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
+  const [activeTab, setActiveTab] = useState("activity");
 
   return (
     <Box sx={uikitStyles.container}>
@@ -930,6 +932,36 @@ const UIKit = () => {
             <Box sx={uikitStyles.caseItem}>
               <Skeleton />
               <Typography sx={uikitStyles.caseLabel}>default</Typography>
+            </Box>
+          </Box>
+
+          {/* Tab */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Tab
+          </Typography>
+          <Box sx={uikitStyles.componentColumn}>
+            <Box sx={{ ...uikitStyles.caseItem, width: 400 }}>
+              <Tab
+                items={[
+                  { label: "Activity", value: "activity" },
+                  { label: "Earnings", value: "earnings" },
+                ]}
+                value={activeTab}
+                onChange={setActiveTab}
+              />
+              <Typography sx={uikitStyles.caseLabel}>2 items</Typography>
+            </Box>
+            <Box sx={{ ...uikitStyles.caseItem, width: 400 }}>
+              <Tab
+                items={[
+                  { label: "All", value: "all" },
+                  { label: "Pending", value: "pending" },
+                  { label: "Completed", value: "completed" },
+                ]}
+                value="all"
+                onChange={() => {}}
+              />
+              <Typography sx={uikitStyles.caseLabel}>3 items</Typography>
             </Box>
           </Box>
 
