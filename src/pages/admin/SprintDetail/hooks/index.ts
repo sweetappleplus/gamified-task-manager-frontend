@@ -1,0 +1,1 @@
+export { useSprintDetailPage } from "./useSprintDetailPage";
