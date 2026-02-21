@@ -21,3 +21,4 @@ export * from "./PatternPanel";
 export * from "./Spinner";
 export * from "./Skeleton";
 export * from "./Tab";
+export * from "./Dropdown";
