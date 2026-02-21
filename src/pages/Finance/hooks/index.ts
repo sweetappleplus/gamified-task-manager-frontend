@@ -1,0 +1,1 @@
+export { useFinancePage } from "./useFinancePage";
