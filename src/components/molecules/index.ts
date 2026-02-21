@@ -1,4 +1,5 @@
 export * from "./BalanceCard";
+export * from "./LedgerEntryCard";
 export * from "./FileUploader";
 export * from "./OTPInput";
 export * from "./NotificationItem";
