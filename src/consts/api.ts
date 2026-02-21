@@ -56,6 +56,14 @@ export const API_URL_LEDGER_ENTRIES_ADMIN_BULK_MARK_PAID =
 
 export const API_URL_ACTIVITY_LOGS = "/activity-logs";
 
+export const API_URL_SPRINTS = "/sprints";
+export const API_URL_SPRINTS_BY_ID = "/sprints/:id";
+export const API_URL_SPRINTS_TASKS = "/sprints/:id/tasks";
+export const API_URL_SPRINTS_REMOVE_TASK = "/sprints/:id/tasks/:taskId";
+export const API_URL_SPRINTS_ACTIVATE = "/sprints/:id/activate";
+export const API_URL_SPRINTS_COMPLETE = "/sprints/:id/complete";
+export const API_URL_SPRINTS_PROGRESS = "/sprints/:id/progress";
+
 export const API_URL_USERS = "/users";
 export const API_URL_USERS_ME = "/users/me";
 export const API_URL_USERS_STATUS = "/users/:id/status";
