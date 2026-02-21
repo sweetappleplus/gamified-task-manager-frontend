@@ -63,6 +63,7 @@ import {
   ActivityLog,
   WorkerProfileCard,
   WalletCard,
+  BarChart,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -1008,6 +1009,24 @@ const UIKit = () => {
                 <DigitCard digit={d} />
               </Box>
             ))}
+          </Box>
+
+          {/* BarChart */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            BarChart
+          </Typography>
+          <Box sx={{ maxWidth: 600, height: 300, mb: 2 }}>
+            <BarChart
+              data={[
+                { label: "Feb", value: 1200 },
+                { label: "Mar", value: 2400 },
+                { label: "Apr", value: 1800 },
+                { label: "May", value: 2100 },
+                { label: "Jun", value: 900 },
+                { label: "Jul", value: 3100 },
+              ]}
+              sx={{ width: "100%", height: "100%" }}
+            />
           </Box>
         </Box>
 
