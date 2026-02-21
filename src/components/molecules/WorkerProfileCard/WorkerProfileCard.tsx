@@ -44,7 +44,7 @@ export const WorkerProfileCard: React.FC<WorkerProfileCardProps> = ({
           gap: "12px",
           pt: "16px",
           px: "16px",
-          mb: "16px",
+          mb: "12px",
         }}
       >
         <Avatar size={48} email={user.email} name={user.name ?? undefined} />
