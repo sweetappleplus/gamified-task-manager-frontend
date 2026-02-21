@@ -12,6 +12,8 @@ import AdminTaskDetailPage from "pages/admin/TaskDetail";
 import AdminWorkersPage from "pages/admin/Workers";
 import AdminFinancePage from "pages/admin/Finance";
 import AdminNotificationsPage from "pages/admin/Notifications";
+import AdminSprintsPage from "pages/admin/Sprints";
+import AdminSprintDetailPage from "pages/admin/SprintDetail";
 import TasksPage from "pages/Tasks";
 import TaskDetailPage from "pages/TaskDetail";
 import StartWorkPage from "pages/StartWork";
@@ -131,6 +133,18 @@ export const ROUTES: Record<string, RouteConfig> = {
     access: ROUTE_ACCESS.PROTECTED,
     roles: [USER_ROLES.SUPER_ADMIN],
   },
+  ADMIN_SPRINTS: {
+    path: "/admin/sprints",
+    component: AdminSprintsPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
+  ADMIN_SPRINT_DETAIL: {
+    path: "/admin/sprints/:id",
+    component: AdminSprintDetailPage,
+    access: ROUTE_ACCESS.PROTECTED,
+    roles: [USER_ROLES.SUPER_ADMIN],
+  },
 } as const;
 
 export const getWorkerSidebarNavItems = (
@@ -243,6 +257,11 @@ export const ADMIN_SIDEBAR_NAV_ITEMS = [
     icon: "star" as const,
     label: "Level Configs",
     route: ROUTES.ADMIN_LEVEL_CONFIGS.path,
+  },
+  {
+    icon: "rocket" as const,
+    label: "Daily Sprints",
+    route: ROUTES.ADMIN_SPRINTS.path,
   },
   {
     icon: "home" as const,
