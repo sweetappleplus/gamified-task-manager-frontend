@@ -3,15 +3,26 @@ import {
   LedgerEntry,
   AdminLedgerFilterParams,
   AdminLedgerSummary,
+  WorkerLedgerSummary,
+  EarningsOverviewItem,
 } from "types";
 
 type LedgerEntryState = {
+  // Admin state
   entries: LedgerEntry[];
   total: number;
   isLoading: boolean;
   filters: AdminLedgerFilterParams;
   summary: AdminLedgerSummary | null;
   isSummaryLoading: boolean;
+  // Worker finance state
+  workerEntries: LedgerEntry[];
+  workerTotal: number;
+  workerIsLoading: boolean;
+  workerSummary: WorkerLedgerSummary | null;
+  workerIsSummaryLoading: boolean;
+  earningsOverview: EarningsOverviewItem[];
+  isEarningsOverviewLoading: boolean;
 };
 
 const initialState: LedgerEntryState = {
@@ -21,6 +32,13 @@ const initialState: LedgerEntryState = {
   filters: { page: 1, limit: 10, sortBy: "createdAt", sortOrder: "desc" },
   summary: null,
   isSummaryLoading: false,
+  workerEntries: [],
+  workerTotal: 0,
+  workerIsLoading: false,
+  workerSummary: null,
+  workerIsSummaryLoading: false,
+  earningsOverview: [],
+  isEarningsOverviewLoading: false,
 };
 
 const ledgerEntrySlice = createSlice({
@@ -51,6 +69,37 @@ const ledgerEntrySlice = createSlice({
         state.entries[index] = action.payload;
       }
     },
+    // Worker finance reducers
+    setWorkerEntries: (state, action: PayloadAction<LedgerEntry[]>) => {
+      state.workerEntries = action.payload;
+    },
+    appendWorkerEntries: (state, action: PayloadAction<LedgerEntry[]>) => {
+      state.workerEntries = [...state.workerEntries, ...action.payload];
+    },
+    setWorkerTotal: (state, action: PayloadAction<number>) => {
+      state.workerTotal = action.payload;
+    },
+    setWorkerLoading: (state, action: PayloadAction<boolean>) => {
+      state.workerIsLoading = action.payload;
+    },
+    setWorkerSummary: (
+      state,
+      action: PayloadAction<WorkerLedgerSummary | null>
+    ) => {
+      state.workerSummary = action.payload;
+    },
+    setWorkerSummaryLoading: (state, action: PayloadAction<boolean>) => {
+      state.workerIsSummaryLoading = action.payload;
+    },
+    setEarningsOverview: (
+      state,
+      action: PayloadAction<EarningsOverviewItem[]>
+    ) => {
+      state.earningsOverview = action.payload;
+    },
+    setEarningsOverviewLoading: (state, action: PayloadAction<boolean>) => {
+      state.isEarningsOverviewLoading = action.payload;
+    },
   },
 });
 
@@ -62,6 +111,14 @@ export const {
   setSummary,
   setSummaryLoading,
   updateEntryInList,
+  setWorkerEntries,
+  appendWorkerEntries,
+  setWorkerTotal,
+  setWorkerLoading,
+  setWorkerSummary,
+  setWorkerSummaryLoading,
+  setEarningsOverview,
+  setEarningsOverviewLoading,
 } = ledgerEntrySlice.actions;
 
 export default ledgerEntrySlice.reducer;

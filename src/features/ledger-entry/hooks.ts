@@ -9,6 +9,14 @@ import {
   setSummary,
   setSummaryLoading,
   updateEntryInList,
+  setWorkerEntries,
+  appendWorkerEntries,
+  setWorkerTotal,
+  setWorkerLoading,
+  setWorkerSummary,
+  setWorkerSummaryLoading,
+  setEarningsOverview,
+  setEarningsOverviewLoading,
 } from "./slice";
 import {
   getAdminLedgerEntriesApi,
@@ -16,8 +24,11 @@ import {
   markLedgerEntryPaidApi,
   markLedgerEntryUnpaidApi,
   bulkMarkLedgerEntriesPaidApi,
+  getWorkerLedgerEntriesApi,
+  getWorkerLedgerSummaryApi,
+  getEarningsOverviewApi,
 } from "services";
-import { AdminLedgerFilterParams } from "types";
+import { AdminLedgerFilterParams, WorkerLedgerFilterParams } from "types";
 
 export const useLedgerEntry = () => {
   const dispatch = useAppDispatch();
@@ -118,5 +129,117 @@ export const useLedgerEntry = () => {
     markAsUnpaid,
     bulkMarkAsPaid,
     changeFilters,
+  };
+};
+
+export const useWorkerFinance = () => {
+  const dispatch = useAppDispatch();
+  const workerEntries = useAppSelector(
+    (state: RootState) => state.ledgerEntry.workerEntries
+  );
+  const workerTotal = useAppSelector(
+    (state: RootState) => state.ledgerEntry.workerTotal
+  );
+  const workerIsLoading = useAppSelector(
+    (state: RootState) => state.ledgerEntry.workerIsLoading
+  );
+  const workerSummary = useAppSelector(
+    (state: RootState) => state.ledgerEntry.workerSummary
+  );
+  const workerIsSummaryLoading = useAppSelector(
+    (state: RootState) => state.ledgerEntry.workerIsSummaryLoading
+  );
+  const earningsOverview = useAppSelector(
+    (state: RootState) => state.ledgerEntry.earningsOverview
+  );
+  const isEarningsOverviewLoading = useAppSelector(
+    (state: RootState) => state.ledgerEntry.isEarningsOverviewLoading
+  );
+
+  const fetchWorkerEntries = useCallback(
+    async (params: WorkerLedgerFilterParams) => {
+      dispatch(setWorkerLoading(true));
+      try {
+        const response = await getWorkerLedgerEntriesApi(params);
+        if (response.data) {
+          dispatch(setWorkerEntries(response.data));
+        }
+        if (response.pagination) {
+          dispatch(setWorkerTotal(response.pagination.total));
+        }
+        return response;
+      } finally {
+        dispatch(setWorkerLoading(false));
+      }
+    },
+    [dispatch]
+  );
+
+  const fetchMoreWorkerEntries = useCallback(
+    async (params: WorkerLedgerFilterParams) => {
+      dispatch(setWorkerLoading(true));
+      try {
+        const response = await getWorkerLedgerEntriesApi(params);
+        if (response.data) {
+          dispatch(appendWorkerEntries(response.data));
+        }
+        if (response.pagination) {
+          dispatch(setWorkerTotal(response.pagination.total));
+        }
+        return response;
+      } finally {
+        dispatch(setWorkerLoading(false));
+      }
+    },
+    [dispatch]
+  );
+
+  const fetchWorkerSummary = useCallback(async () => {
+    dispatch(setWorkerSummaryLoading(true));
+    try {
+      const response = await getWorkerLedgerSummaryApi();
+      if (response.data) {
+        dispatch(setWorkerSummary(response.data));
+      }
+      return response;
+    } finally {
+      dispatch(setWorkerSummaryLoading(false));
+    }
+  }, [dispatch]);
+
+  const fetchEarningsOverview = useCallback(
+    async (period?: string) => {
+      dispatch(setEarningsOverviewLoading(true));
+      try {
+        const response = await getEarningsOverviewApi(period);
+        if (response.data) {
+          dispatch(setEarningsOverview(response.data));
+        }
+        return response;
+      } finally {
+        dispatch(setEarningsOverviewLoading(false));
+      }
+    },
+    [dispatch]
+  );
+
+  const resetWorkerEntries = useCallback(() => {
+    dispatch(setWorkerEntries([]));
+    dispatch(setWorkerTotal(0));
+  }, [dispatch]);
+
+  return {
+    workerEntries,
+    workerTotal,
+    workerIsLoading,
+    workerSummary,
+    workerIsSummaryLoading,
+    earningsOverview,
+    isEarningsOverviewLoading,
+    fetchWorkerEntries,
+    fetchMoreWorkerEntries,
+    fetchWorkerSummary,
+    fetchEarningsOverview,
+    resetWorkerEntries,
   };
 };
