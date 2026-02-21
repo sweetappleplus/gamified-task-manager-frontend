@@ -61,6 +61,7 @@ import {
   UserSelectField,
   ActivityLog,
   WorkerProfileCard,
+  WalletCard,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -1058,6 +1059,19 @@ const UIKit = () => {
           </Typography>
           <Box sx={{ mb: 2, width: 500 }}>
             <BalanceCard amount={21148.7} additionalAmount={20.4} />
+          </Box>
+
+          {/* WalletCard */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            WalletCard
+          </Typography>
+          <Box sx={{ mb: 2, width: 500 }}>
+            <WalletCard
+              balance={21148.7}
+              totalEarnings={24148.7}
+              pending={3000}
+              onWithdraw={() => {}}
+            />
           </Box>
 
           {/* RewardsEconomics */}
