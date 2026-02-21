@@ -2,7 +2,6 @@ import { SxProps, Theme } from "@mui/material";
 
 export const startWorkStyles: Record<string, SxProps<Theme>> = {
   container: {
-    pb: "20px",
     display: "flex",
     flexDirection: "column",
     minHeight: "calc(100dvh - 68px)",

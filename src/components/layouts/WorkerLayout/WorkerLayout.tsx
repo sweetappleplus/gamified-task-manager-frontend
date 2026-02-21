@@ -190,7 +190,7 @@ export const WorkerLayout: React.FC<WorkerLayoutProps> = ({
       sx={{
         px: "16px",
         py: 0,
-        pb: "120px",
+        pb: "112px",
       }}
     >
       {children}
