@@ -7,6 +7,7 @@ import { taskReducer } from "features/task";
 import { notificationReducer } from "features/notification";
 import { userReducer } from "features/user";
 import { ledgerEntryReducer } from "features/ledger-entry";
+import { sprintReducer } from "features/sprint";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   notification: notificationReducer,
   user: userReducer,
   ledgerEntry: ledgerEntryReducer,
+  sprint: sprintReducer,
 });
 
 export default rootReducer;
