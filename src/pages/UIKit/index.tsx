@@ -36,6 +36,7 @@ import {
   SpinnerSize,
   Skeleton,
   Tab,
+  Dropdown,
   EmptyState,
   SidebarNavItem,
   SidebarLinks,
@@ -263,6 +264,7 @@ const UIKit = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
   const [activeTab, setActiveTab] = useState("activity");
+  const [dropdownValue, setDropdownValue] = useState("all-time");
 
   return (
     <Box sx={uikitStyles.container}>
@@ -963,6 +965,28 @@ const UIKit = () => {
                 onChange={() => {}}
               />
               <Typography sx={uikitStyles.caseLabel}>3 items</Typography>
+            </Box>
+          </Box>
+
+          {/* Dropdown */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            Dropdown
+          </Typography>
+          <Box sx={uikitStyles.componentRow}>
+            <Box sx={uikitStyles.caseItem}>
+              <Dropdown
+                items={[
+                  { label: "This week", value: "this-week" },
+                  { label: "This month", value: "this-month" },
+                  { label: "Last month", value: "last-month" },
+                  { label: "This year", value: "this-year" },
+                  { label: "All time", value: "all-time" },
+                ]}
+                value={dropdownValue}
+                onChange={setDropdownValue}
+                width={160}
+              />
+              <Typography sx={uikitStyles.caseLabel}>default</Typography>
             </Box>
           </Box>
 
