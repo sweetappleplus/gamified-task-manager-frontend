@@ -24,6 +24,7 @@ export type User = {
   lastLoginAt?: string | null;
   createdAt?: string;
   level?: UserLevel;
+  completedTaskCount?: number;
 };
 
 export type UserSortBy =
