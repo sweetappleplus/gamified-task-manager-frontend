@@ -19,6 +19,13 @@ export type LedgerEntryTask = {
   status: string;
 };
 
+export type LedgerEntryPaymentMethod = {
+  id: string;
+  type: string;
+  provider?: string | null;
+  accountInfo: string;
+};
+
 export type LedgerEntry = {
   id: string;
   userId: string;
@@ -26,11 +33,13 @@ export type LedgerEntry = {
   amount: string;
   description?: string | null;
   relatedTaskId?: string | null;
+  paymentMethodId?: string | null;
   isPaid: boolean;
   paidAt?: string | null;
   createdAt: string;
   user?: LedgerEntryUser;
   relatedTask?: LedgerEntryTask | null;
+  paymentMethod?: LedgerEntryPaymentMethod | null;
 };
 
 export type AdminLedgerFilterParams = {
