@@ -64,6 +64,10 @@ import {
   WorkerProfileCard,
   WalletCard,
   BarChart,
+  LedgerEntryCard,
+  LEDGER_ENTRY_VARIANTS,
+  LEDGER_ENTRY_STATUSES,
+  LEDGER_ENTRY_CATEGORIES,
 } from "components";
 import { ROUTES, WORKER_FOOTER_NAV_ITEMS } from "consts";
 import { useToast, useModal } from "hooks";
@@ -77,6 +81,7 @@ import {
   USER_ROLES,
   ActivityType,
   ACTIVITY_TYPES,
+  PAYMENT_METHOD_TYPES,
 } from "types";
 
 const iconNames = Object.keys(ICONS) as IconName[];
@@ -1102,6 +1107,51 @@ const UIKit = () => {
           </Typography>
           <Box sx={{ mb: 2, width: 500 }}>
             <BalanceCard amount={21148.7} additionalAmount={20.4} />
+          </Box>
+
+          {/* LedgerEntryCard */}
+          <Typography variant="h6" sx={uikitStyles.componentLabel}>
+            LedgerEntryCard
+          </Typography>
+          <Box
+            sx={{
+              ...uikitStyles.componentColumn,
+              maxWidth: 500,
+              bgcolor: "grayscale.50",
+              p: 2,
+              borderRadius: 2,
+            }}
+          >
+            <LedgerEntryCard
+              variant={LEDGER_ENTRY_VARIANTS.GET_PAID}
+              status={LEDGER_ENTRY_STATUSES.DONE}
+              category={LEDGER_ENTRY_CATEGORIES.REGULAR}
+              taskTitle="Complete profile setup"
+              amount={25}
+              date="Feb 15, 2026"
+            />
+            <LedgerEntryCard
+              variant={LEDGER_ENTRY_VARIANTS.GET_PAID}
+              status={LEDGER_ENTRY_STATUSES.PENDING}
+              category={LEDGER_ENTRY_CATEGORIES.BONUS}
+              taskTitle="Write a detailed review"
+              amount={50}
+              date="Feb 18, 2026"
+            />
+            <LedgerEntryCard
+              variant={LEDGER_ENTRY_VARIANTS.WITHDRAWAL}
+              status={LEDGER_ENTRY_STATUSES.DONE}
+              paymentMethod={PAYMENT_METHOD_TYPES.BANK_ACCOUNT}
+              amount={100}
+              date="Feb 10, 2026"
+            />
+            <LedgerEntryCard
+              variant={LEDGER_ENTRY_VARIANTS.WITHDRAWAL}
+              status={LEDGER_ENTRY_STATUSES.PENDING}
+              paymentMethod={PAYMENT_METHOD_TYPES.PAYPAL}
+              amount={75.5}
+              date="Feb 20, 2026"
+            />
           </Box>
 
           {/* WalletCard */}

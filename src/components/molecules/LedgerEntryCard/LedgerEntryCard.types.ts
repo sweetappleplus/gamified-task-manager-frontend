@@ -1,9 +1,29 @@
 import { SxProps, Theme } from "@mui/material";
 import { PaymentMethodType } from "types";
 
-export type LedgerEntryVariant = "get_paid" | "withdrawal";
-export type LedgerEntryStatus = "pending" | "done";
-export type LedgerEntryCategory = "regular" | "bonus";
+export const LEDGER_ENTRY_VARIANTS = {
+  GET_PAID: "get_paid",
+  WITHDRAWAL: "withdrawal",
+} as const;
+
+export type LedgerEntryVariant =
+  (typeof LEDGER_ENTRY_VARIANTS)[keyof typeof LEDGER_ENTRY_VARIANTS];
+
+export const LEDGER_ENTRY_STATUSES = {
+  PENDING: "pending",
+  DONE: "done",
+} as const;
+
+export type LedgerEntryStatus =
+  (typeof LEDGER_ENTRY_STATUSES)[keyof typeof LEDGER_ENTRY_STATUSES];
+
+export const LEDGER_ENTRY_CATEGORIES = {
+  REGULAR: "regular",
+  BONUS: "bonus",
+} as const;
+
+export type LedgerEntryCategory =
+  (typeof LEDGER_ENTRY_CATEGORIES)[keyof typeof LEDGER_ENTRY_CATEGORIES];
 
 interface LedgerEntryCardBaseProps {
   amount: number;
