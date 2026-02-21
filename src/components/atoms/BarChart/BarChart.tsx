@@ -76,6 +76,11 @@ export const BarChart: React.FC<BarChartProps> = ({ data, sx }) => {
   const options: ChartOptions<"bar"> = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 24,
+      },
+    },
     plugins: {
       tooltip: {
         enabled: false,
