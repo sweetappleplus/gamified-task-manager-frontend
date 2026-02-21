@@ -76,3 +76,20 @@ export type AdminLedgerSummary = {
   pendingPayout: string;
   alreadyPaid: string;
 };
+
+export type WorkerLedgerFilterParams = {
+  page?: number;
+  limit?: number;
+  type?: LedgerType;
+};
+
+export type WorkerLedgerSummary = {
+  balance: string;
+  withdrawable: string;
+  pendingPayments: string;
+};
+
+export type EarningsOverviewItem = {
+  label: string;
+  total: string;
+};
