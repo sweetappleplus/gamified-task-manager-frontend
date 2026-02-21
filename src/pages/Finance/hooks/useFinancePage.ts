@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWorkerFinance } from "features/ledger-entry";
-import { LEDGER_TYPES, LedgerType } from "types";
+import { LEDGER_TYPES, LedgerType, LedgerEntry } from "types";
 
 const ITEMS_PER_PAGE = 15;
 
@@ -14,6 +14,13 @@ const TAB_TYPE_MAP: Record<string, LedgerType | undefined> = {
   [TAB_VALUES.TRANSACTION_HISTORY]: undefined,
   [TAB_VALUES.WITHDRAWALS]: LEDGER_TYPES.WITHDRAWAL,
 };
+
+interface TabCache {
+  entries: LedgerEntry[];
+  total: number;
+  page: number;
+  hasMore: boolean;
+}
 
 const PERIOD_OPTIONS = [
   { label: "This Week", value: "this_week" },
@@ -38,7 +45,7 @@ export const useFinancePage = () => {
     fetchMoreWorkerEntries,
     fetchWorkerSummary,
     fetchEarningsOverview,
-    resetWorkerEntries,
+    restoreWorkerEntries,
   } = useWorkerFinance();
 
   const [activeTab, setActiveTab] = useState(TAB_VALUES.TRANSACTION_HISTORY);
@@ -46,6 +53,7 @@ export const useFinancePage = () => {
   const [hasMore, setHasMore] = useState(true);
   const [earningsPeriod, setEarningsPeriod] = useState("this_month");
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const tabCacheRef = useRef<Record<string, TabCache>>({});
 
   // Fetch summary on mount
   useEffect(() => {
@@ -57,8 +65,16 @@ export const useFinancePage = () => {
     fetchEarningsOverview(earningsPeriod);
   }, [earningsPeriod, fetchEarningsOverview]);
 
-  // Fetch entries when tab changes
+  // Fetch entries when tab changes (restore from cache if available)
   useEffect(() => {
+    const cached = tabCacheRef.current[activeTab];
+    if (cached) {
+      restoreWorkerEntries(cached.entries, cached.total);
+      setPage(cached.page);
+      setHasMore(cached.hasMore);
+      return;
+    }
+
     setPage(1);
     setHasMore(true);
     const type = TAB_TYPE_MAP[activeTab];
@@ -71,7 +87,7 @@ export const useFinancePage = () => {
         }
       }
     );
-  }, [activeTab, fetchWorkerEntries]);
+  }, [activeTab, fetchWorkerEntries, restoreWorkerEntries]);
 
   const loadMore = useCallback(async () => {
     if (workerIsLoading || !hasMore) return;
@@ -125,10 +141,16 @@ export const useFinancePage = () => {
   const handleTabChange = useCallback(
     (value: string) => {
       if (value === activeTab) return;
-      resetWorkerEntries();
+      // Save current tab data to cache before switching
+      tabCacheRef.current[activeTab] = {
+        entries: workerEntries,
+        total: workerTotal,
+        page,
+        hasMore,
+      };
       setActiveTab(value as typeof activeTab);
     },
-    [activeTab, resetWorkerEntries]
+    [activeTab, workerEntries, workerTotal, page, hasMore]
   );
 
   const handleBack = useCallback(() => {

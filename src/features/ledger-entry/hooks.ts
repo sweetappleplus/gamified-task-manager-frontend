@@ -28,7 +28,11 @@ import {
   getWorkerLedgerSummaryApi,
   getEarningsOverviewApi,
 } from "services";
-import { AdminLedgerFilterParams, WorkerLedgerFilterParams } from "types";
+import {
+  AdminLedgerFilterParams,
+  WorkerLedgerFilterParams,
+  LedgerEntry,
+} from "types";
 
 export const useLedgerEntry = () => {
   const dispatch = useAppDispatch();
@@ -223,6 +227,14 @@ export const useWorkerFinance = () => {
     [dispatch]
   );
 
+  const restoreWorkerEntries = useCallback(
+    (entries: LedgerEntry[], total: number) => {
+      dispatch(setWorkerEntries(entries));
+      dispatch(setWorkerTotal(total));
+    },
+    [dispatch]
+  );
+
   const resetWorkerEntries = useCallback(() => {
     dispatch(setWorkerEntries([]));
     dispatch(setWorkerTotal(0));
@@ -240,6 +252,7 @@ export const useWorkerFinance = () => {
     fetchMoreWorkerEntries,
     fetchWorkerSummary,
     fetchEarningsOverview,
+    restoreWorkerEntries,
     resetWorkerEntries,
   };
 };
